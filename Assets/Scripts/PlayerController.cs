@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
@@ -58,6 +59,23 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
     }
 
+    private void FindAdjacentTiles(GameObject tile)
+    {
+        List<GameObject> adjacentTiles = new List<GameObject>();
+        
+        if (tileSet != null)
+        {
+            foreach (GameObject i in tiles)
+            {
+                Vector2 distance = i.transform.position - gameObject.transform.position;
 
+                if(false)
+                {
+
+                }
+            }
+
+        }
+    }
 
 }
