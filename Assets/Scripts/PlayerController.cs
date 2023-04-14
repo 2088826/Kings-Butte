@@ -7,23 +7,41 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject tileSet;
     [SerializeField] float speed = 2;
+    [SerializeField] GameObject target;
+    [SerializeField] int currentTileIndex = 7;
 
-    int currentTileIndex = 7;
+    List<GameObject> tiles;
+
     
     
     
     
     
-    // Start is called before the first frame update
+    
     void Start()
     {
-        
+        tiles = new List<GameObject>();
+
+        if (tileSet != null)
+        {
+            foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
+            {
+                tiles.Add(tile.gameObject);
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (tiles.Count > 0)
+        {
+            target = tiles[currentTileIndex];
+        }
         
+        if (target)
+        {
+            MoveToTile(target);
+        }
     }
 
     private void MoveToTile(GameObject target)
