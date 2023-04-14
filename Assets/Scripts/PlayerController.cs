@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
 
     List<GameObject> tiles;
 
+    float tileWidth;
+    float tileHeight;
+
     
     
     
@@ -28,6 +31,9 @@ public class PlayerController : MonoBehaviour
             {
                 tiles.Add(tile.gameObject);
             }
+
+            tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
+            tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
         }
     }
 
