@@ -22,15 +22,21 @@ public class PlayerController : MonoBehaviour
     {
         tiles = new List<GameObject>();
 
-        foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
+        if (tileSet != null)
         {
-            tiles.Add(tile.gameObject);
+            foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
+            {
+                tiles.Add(tile.gameObject);
+            }
         }
     }
 
     void Update()
     {
-        target = tiles[currentTileIndex];
+        if (tiles.Count > 0)
+        {
+            target = tiles[currentTileIndex];
+        }
         
         if (target)
         {

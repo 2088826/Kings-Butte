@@ -489,9 +489,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77907bba3f1ecfe4198fa8a2e951095b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSet: {fileID: 206109704}
+  tileSet: {fileID: 0}
   speed: 2
   target: {fileID: 1945135730}
+  currentTileIndex: 7
 --- !u!1 &652234174
 GameObject:
   m_ObjectHideFlags: 0
