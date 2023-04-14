@@ -7,8 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject tileSet;
     [SerializeField] float speed = 2;
+    [SerializeField] GameObject target;
+    [SerializeField] int currentTileIndex = 7;
 
-    int currentTileIndex = 7;
+    List<GameObject> tiles;
+
+    
     
     
     
@@ -16,12 +20,22 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-        
+        tiles = new List<GameObject>();
+
+        foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
+        {
+            tiles.Add(tile.gameObject);
+        }
     }
 
     void Update()
     {
+        target = tiles[currentTileIndex];
         
+        if (target)
+        {
+            MoveToTile(target);
+        }
     }
 
     private void MoveToTile(GameObject target)
