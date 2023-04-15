@@ -18,24 +18,23 @@ public class PlayerController : MonoBehaviour
     float tileHeight;
 
     
-    
-    
-    
-    
-    
+
     void Start()
     {
         tiles = new List<GameObject>();
+
+        int count = 0;
 
         if (tileSet != null)
         {
             foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
             {
+                count++;
                 tiles.Add(tile.gameObject);
+                Debug.Log(count);
             }
 
-            tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
-            tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
+            
         }
 
         // Start at the target position.
@@ -44,17 +43,42 @@ public class PlayerController : MonoBehaviour
             transform.position = target.transform.position;
         }
 
-        GetTiles2();
+        //GetTiles2();
     }
 
     void Update()
     {
+
+        // Placed in update because it does not work on start
+        // Get the tiles and put them in the tiles List
+        if (tiles.Count <= 0 && tileSet != null)
+        {
+            int count = 0;
+
+            foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
+            {
+                
+                tiles.Add(tile.gameObject);
+                count++;
+            }
+
+            Debug.Log(count);
+
+            
+            if (tiles.Count > 0)
+            {
+                tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
+                tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
+            }
+        }
+        
+        
         if (tiles.Count > 0)
         {
             target = tiles[currentTileIndex];
         }
         
-        if (target )
+        if (target)
         {
             MoveToTile(target);
         }
