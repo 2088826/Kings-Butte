@@ -17,7 +17,21 @@ public class test : MonoBehaviour
     GameObject player;
 
     private bool isAttacking = false;
-    
+
+
+    /* 
+        -- Joystick buttons --
+        Joystick 0 = B button
+        Joystick 1 = A button
+        Joystick 2 = Y button
+        Joystick 3 = X button
+        Joystick 4 = L1 button
+        Joystick 5 = R1 button
+        Joystick 6 = L2 button
+        Joystick 7 = R2 button
+        Joystick 8 = L3 button
+        Joystick 9 = R3 button
+     */
 
     // Start is called before the first frame update
     void Start()
@@ -36,15 +50,31 @@ public class test : MonoBehaviour
             float inputX = Input.GetAxis("Horizontal");
             float inputY = Input.GetAxisRaw("Vertical");
             rb2d.velocity = new Vector2(inputX * m_speed, inputY * m_speed);
+
+            if(Input.GetAxisRaw("Jump") > 0)
+            {
+                isAttacking = true;
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("shockwave");
+                Debug.Log("Shockwave");
+            }
         }
 
-        if(Input.GetAxisRaw("Jump") > 0 && !isAttacking)
+        if (gameObject.name == "Player2" && !isAttacking)
         {
-            isAttacking = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("shockwave");
-            Debug.Log("Shockwave");
+            float inputX = Input.GetAxis("Horizontal");
+            float inputY = Input.GetAxisRaw("Vertical");
+            rb2d.velocity = new Vector2(inputX * m_speed, inputY * m_speed);
+
+            if (Input.GetAxisRaw("Jump") > 0)
+            {
+                isAttacking = true;
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("shockwave");
+                Debug.Log("Shockwave");
+            }
         }
+
 
         // Swap direction of sprite depending on walk direction
         //if (inputX > 0)
