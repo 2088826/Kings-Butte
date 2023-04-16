@@ -676,10 +676,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileSet: {fileID: 370303554}
-  speed: 2
+  speed: 1
   target: {fileID: 0}
-  currentTileIndex: 79
-  sampleTile: {fileID: 1082355588}
+  currentTileIndex: 67
+  tiles: []
 --- !u!1 &432235182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7361022398509699068, guid: 905b2ff9f6c3ced4f87b7d531b6bfcd2, type: 3}

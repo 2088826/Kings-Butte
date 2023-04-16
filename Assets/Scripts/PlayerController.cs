@@ -11,17 +11,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
     [SerializeField] int currentTileIndex = 7;
-    [SerializeField] GameObject sampleTile;
+
+    [SerializeField] float inputCooldown = 5f;
 
     List<GameObject> tiles;
 
     float tileWidth;
     float tileHeight;
 
-    
+
+    // Holds the adjacent tiles
+    GameObject up;
+    GameObject down;
+    GameObject right;
+    GameObject left;
+
 
     void Start()
     {
+
+        up = new GameObject();
+        down = new GameObject();
+        right = new GameObject();
+        left = new GameObject();
+
+
         tiles = new List<GameObject>();
 
         int count = 0;
@@ -35,10 +49,6 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log(count);
             }
 
-            if (!sampleTile)
-            {
-                sampleTile = tileSet;
-            }
         }
 
         // Start at the target position.
@@ -73,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
             if (!target)
             {
-                // Set a target according to the tileIndex
+                // Initialize a target according to the tileIndex
                 target = tiles[currentTileIndex];
             }
 
@@ -84,19 +94,28 @@ public class PlayerController : MonoBehaviour
                 transform.position = target.transform.position;
             }
 
-            GetTiles2();
+            //GetTiles2();
         }
 
 
-        if (tiles.Count > 0)
+        // Changes the target to reflect the currentTileIndex
+        /*if (tiles.Count > 0)
         {
             target = tiles[currentTileIndex];
-        }
-        
+        }*/
+
+        // Move to the target
         if (target)
         {
             MoveToTile(target);
         }
+
+        GetTiles2();
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
     }
 
     private void MoveToTile(GameObject target)
@@ -105,24 +124,6 @@ public class PlayerController : MonoBehaviour
 
         // move sprite towards the target location
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
-    }
-    private void FindAdjacentTiles(GameObject tile)
-    {
-        List<GameObject> adjacentTiles = new List<GameObject>();
-        
-        if (tileSet != null)
-        {
-            foreach (GameObject i in tiles)
-            {
-                Vector2 distance = i.transform.position - gameObject.transform.position;
-
-                if(false)
-                {
-
-                }
-            }
-
-        }
     }
 
     private void GetTiles()
@@ -150,14 +151,15 @@ public class PlayerController : MonoBehaviour
         Vector2 xBox = new Vector2(tileWidth, tileHeight * 0.0001f);
         Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight);
 
+        // Gets colliders
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
         Collider2D[] yColliders = Physics2D.OverlapBoxAll(transform.position, yBox, 63);
 
         List<GameObject> xTiles = new List<GameObject>();
         List<GameObject> yTiles = new List<GameObject>();
 
-        Debug.Log("x=" + xColliders.Length.ToString());
-        Debug.Log("y=" + yColliders.Length.ToString());
+        //Debug.Log("x=" + xColliders.Length.ToString());
+        //Debug.Log("y=" + yColliders.Length.ToString());
 
         foreach (Collider2D coll in xColliders)
         {
@@ -169,10 +171,7 @@ public class PlayerController : MonoBehaviour
             yTiles.Add(coll.gameObject);
         }
 
-        GameObject up = new GameObject();
-        GameObject down = new GameObject();
-        GameObject right = new GameObject();
-        GameObject left = new GameObject();
+        
 
 
         up = yTiles[0];
@@ -182,36 +181,39 @@ public class PlayerController : MonoBehaviour
 
         foreach (GameObject tile in yTiles)
         {
-            if (tile.transform.position.y > up.transform.position.y)
+            // TODO: Condition that the tile must have a tile tag.
+            if(true)
             {
-                up = tile;
-            }
+                if (tile.transform.position.y > up.transform.position.y)
+                {
+                    up = tile;
+                }
 
-            if (tile.transform.position.y < down.transform.position.y)
-            {
-                down = tile;
+                if (tile.transform.position.y < down.transform.position.y)
+                {
+                    down = tile;
+                }
             }
         }
 
         foreach (GameObject tile in xTiles)
         {
-            if (tile.transform.position.x > right.transform.position.x)
+            // TODO: Condition that the tile must have a tile tag.
+            if (true)
             {
-                right = tile;
-            }
+                if (tile.transform.position.x > right.transform.position.x)
+                {
+                    right = tile;
+                }
 
-            if (tile.transform.position.x < left.transform.position.x)
-            {
-                left = tile;
+                if (tile.transform.position.x < left.transform.position.x)
+                {
+                    left = tile;
+                }
             }
         }
 
 
-
-        Debug.Log("Up=" + up.gameObject.name);
-        Debug.Log("Down=" + down.gameObject.name);
-        Debug.Log("Right=" + right.gameObject.name);
-        Debug.Log("Left=" + left.gameObject.name);
 
         MarkTile(up, "up");
         MarkTile(down, "down");
@@ -223,6 +225,43 @@ public class PlayerController : MonoBehaviour
     private void MarkTile(GameObject tile, string name)
     {
         tile.gameObject.name = name;
+    }
+
+    private void MovePlayer()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        if (horizontal != 0)
+        {
+            if(horizontal > 0)
+            {
+                // Move Right
+                target = right;
+                Debug.Log("RIGHT");
+            }
+            else
+            {
+                // Move Left
+                target = left;
+                Debug.Log("LEFT");
+            }
+        }
+        else if(vertical != 0)
+        {
+            if (vertical > 0)
+            {
+                // Move Up
+                target = up;
+                Debug.Log("UP");
+            }
+            else
+            {
+                // Move Down
+                target = down;
+                Debug.Log("DOWN");
+            }
+        }
     }
 
 }
