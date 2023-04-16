@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Horizontal") != 0) && Time.time > nextMoveTime)
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && Time.time > nextMoveTime)
         {
             GetTiles2();
 
