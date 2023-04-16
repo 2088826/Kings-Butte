@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
         Vector2 xBox = new Vector2(tileWidth, tileHeight * 0.0001f);
         Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight);
 
-        // Gets colliders (HARDCODED)
+        // Gets colliders (HARDCODED ANGLES)
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
         Collider2D[] yColliders = Physics2D.OverlapBoxAll(transform.position, yBox, 63);
 
