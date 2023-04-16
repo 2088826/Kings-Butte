@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
         foreach (GameObject tile in yTiles)
         {
             // TODO: Condition that the tile must have a tile tag.
-            if(true)
+            if (tile.tag == "Tile")
             {
                 if (tile.transform.position.y > up.transform.position.y)
                 {
@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
         foreach (GameObject tile in xTiles)
         {
             // TODO: Condition that the tile must have a tile tag.
-            if (true)
+            if (tile.tag == "Tile")
             {
                 if (tile.transform.position.x > right.transform.position.x)
                 {
