@@ -679,7 +679,7 @@ MonoBehaviour:
   speed: 1
   target: {fileID: 0}
   currentTileIndex: 67
-  tiles: []
+  moveCooldown: 0.4
 --- !u!1 &432235182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7361022398509699068, guid: 905b2ff9f6c3ced4f87b7d531b6bfcd2, type: 3}

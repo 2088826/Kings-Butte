@@ -12,7 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] int currentTileIndex = 7;
 
-    [SerializeField] float inputCooldown = 5f;
+    [SerializeField] float moveCooldown = 1f;
+    
+    bool moving = false; // Not used... yet
+
+    float nextMoveTime = 0f;
 
     List<GameObject> tiles;
 
@@ -34,7 +38,6 @@ public class PlayerController : MonoBehaviour
         down = new GameObject();
         right = new GameObject();
         left = new GameObject();
-
 
         tiles = new List<GameObject>();
 
@@ -110,12 +113,20 @@ public class PlayerController : MonoBehaviour
             MoveToTile(target);
         }
 
-        GetTiles2();
+        //GetTiles2();
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Horizontal") != 0) && Time.time > nextMoveTime)
+        {
+            GetTiles2();
+
+            MovePlayer();
+
+            nextMoveTime = Time.time + moveCooldown;
+
+        }
     }
 
     private void MoveToTile(GameObject target)
