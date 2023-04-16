@@ -41,43 +41,19 @@ public class PlayerController : MonoBehaviour
 
         tiles = new List<GameObject>();
 
-        int count = 0;
-
-        if (tileSet != null)
-        {
-            foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
-            {
-                count++;
-                //tiles.Add(tile.gameObject);
-                //Debug.Log(count);
-            }
-
-        }
-
-        // Start at the target position.
-        if(target)
-        {
-            transform.position = target.transform.position;
-        }
-
-        
-    }
-
-    void Update()
-    {
-
-        // Placed in update because it does not work on start
-        // Get the tiles and put them in the tiles List
         if (tiles.Count <= 0 && tileSet != null)
         {
 
+            // Adds all the tiles in the tileSet to the Tiles List.
             foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
             {
-                
+
                 tiles.Add(tile.gameObject);
             }
 
-            
+
+            // Gets the Width and Length of the tiles
+            // *potentially replaceable*
             if (tiles.Count > 0)
             {
                 tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
@@ -90,16 +66,21 @@ public class PlayerController : MonoBehaviour
                 target = tiles[currentTileIndex];
             }
 
-            
+
             if (target)
             {
                 // Start at the target position.
                 transform.position = target.transform.position;
             }
 
-            //GetTiles2();
+            //GetAdjacentTiles();
         }
 
+
+    }
+
+    void Update()
+    {
 
         // Changes the target to reflect the currentTileIndex
         /*if (tiles.Count > 0)
@@ -107,20 +88,25 @@ public class PlayerController : MonoBehaviour
             target = tiles[currentTileIndex];
         }*/
 
-        // Move to the target
-        if (target)
+
+        // TODO: Make a "moving" bool... maybe
+        if (true)
         {
-            MoveToTile(target);
+            // Move to the target
+            if (target)
+            {
+                MoveToTile(target);
+            }
         }
 
-        //GetTiles2();
+        //GetAdjacentTiles();
     }
 
     private void FixedUpdate()
     {
         if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && Time.time > nextMoveTime)
         {
-            GetTiles2();
+            GetAdjacentTiles();
 
             MovePlayer();
 
@@ -129,6 +115,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Moves the player in the direction of the target.
     private void MoveToTile(GameObject target)
     {
         float step = speed * Time.deltaTime;
@@ -137,41 +124,26 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
     }
 
-    private void GetTiles()
+    /// <summary>
+    /// Identifies the adjacent tiles.
+    /// </summary>
+    /// <remarks>The angles are hardcoded.</remarks>
+    private void GetAdjacentTiles()
     {
-        Collider2D[] adjacentColliders = Physics2D.OverlapCircleAll(transform.position, tileWidth);
-
-        List<GameObject> adjacentTiles = new List<GameObject>();
-
-        Debug.Log(adjacentColliders.Length.ToString());
-
-        foreach (Collider2D coll in adjacentColliders)
-        {
-            adjacentTiles.Add(coll.gameObject);
-        }
-
-        foreach (GameObject tile in adjacentTiles)
-        {
-            Debug.Log(tile.transform.position.ToString());
-        }
-
-    }
-
-    private void GetTiles2()
-    {
+        // Dimensions of the OverlapBox
         Vector2 xBox = new Vector2(tileWidth, tileHeight * 0.0001f);
         Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight);
 
-        // Gets colliders
+        // Gets colliders (HARDCODED)
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
         Collider2D[] yColliders = Physics2D.OverlapBoxAll(transform.position, yBox, 63);
 
+        // Lists to hold Horizontal and Vertical tile GameObjects.
         List<GameObject> xTiles = new List<GameObject>();
         List<GameObject> yTiles = new List<GameObject>();
 
-        //Debug.Log("x=" + xColliders.Length.ToString());
-        //Debug.Log("y=" + yColliders.Length.ToString());
 
+        // Adds the GameObjects of the colliders to the list.
         foreach (Collider2D coll in xColliders)
         {
             xTiles.Add(coll.gameObject);
@@ -182,17 +154,16 @@ public class PlayerController : MonoBehaviour
             yTiles.Add(coll.gameObject);
         }
 
-        
-
-
+        // Initializes the values of the adjacent tiles.
         up = yTiles[0];
         down = yTiles[0];
         right = xTiles[0];
         left = xTiles[0];
 
+        // Determines the Top and Bottom tiles.
         foreach (GameObject tile in yTiles)
         {
-            // TODO: Condition that the tile must have a tile tag.
+            // Only tile objects count
             if (tile.tag == "Tile")
             {
                 if (tile.transform.position.y > up.transform.position.y)
@@ -207,9 +178,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Determines the Left and Right tiles.
         foreach (GameObject tile in xTiles)
         {
-            // TODO: Condition that the tile must have a tile tag.
+            // Only tile objects count
             if (tile.tag == "Tile")
             {
                 if (tile.transform.position.x > right.transform.position.x)
@@ -225,11 +197,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
-        MarkTile(up, "up");
+        // Used to Identify adjacent tiles from editor. No longer needed.
+        /*MarkTile(up, "up");
         MarkTile(down, "down");
         MarkTile(left, "left");
-        MarkTile(right, "right");
+        MarkTile(right, "right");*/
 
     }
 
@@ -238,6 +210,9 @@ public class PlayerController : MonoBehaviour
         tile.gameObject.name = name;
     }
 
+    /// <summary>
+    /// Sets the target to an adjacent tile according to the input.
+    /// </summary>
     private void MovePlayer()
     {
         float horizontal = Input.GetAxis("Horizontal");
