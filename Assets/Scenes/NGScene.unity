@@ -672,11 +672,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 429236151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77907bba3f1ecfe4198fa8a2e951095b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a259dab235adec49bb7dee4d70f05aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileSet: {fileID: 370303554}
-  speed: 1
+  speed: 2
   target: {fileID: 0}
   currentTileIndex: 67
   moveCooldown: 1
