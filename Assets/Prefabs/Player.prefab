@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6876170827077684828}
   m_LocalRotation: {x: 0.46193978, y: -0.19134171, z: 0.33141357, w: 0.8001032}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -363,7 +363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77907bba3f1ecfe4198fa8a2e951095b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSet: {fileID: 1605690926197460551, guid: 79b002afac2697f4e8ec544bd970cdfe, type: 3}
   speed: 2
   target: {fileID: 0}
   currentTileIndex: 7
@@ -393,7 +392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6876170828523462686}
   m_LocalRotation: {x: 0.46193978, y: -0.19134171, z: 0.33141357, w: 0.8001032}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -413,7 +412,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.8, y: -0.8}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
