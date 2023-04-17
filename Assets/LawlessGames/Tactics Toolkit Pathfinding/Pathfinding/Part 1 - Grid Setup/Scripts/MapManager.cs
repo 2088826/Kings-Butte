@@ -10,8 +10,8 @@ namespace finished1
         private static MapManager _instance;
         public static MapManager Instance { get { return _instance; } }
 
-        public GameObject overlayPrefab;
-        public GameObject overlayContainer;
+        public GameObject tilePlaceholderPrefab;
+        public GameObject tileContainerPrefab;
 
         public float littleBump;
 
@@ -34,6 +34,9 @@ namespace finished1
             littleBump = 0.0003f;
             var tileMap = gameObject.GetComponentInChildren<Tilemap>();
             map = new Dictionary<Vector2Int, GameObject>();
+            GameObject container = Instantiate(tileContainerPrefab);
+            container.name = "TileContainer";
+            int count = 0;
 
             BoundsInt bounds = tileMap.cellBounds;
 
@@ -47,11 +50,12 @@ namespace finished1
                         var tileKey = new Vector2Int(x, y);
                         if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey))
                         {
-                            var overlayTile = Instantiate(overlayPrefab, overlayContainer.transform);
+                            var newTile = Instantiate(tilePlaceholderPrefab, container.transform);
+                            newTile.name = "Tile " + count++;
                             var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
-                            overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z+1);
-                            overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
-                            map.Add(tileKey, overlayTile);
+                            newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z+1);
+                            newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
+                            map.Add(tileKey, newTile);
                         }
                     }
                 }
