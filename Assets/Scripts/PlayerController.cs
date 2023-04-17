@@ -196,10 +196,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Initializes the values of the adjacent tiles.
-        up = yTiles[0];
-        down = yTiles[0];
-        right = xTiles[0];
-        left = xTiles[0];
+        up = xTiles[0]; // up
+        down = xTiles[0]; // down
+        right = yTiles[0]; // right
+        left = yTiles[0]; //left
 
         // Determines the Top and Bottom tiles.
         foreach (GameObject tile in yTiles)
@@ -256,22 +256,22 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void MovePlayer()
     {
-        float horizontal = move.ReadValue<Vector2>().y;
-        float vertical = move.ReadValue<Vector2>().x;
+        float horizontal = move.ReadValue<Vector2>().x;
+        float vertical = move.ReadValue<Vector2>().y;
 
         if (horizontal != 0)
         {
             if(horizontal > 0)
             {
                 // Move Right
-                target = right;
-                Debug.Log("RIGHT");
+                target = down;
+                Debug.Log("Right");
             }
             else
             {
                 // Move Left
-                target = left;
-                Debug.Log("LEFT");
+                target = up;
+                Debug.Log("Left");
             }
         }
         else if(vertical != 0)
@@ -279,14 +279,14 @@ public class PlayerController : MonoBehaviour
             if (vertical > 0)
             {
                 // Move Up
-                target = up;
-                Debug.Log("UP");
+                target = right;
+                Debug.Log("Up");
             }
             else
             {
                 // Move Down
-                target = down;
-                Debug.Log("DOWN");
+                target = left;
+                Debug.Log("Down");
             }
         }
     }
