@@ -678,7 +678,7 @@ MonoBehaviour:
   tileSet: {fileID: 370303554}
   speed: 2
   target: {fileID: 0}
-  currentTileIndex: 67
+  currentTileIndex: 0
   moveCooldown: 1
 --- !u!1 &432235182 stripped
 GameObject:

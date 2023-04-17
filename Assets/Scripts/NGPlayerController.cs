@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class NGPlayerController : MonoBehaviour
 {
-    [SerializeField] GameObject tileSet;
+    GameObject tileSet;
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
     [SerializeField] int currentTileIndex = 7;
@@ -33,6 +33,7 @@ public class NGPlayerController : MonoBehaviour
 
     void Start()
     {
+        tileSet = GameObject.Find("TileContainer");
 
         up = new GameObject();
         down = new GameObject();
