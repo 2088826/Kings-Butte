@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveCooldown = 1f;
     
     bool moving = false; // Not used... yet
-    private bool _isAbility = false;
 
     float nextMoveTime = 0f;
 
@@ -26,10 +25,6 @@ public class PlayerController : MonoBehaviour
 
     float tileWidth;
     float tileHeight;
-
-    private Rigidbody2D rb2d;
-    private Animator pAnim;
-
 
     // Holds the adjacent tiles
     GameObject up;
@@ -42,10 +37,8 @@ public class PlayerController : MonoBehaviour
     private InputActionMap player;
     private InputAction move;
 
-
     void Start()
     {
-
         up = new GameObject();
         down = new GameObject();
         right = new GameObject();
@@ -53,7 +46,6 @@ public class PlayerController : MonoBehaviour
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
-
 
         if (tiles.Count <= 0 && tileSet != null)
         {
@@ -94,9 +86,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        pAnim = GetComponent<Animator>();
-
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
     }
@@ -106,7 +95,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        player.FindAction("Ability1").started += DoAbility1;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -116,7 +104,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        player.FindAction("Ability1").started -= DoAbility1;
         player.Disable();
     }
 
@@ -289,29 +276,5 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Down");
             }
         }
-    }
-
-    /// <summary>
-    /// Called on button press and uses ability 1.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void DoAbility1(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("shockwave");
-        }
-    }
-
-    /// <summary>
-    /// Reset the player animation state to idle.
-    /// </summary>
-    public void idleAnim()
-    {
-        pAnim.SetTrigger("idle");
-        _isAbility = false;
-        rb2d.bodyType = RigidbodyType2D.Dynamic;
     }
 }
