@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int currentTileIndex = 7;
 
     [SerializeField] float moveCooldown = 1f;
-    
+    [SerializeField] float pushedCooldown = 0.15f;
+
     bool moving = false; // Not used... yet
+    bool targetOn = true;
     private bool _isAbility = false;
 
     float nextMoveTime = 0f;
@@ -131,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
 
         // TODO: Make a "moving" bool... maybe
-        if (true)
+        if (targetOn == true)
         {
             // Move to the target
             if (target)
@@ -313,5 +315,59 @@ public class PlayerController : MonoBehaviour
         pAnim.SetTrigger("idle");
         _isAbility = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    /// <summary>
+    /// To be called when the object is pushed.
+    /// </summary>
+    private void OnPushed()
+    {
+        targetOn = false;
+
+        Invoke("ActivateTarget", pushedCooldown);
+        target = GetCurrentTile();
+
+
+    }
+
+    private void ActivateTarget()
+    {
+        targetOn = true;
+    }
+
+    public GameObject GetCurrentTile()
+    {
+        
+        // Initialize with the target
+        GameObject currentTile = target;
+        
+        // Gets colliders
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.0001f);
+
+        // Lists to hold Horizontal and Vertical tile GameObjects.
+        List<GameObject> tile = new List<GameObject>();
+
+
+        // Adds the GameObjects of the colliders to the list.
+        foreach (Collider2D coll in colliders)
+        {
+           if (coll.gameObject.tag == "Tile")
+            {
+                currentTile = coll.gameObject;
+                Debug.Log("Target reassigned");
+                break;
+            }
+        }
+
+        return currentTile;
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag != "Tile")
+        {
+            OnPushed();
+        }
     }
 }
