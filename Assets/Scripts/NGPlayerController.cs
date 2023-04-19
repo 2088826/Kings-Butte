@@ -2,35 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.WSA;
 using static UnityEngine.GraphicsBuffer;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
 
-
-public class PlayerController : MonoBehaviour
+public class NGPlayerController : MonoBehaviour
 {
+    GameObject tileSet;
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
     [SerializeField] int currentTileIndex = 7;
 
     [SerializeField] float moveCooldown = 1f;
-    [SerializeField] float pushedCooldown = 0.15f;
-
+    
     bool moving = false; // Not used... yet
-    bool targetOn = true;
-    private bool _isAbility = false;
 
     float nextMoveTime = 0f;
 
-    GameObject tileSet;
     List<GameObject> tiles;
 
     float tileWidth;
     float tileHeight;
-
-    private Rigidbody2D rb2d;
-    private Animator pAnim;
 
 
     // Holds the adjacent tiles
@@ -39,23 +30,17 @@ public class PlayerController : MonoBehaviour
     GameObject right;
     GameObject left;
 
-    // Input System
-    private InputActionAsset inputAsset;
-    private InputActionMap player;
-    private InputAction move;
-
 
     void Start()
     {
+        tileSet = GameObject.Find("TileContainer");
 
         up = new GameObject();
         down = new GameObject();
         right = new GameObject();
         left = new GameObject();
 
-        tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
-
 
         if (tiles.Count <= 0 && tileSet != null)
         {
@@ -63,6 +48,7 @@ public class PlayerController : MonoBehaviour
             // Adds all the tiles in the tileSet to the Tiles List.
             foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
             {
+
                 tiles.Add(tile.gameObject);
             }
 
@@ -75,51 +61,23 @@ public class PlayerController : MonoBehaviour
                 tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
             }
 
-            //if (!target)
-            //{
-            //    // Initialize a target according to the tileIndex
-            //    target = tiles[currentTileIndex];
-            //}
+            if (!target)
+            {
+                // Initialize a target according to the tileIndex
+                target = tiles[currentTileIndex];
+            }
 
 
-            //if (target)
-            //{
-            //    // Start at the target position.
-            //    transform.position = target.transform.position;
-            //}
+            if (target)
+            {
+                // Start at the target position.
+                transform.position = target.transform.position;
+            }
 
             //GetAdjacentTiles();
         }
 
 
-    }
-
-    private void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-        pAnim = GetComponent<Animator>();
-
-        inputAsset = this.GetComponent<PlayerInput>().actions;
-        player = inputAsset.FindActionMap("Player");
-    }
-
-    /// <summary>
-    /// I believe this is called on value change for inputs when pressed.
-    /// </summary>
-    private void OnEnable()
-    {
-        player.FindAction("Ability1").started += DoAbility1;
-        move = player.FindAction("Movement");
-        player.Enable();
-    }
-
-    /// <summary>
-    /// I believe this is called on value change when released (back to neutral positions).
-    /// </summary>
-    private void OnDisable()
-    {
-        player.FindAction("Ability1").started -= DoAbility1;
-        player.Disable();
     }
 
     void Update()
@@ -133,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
 
         // TODO: Make a "moving" bool... maybe
-        if (targetOn == true)
+        if (true)
         {
             // Move to the target
             if (target)
@@ -147,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (move != null && Time.time > nextMoveTime)
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && Time.time > nextMoveTime)
         {
             GetAdjacentTiles();
 
@@ -198,10 +156,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Initializes the values of the adjacent tiles.
-        up = xTiles[0]; // up
-        down = xTiles[0]; // down
-        right = yTiles[0]; // right
-        left = yTiles[0]; //left
+        up = yTiles[0];
+        down = yTiles[0];
+        right = xTiles[0];
+        left = xTiles[0];
 
         // Determines the Top and Bottom tiles.
         foreach (GameObject tile in yTiles)
@@ -258,22 +216,22 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void MovePlayer()
     {
-        float horizontal = move.ReadValue<Vector2>().x;
-        float vertical = move.ReadValue<Vector2>().y;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
         if (horizontal != 0)
         {
             if(horizontal > 0)
             {
                 // Move Right
-                target = down;
-                Debug.Log("Right");
+                target = right;
+                Debug.Log("RIGHT");
             }
             else
             {
                 // Move Left
-                target = up;
-                Debug.Log("Left");
+                target = left;
+                Debug.Log("LEFT");
             }
         }
         else if(vertical != 0)
@@ -281,93 +239,16 @@ public class PlayerController : MonoBehaviour
             if (vertical > 0)
             {
                 // Move Up
-                target = right;
-                Debug.Log("Up");
+                target = up;
+                Debug.Log("UP");
             }
             else
             {
                 // Move Down
-                target = left;
-                Debug.Log("Down");
+                target = down;
+                Debug.Log("DOWN");
             }
         }
     }
 
-    /// <summary>
-    /// Called on button press and uses ability 1.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void DoAbility1(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("shockwave");
-        }
-    }
-
-    /// <summary>
-    /// Reset the player animation state to idle.
-    /// </summary>
-    public void idleAnim()
-    {
-        pAnim.SetTrigger("idle");
-        _isAbility = false;
-        rb2d.bodyType = RigidbodyType2D.Dynamic;
-    }
-
-    /// <summary>
-    /// To be called when the object is pushed.
-    /// </summary>
-    private void OnPushed()
-    {
-        targetOn = false;
-
-        Invoke("ActivateTarget", pushedCooldown);
-        target = GetCurrentTile();
-
-
-    }
-
-    private void ActivateTarget()
-    {
-        targetOn = true;
-    }
-
-    public GameObject GetCurrentTile()
-    {
-        
-        // Initialize with the target
-        GameObject currentTile = target;
-        
-        // Gets colliders
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.0001f);
-
-        // Lists to hold Horizontal and Vertical tile GameObjects.
-        List<GameObject> tile = new List<GameObject>();
-
-
-        // Adds the GameObjects of the colliders to the list.
-        foreach (Collider2D coll in colliders)
-        {
-           if (coll.gameObject.tag == "Tile")
-            {
-                currentTile = coll.gameObject;
-                Debug.Log("Target reassigned");
-                break;
-            }
-        }
-
-        return currentTile;
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.tag != "Tile")
-        {
-            OnPushed();
-        }
-    }
 }
