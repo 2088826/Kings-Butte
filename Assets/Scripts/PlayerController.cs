@@ -16,10 +16,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveCooldown = 1f;
     [SerializeField] float pushedCooldown = 0.15f;
-
     bool moving = false; // Not used... yet
-    bool targetOn = true;
     private bool _isAbility = false;
+	bool targetOn = true;
 
     float nextMoveTime = 0f;
 
@@ -28,11 +27,7 @@ public class PlayerController : MonoBehaviour
 
     float tileWidth;
     float tileHeight;
-
-    private Rigidbody2D rb2d;
-    private Animator pAnim;
-
-
+    
     // Holds the adjacent tiles
     GameObject up;
     GameObject down;
@@ -43,11 +38,9 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
-
-
+    
     void Start()
     {
-
         up = new GameObject();
         down = new GameObject();
         right = new GameObject();
@@ -55,8 +48,7 @@ public class PlayerController : MonoBehaviour
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
-
-
+        
         if (tiles.Count <= 0 && tileSet != null)
         {
 
@@ -96,9 +88,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        pAnim = GetComponent<Animator>();
-
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
     }
@@ -108,7 +97,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        player.FindAction("Ability1").started += DoAbility1;
         move = player.FindAction("Movement");
         player.Enable();
     }
@@ -118,7 +106,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        player.FindAction("Ability1").started -= DoAbility1;
         player.Disable();
     }
 
@@ -263,7 +250,7 @@ public class PlayerController : MonoBehaviour
 
         if (horizontal != 0)
         {
-            if(horizontal > 0)
+            if (horizontal > 0)
             {
                 // Move Right
                 target = down;
@@ -276,7 +263,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Left");
             }
         }
-        else if(vertical != 0)
+        else if (vertical != 0)
         {
             if (vertical > 0)
             {
@@ -292,31 +279,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// Called on button press and uses ability 1.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void DoAbility1(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("shockwave");
-        }
-    }
-
-    /// <summary>
-    /// Reset the player animation state to idle.
-    /// </summary>
-    public void idleAnim()
-    {
-        pAnim.SetTrigger("idle");
-        _isAbility = false;
-        rb2d.bodyType = RigidbodyType2D.Dynamic;
-    }
-
+        
     /// <summary>
     /// To be called when the object is pushed.
     /// </summary>
