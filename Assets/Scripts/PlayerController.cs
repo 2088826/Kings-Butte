@@ -326,13 +326,39 @@ public class PlayerController : MonoBehaviour
 
         Invoke("ActivateTarget", pushedCooldown);
         target = GetCurrentTile();
-
-
     }
 
     private void ActivateTarget()
     {
         targetOn = true;
+    }
+
+    public void GetPushed(Transform transform)
+    {
+        GetAdjacentTiles();
+
+        Transform up = this.up.transform;
+        Transform down = this.down.transform;
+        Transform left = this.left.transform;
+        Transform right = this.right.transform;
+
+        if (transform.position == up.transform.position)
+        {
+            target = this.down;
+        }
+        else if(transform.position == down.transform.position)
+        {
+            target = this.up;
+        }
+        else if (transform.position == left.transform.position)
+        {
+            target = this.right;
+        }
+        else if (transform.position == right.transform.position)
+        {
+            target = this.left;
+        }
+
     }
 
     public GameObject GetCurrentTile()
@@ -365,9 +391,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag != "Tile")
+        if(other.gameObject.name == "Shockwave")
         {
-            OnPushed();
+            //OnPushed();
+
+            GetPushed(other.transform);
+
+            Debug.Log("Collision detected");
         }
     }
 }
