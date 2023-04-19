@@ -268,11 +268,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77907bba3f1ecfe4198fa8a2e951095b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSet: {fileID: 1105605774}
   speed: 2
   target: {fileID: 0}
   currentTileIndex: 7
   moveCooldown: 1
+  pushCooldown: 0.5
 --- !u!212 &1453719112
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -352,9 +352,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6862219962853230827, guid: 09847a53f8170fc43bc8b17f713b2cd5, type: 3}
+      propertyPath: moveCooldown
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6876170827907371456, guid: 09847a53f8170fc43bc8b17f713b2cd5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6876170827907371456, guid: 09847a53f8170fc43bc8b17f713b2cd5, type: 3}
       propertyPath: m_LocalPosition.x
