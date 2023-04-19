@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int currentTileIndex = 7;
 
     [SerializeField] float moveCooldown = 1f;
-    [SerializeField] float pushCooldown = 0.5f;
+    [SerializeField] float pushedCooldown = 0.15f;
 
     bool moving = false; // Not used... yet
     bool targetOn = true;
@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
     {
         targetOn = false;
 
-        Invoke("ActivateTarget()", 1);
+        Invoke("ActivateTarget", pushedCooldown);
         target = GetCurrentTile();
 
 
