@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
 
         if (horizontal != 0)
         {
-            if(horizontal > 0)
+            if (horizontal > 0)
             {
                 // Move Right
                 target = down;
@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Left");
             }
         }
-        else if(vertical != 0)
+        else if (vertical != 0)
         {
             if (vertical > 0)
             {
@@ -278,6 +278,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Down");
             }
         }
+    }
         
     /// <summary>
     /// To be called when the object is pushed.
