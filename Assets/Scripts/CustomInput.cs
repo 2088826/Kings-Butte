@@ -55,7 +55,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Ability1"",
+                    ""name"": ""PowerUp"",
                     ""type"": ""Button"",
                     ""id"": ""44ce5e75-240d-40f2-afe0-9b27e7b70cb8"",
                     ""expectedControlType"": ""Button"",
@@ -64,7 +64,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Ability2"",
+                    ""name"": ""BasicAttack"",
                     ""type"": ""Button"",
                     ""id"": ""14e6e626-1e38-4965-9501-a0cdf2083c6d"",
                     ""expectedControlType"": ""Button"",
@@ -73,7 +73,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PowerUp1"",
+                    ""name"": ""Ability1"",
                     ""type"": ""Button"",
                     ""id"": ""9388eacb-1d50-4618-b0e5-87ee701e8c97"",
                     ""expectedControlType"": ""Button"",
@@ -82,13 +82,22 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PowerUp2"",
+                    ""name"": ""Ability2"",
                     ""type"": ""Button"",
                     ""id"": ""3cd67d49-b294-4fc1-84bf-63bda155c0d0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""2e4010b6-8826-4464-9103-5d721f0be97d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""AttackNorth"",
@@ -135,7 +144,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability2"",
+                    ""action"": ""BasicAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -146,7 +155,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability2"",
+                    ""action"": ""BasicAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -157,7 +166,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PowerUp1"",
+                    ""action"": ""Ability1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -168,7 +177,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PowerUp1"",
+                    ""action"": ""Ability1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -179,7 +188,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PowerUp2"",
+                    ""action"": ""Ability2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -190,7 +199,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PowerUp2"",
+                    ""action"": ""Ability2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -201,7 +210,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability1"",
+                    ""action"": ""PowerUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -212,7 +221,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Ability1"",
+                    ""action"": ""PowerUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -457,6 +466,17 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""action"": ""AttackEast"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6aa98997-7943-4b9a-87a3-60d66ea9a6f5"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -507,10 +527,11 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
         m_Player_Join = m_Player.FindAction("Join", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_PowerUp = m_Player.FindAction("PowerUp", throwIfNotFound: true);
+        m_Player_BasicAttack = m_Player.FindAction("BasicAttack", throwIfNotFound: true);
         m_Player_Ability1 = m_Player.FindAction("Ability1", throwIfNotFound: true);
         m_Player_Ability2 = m_Player.FindAction("Ability2", throwIfNotFound: true);
-        m_Player_PowerUp1 = m_Player.FindAction("PowerUp1", throwIfNotFound: true);
-        m_Player_PowerUp2 = m_Player.FindAction("PowerUp2", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_AttackNorth = m_Player.FindAction("AttackNorth", throwIfNotFound: true);
         m_Player_AttackSouth = m_Player.FindAction("AttackSouth", throwIfNotFound: true);
         m_Player_AttackWest = m_Player.FindAction("AttackWest", throwIfNotFound: true);
@@ -580,10 +601,11 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Join;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_PowerUp;
+    private readonly InputAction m_Player_BasicAttack;
     private readonly InputAction m_Player_Ability1;
     private readonly InputAction m_Player_Ability2;
-    private readonly InputAction m_Player_PowerUp1;
-    private readonly InputAction m_Player_PowerUp2;
+    private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_AttackNorth;
     private readonly InputAction m_Player_AttackSouth;
     private readonly InputAction m_Player_AttackWest;
@@ -595,10 +617,11 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
         public InputAction @Join => m_Wrapper.m_Player_Join;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @PowerUp => m_Wrapper.m_Player_PowerUp;
+        public InputAction @BasicAttack => m_Wrapper.m_Player_BasicAttack;
         public InputAction @Ability1 => m_Wrapper.m_Player_Ability1;
         public InputAction @Ability2 => m_Wrapper.m_Player_Ability2;
-        public InputAction @PowerUp1 => m_Wrapper.m_Player_PowerUp1;
-        public InputAction @PowerUp2 => m_Wrapper.m_Player_PowerUp2;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @AttackNorth => m_Wrapper.m_Player_AttackNorth;
         public InputAction @AttackSouth => m_Wrapper.m_Player_AttackSouth;
         public InputAction @AttackWest => m_Wrapper.m_Player_AttackWest;
@@ -621,18 +644,21 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @PowerUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
+                @PowerUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
+                @PowerUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
+                @BasicAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBasicAttack;
+                @BasicAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBasicAttack;
+                @BasicAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBasicAttack;
                 @Ability1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
                 @Ability1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
                 @Ability1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
                 @Ability2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
                 @Ability2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
                 @Ability2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
-                @PowerUp1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp1;
-                @PowerUp1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp1;
-                @PowerUp1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp1;
-                @PowerUp2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp2;
-                @PowerUp2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp2;
-                @PowerUp2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp2;
+                @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @AttackNorth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackNorth;
                 @AttackNorth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackNorth;
                 @AttackNorth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackNorth;
@@ -658,18 +684,21 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @PowerUp.started += instance.OnPowerUp;
+                @PowerUp.performed += instance.OnPowerUp;
+                @PowerUp.canceled += instance.OnPowerUp;
+                @BasicAttack.started += instance.OnBasicAttack;
+                @BasicAttack.performed += instance.OnBasicAttack;
+                @BasicAttack.canceled += instance.OnBasicAttack;
                 @Ability1.started += instance.OnAbility1;
                 @Ability1.performed += instance.OnAbility1;
                 @Ability1.canceled += instance.OnAbility1;
                 @Ability2.started += instance.OnAbility2;
                 @Ability2.performed += instance.OnAbility2;
                 @Ability2.canceled += instance.OnAbility2;
-                @PowerUp1.started += instance.OnPowerUp1;
-                @PowerUp1.performed += instance.OnPowerUp1;
-                @PowerUp1.canceled += instance.OnPowerUp1;
-                @PowerUp2.started += instance.OnPowerUp2;
-                @PowerUp2.performed += instance.OnPowerUp2;
-                @PowerUp2.canceled += instance.OnPowerUp2;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
                 @AttackNorth.started += instance.OnAttackNorth;
                 @AttackNorth.performed += instance.OnAttackNorth;
                 @AttackNorth.canceled += instance.OnAttackNorth;
@@ -724,10 +753,11 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
         void OnJoin(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnPowerUp(InputAction.CallbackContext context);
+        void OnBasicAttack(InputAction.CallbackContext context);
         void OnAbility1(InputAction.CallbackContext context);
         void OnAbility2(InputAction.CallbackContext context);
-        void OnPowerUp1(InputAction.CallbackContext context);
-        void OnPowerUp2(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         void OnAttackNorth(InputAction.CallbackContext context);
         void OnAttackSouth(InputAction.CallbackContext context);
         void OnAttackWest(InputAction.CallbackContext context);
