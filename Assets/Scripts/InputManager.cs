@@ -6,6 +6,11 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    private float speed = 5f;
+    private Vector2 targetPos = Vector2.zero;
+    private float xOffset = 0;
+    private float yOffset = 0;
+
     private bool _isAbility = false;
     private bool _hasPowerUp = false;
 
@@ -59,11 +64,6 @@ public class InputManager : MonoBehaviour
         player.Disable();
     }
 
-    private void FixedUpdate()
-    {
-        Debug.Log(aim.ReadValue<Vector2>());
-    }
-
     /// <summary>
     /// Called on button press and uses ability 1.
     /// </summary>
@@ -85,12 +85,66 @@ public class InputManager : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility2(InputAction.CallbackContext obj)
     {
-        if (!_isAbility) // Jump (move 2 spaces)
+
+        if (!_isAbility && aim.inProgress) // Jump (move 2 spaces)
         {
-            Debug.Log("Ability2");
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("ability2");
+            float valueX = aim.ReadValue<Vector2>().x;
+            float valueY = aim.ReadValue<Vector2>().y;
+
+            Vector2 currentPos = gameObject.transform.position;
+
+            if (valueY > 0.1 && valueY > valueX) // Up(y) = 1
+            {
+                Debug.Log("Jump North");
+                _isAbility = true;
+
+                xOffset = 1f;
+                yOffset = 0.5f;
+                targetPos = new Vector2 (currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
+            else if (valueY < -0.1 && valueY < valueX) // Down(y) = -1
+            {
+                Debug.Log("Jump South");
+                _isAbility = true;
+
+                xOffset = -1f;
+                yOffset = -0.5f;
+                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
+            else if (valueX < -0.1 && valueX < valueY) // Left(x) = -1
+            {
+                Debug.Log("Jump West");
+                _isAbility = true;
+
+                xOffset = -1f;
+                yOffset = 0.5f;
+                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
+            else if (valueX > 0.1 && valueX > valueY) // Right(x) = 1
+            {
+                Debug.Log("Jump East");
+                _isAbility = true;
+
+                xOffset = 1f;
+                yOffset = -0.5f;
+                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
         }
     }
 
@@ -154,60 +208,9 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Called on north button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackNorth(InputAction.CallbackContext obj)
+    private void MoveToTarget()
     {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Nattack");
-        }
-    }
-
-    /// <summary>
-    /// Called on south button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackSouth(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Sattack");
-        }
-    }
-
-    /// <summary>
-    /// Called on west button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackWest(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Wattack");
-        }
-    }
-
-    /// <summary>
-    /// Called on east button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackEast(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Eattack");
-        }
+        gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, targetPos, speed * Time.deltaTime);
     }
 
     /// <summary>
