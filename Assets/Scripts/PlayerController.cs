@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveCooldown = 1f;
     [SerializeField] float pushedCooldown = 0.15f;
+
+
     bool moving = false; // Not used... yet
     private bool _isAbility = false;
 	bool targetOn = true;
@@ -332,7 +334,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.name == "Shockwave")
+        if(other.gameObject.name.Contains("Player") == true)
         {
             //OnPushed();
 
@@ -340,5 +342,7 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("Collision detected");
         }
+
+        Debug.Log(gameObject.name + " detects " + other.gameObject.name);
     }
 }
