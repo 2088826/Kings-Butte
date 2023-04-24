@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveCooldown = 1f;
     [SerializeField] float pushedCooldown = 0.15f;
+
+
     bool moving = false; // Not used... yet
     private bool _isAbility = false;
 	bool targetOn = true;
@@ -265,13 +267,48 @@ public class PlayerController : MonoBehaviour
     {
         targetOn = false;
 
+        Invoke("SetTargetToCurrentTile", pushedCooldown);
         Invoke("ActivateTarget", pushedCooldown);
-        target = GetCurrentTile();
+        //target = GetCurrentTile();
+        
     }
 
     private void ActivateTarget()
     {
         targetOn = true;
+    }
+
+    private void SetTargetToCurrentTile()
+    {
+        target = GetCurrentTile();
+    }
+
+    public void GetPushed(Transform transform)
+    {
+        GetAdjacentTiles();
+
+        Transform up = this.up.transform;
+        Transform down = this.down.transform;
+        Transform left = this.left.transform;
+        Transform right = this.right.transform;
+
+        if (transform.position == up.transform.position)
+        {
+            target = this.down;
+        }
+        else if(transform.position == down.transform.position)
+        {
+            target = this.up;
+        }
+        else if (transform.position == left.transform.position)
+        {
+            target = this.right;
+        }
+        else if (transform.position == right.transform.position)
+        {
+            target = this.left;
+        }
+
     }
 
     public GameObject GetCurrentTile()
@@ -304,9 +341,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag != "Tile")
+        if(other.gameObject.name.Contains("Player") == true && input.IsAbility == false)
         {
             OnPushed();
+
+            //GetPushed(other.transform);
+
+            Debug.Log(gameObject.name + " detects " + other.gameObject.name);
         }
     }
 }
