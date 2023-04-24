@@ -16,6 +16,8 @@ public class InputManager : MonoBehaviour
     private InputActionMap player;
     private InputAction move;
 
+    public InputAction Move { get { return move; } }
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -38,6 +40,7 @@ public class InputManager : MonoBehaviour
         player.FindAction("AttackSouth").started += AttackSouth;
         player.FindAction("AttackWest").started += AttackWest;
         player.FindAction("AttackEast").started += AttackEast;
+        move = player.FindAction("Movement");
         player.Enable();
     }
 
