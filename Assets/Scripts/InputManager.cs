@@ -24,6 +24,9 @@ public class InputManager : MonoBehaviour
     private InputAction aim;
 
  	public InputAction Move { get { return move; } }
+    public InputAction Aim { get { return aim; } }
+    public bool IsAbility { get { return _isAbility; } }
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -94,7 +97,7 @@ public class InputManager : MonoBehaviour
             float valueY = aim.ReadValue<Vector2>().y;
             Vector2 currentPos = gameObject.transform.position;
             
-            if (valueY > 0.1 && valueY > valueX) // Up(y) = 1
+            if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
                 Debug.Log("Jump North");
                 _isAbility = true;
@@ -106,7 +109,7 @@ public class InputManager : MonoBehaviour
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("ability2");
             }
-            else if (valueY < -0.1 && valueY < valueX) // Down(y) = -1
+            else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
                 Debug.Log("Jump South");
                 _isAbility = true;
@@ -119,7 +122,7 @@ public class InputManager : MonoBehaviour
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("ability2");
             }
-            else if (valueX < -0.1 && valueX < valueY) // Left(x) = -1
+            else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
                 Debug.Log("Jump West");
                 _isAbility = true;
@@ -132,7 +135,7 @@ public class InputManager : MonoBehaviour
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("ability2");
             }
-            else if (valueX > 0.1 && valueX > valueY) // Right(x) = 1
+            else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
                 Debug.Log("Jump East");
                 _isAbility = true;
@@ -175,28 +178,28 @@ public class InputManager : MonoBehaviour
             float valueX = aim.ReadValue<Vector2>().x;
             float valueY = aim.ReadValue<Vector2>().y;
 
-            if (valueY > 0.1 && valueY > valueX) // Up(y) = 1
+            if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
                 Debug.Log("Basic Attack North");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Nattack");
             }
-            else if (valueY < -0.1 && valueY < valueX) // Down(y) = -1
+            else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
                 Debug.Log("Basic Attack South");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Sattack");
             }
-            else if (valueX < -0.1 && valueX < valueY) // Left(x) = -1
+            else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
                 Debug.Log("Basic Attack West");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Wattack");
             }
-            else if (valueX > 0.1 && valueX > valueY) // Right(x) = 1
+            else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
                 Debug.Log("Basic Attack East");
                 _isAbility = true;
