@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private Animator pAnim;
+    private PlayerController controller;
 
     // Input System
     private InputActionAsset inputAsset;
@@ -31,6 +32,7 @@ public class InputManager : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         pAnim = GetComponent<Animator>();
+        controller = GetComponent<PlayerController>();
 
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
@@ -45,10 +47,6 @@ public class InputManager : MonoBehaviour
         player.FindAction("Ability2").started += DoAbility2;
 		player.FindAction("PowerUp").started += DoPowerUp;
         player.FindAction("BasicAttack").started += DoBasicAttack; 
-        //player.FindAction("AttackNorth").started += AttackNorth;
-        //player.FindAction("AttackSouth").started += AttackSouth;
-        //player.FindAction("AttackWest").started += AttackWest;
-        //player.FindAction("AttackEast").started += AttackEast;
 		aim = player.FindAction("Aim");
 		move = player.FindAction("Movement");
         player.Enable();
@@ -63,10 +61,6 @@ public class InputManager : MonoBehaviour
         player.FindAction("Ability2").started -= DoAbility2;
         player.FindAction("PowerUp").started -= DoPowerUp;
         player.FindAction("BasicAttack").started -= DoBasicAttack;
-        //player.FindAction("AttackNorth").started -= AttackNorth;
-        //player.FindAction("AttackSouth").started -= AttackSouth;
-        //player.FindAction("AttackWest").started -= AttackWest;
-        //player.FindAction("AttackEast").started -= AttackEast;
         player.Disable();
     }
 
