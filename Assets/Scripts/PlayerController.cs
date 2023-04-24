@@ -267,8 +267,13 @@ public class PlayerController : MonoBehaviour
     {
         targetOn = false;
 
-        Invoke("SetTargetToCurrentTile", pushedCooldown);
-        Invoke("ActivateTarget", pushedCooldown);
+        SetTargetToCurrentTile();
+        ActivateTarget();
+
+
+        //Invoke("SetTargetToCurrentTile", pushedCooldown);
+        //Invoke("ActivateTarget", pushedCooldown);
+
         //target = GetCurrentTile();
         
     }
@@ -339,8 +344,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionExit2D(Collision2D other)
     {
+        
+        // maybe use an oncollisionexit
+
+
         if(other.gameObject.name.Contains("Player") == true && input.IsAbility == false)
         {
             OnPushed();
