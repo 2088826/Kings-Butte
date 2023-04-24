@@ -51,7 +51,7 @@ namespace finished1
                         if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey))
                         {
                             var newTile = Instantiate(tilePlaceholderPrefab, container.transform);
-                            newTile.name = "Tile " + count++;
+                            newTile.name = "PlayableTile " + count++;
                             var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
                             newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z+1);
                             newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
