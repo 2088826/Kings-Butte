@@ -6,7 +6,13 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+	private float speed = 5f;
+    private Vector2 targetPos = Vector2.zero;
+    private float xOffset = 0;
+    private float yOffset = 0;
+
     private bool _isAbility = false;
+	private bool _hasPowerUp = false;
 
     private Rigidbody2D rb2d;
     private Animator pAnim;
@@ -15,8 +21,11 @@ public class InputManager : MonoBehaviour
     private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
+    private InputAction aim;
 
-    public InputAction Move { get { return move; } }
+ 	public InputAction Move { get { return move; } }
+    public InputAction Aim { get { return aim; } }
+    public bool IsAbility { get { return _isAbility; } }
 
     private void Awake()
     {
@@ -34,13 +43,14 @@ public class InputManager : MonoBehaviour
     {
         player.FindAction("Ability1").started += DoAbility1;
         player.FindAction("Ability2").started += DoAbility2;
-        player.FindAction("PowerUp1").started += PowerUp1;
-        player.FindAction("PowerUp2").started += PowerUp2;
-        player.FindAction("AttackNorth").started += AttackNorth;
-        player.FindAction("AttackSouth").started += AttackSouth;
-        player.FindAction("AttackWest").started += AttackWest;
-        player.FindAction("AttackEast").started += AttackEast;
-        move = player.FindAction("Movement");
+		player.FindAction("PowerUp").started += DoPowerUp;
+        player.FindAction("BasicAttack").started += DoBasicAttack; 
+        //player.FindAction("AttackNorth").started += AttackNorth;
+        //player.FindAction("AttackSouth").started += AttackSouth;
+        //player.FindAction("AttackWest").started += AttackWest;
+        //player.FindAction("AttackEast").started += AttackEast;
+		aim = player.FindAction("Aim");
+		move = player.FindAction("Movement");
         player.Enable();
     }
 
@@ -51,12 +61,12 @@ public class InputManager : MonoBehaviour
     {
         player.FindAction("Ability1").started -= DoAbility1;
         player.FindAction("Ability2").started -= DoAbility2;
-        player.FindAction("PowerUp1").started -= PowerUp1;
-        player.FindAction("PowerUp2").started -= PowerUp2;
-        player.FindAction("AttackNorth").started -= AttackNorth;
-        player.FindAction("AttackSouth").started -= AttackSouth;
-        player.FindAction("AttackWest").started -= AttackWest;
-        player.FindAction("AttackEast").started -= AttackEast;
+        player.FindAction("PowerUp").started -= DoPowerUp;
+        player.FindAction("BasicAttack").started -= DoBasicAttack;
+        //player.FindAction("AttackNorth").started -= AttackNorth;
+        //player.FindAction("AttackSouth").started -= AttackSouth;
+        //player.FindAction("AttackWest").started -= AttackWest;
+        //player.FindAction("AttackEast").started -= AttackEast;
         player.Disable();
     }
 
@@ -81,102 +91,129 @@ public class InputManager : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility2(InputAction.CallbackContext obj)
     {
-        if (!_isAbility) // Jump (move 2 spaces)
+        if (!_isAbility && aim.inProgress) // Jump (move 2 spaces)
         {
-            Debug.Log("Ability2");
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("ability2");
+			float valueX = aim.ReadValue<Vector2>().x;
+            float valueY = aim.ReadValue<Vector2>().y;
+            Vector2 currentPos = gameObject.transform.position;
+            
+            if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
+            {
+                Debug.Log("Jump North");
+                _isAbility = true;
+                xOffset = 1f;
+                yOffset = 0.5f;
+                targetPos = new Vector2 (currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
+            else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
+            {
+                Debug.Log("Jump South");
+                _isAbility = true;
+
+                xOffset = -1f;
+                yOffset = -0.5f;
+                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
+            else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
+            {
+                Debug.Log("Jump West");
+                _isAbility = true;
+
+                xOffset = -1f;
+                yOffset = 0.5f;
+                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
+            else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
+            {
+                Debug.Log("Jump East");
+                _isAbility = true;
+
+                xOffset = 1f;
+                yOffset = -0.5f;
+                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
+                MoveToTarget();
+
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("ability2");
+            }
         }
     }
 
     /// <summary>
-    /// Called on button press and uses ability 3.
+    /// Called on button press and uses powerup if available.
     /// </summary>
     /// <param name="obj">obj Callback context when action is triggered</param>
-    private void PowerUp1(InputAction.CallbackContext obj)
+    private void DoPowerUp(InputAction.CallbackContext obj)
     {
-        if (!_isAbility) // Powerup 1
+        if (!_isAbility && _hasPowerUp) // Powerup
         {
-            Debug.Log("PowerUp1");
+            Debug.Log("PowerUp");
             _isAbility = true;
             rb2d.bodyType = RigidbodyType2D.Static;
-            //pAnim.SetTrigger("powerUp1");
+            pAnim.SetTrigger("powerUp1");
         }
     }
 
     /// <summary>
-    /// Called on button press and uses ability 4.
+    /// Button press uses a basic attack in the direction of the aim.
     /// </summary>
     /// <param name="obj">obj Callback context when action is triggered</param>
-    private void PowerUp2(InputAction.CallbackContext obj)
+    private void DoBasicAttack(InputAction.CallbackContext obj)
     {
-        if (!_isAbility) // Powerup 2
+
+        if (!_isAbility && aim.inProgress) // Basic Attack
         {
-            Debug.Log("PowerUp2");
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            //pAnim.SetTrigger("powerUp2");
+            float valueX = aim.ReadValue<Vector2>().x;
+            float valueY = aim.ReadValue<Vector2>().y;
+
+            if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
+            {
+                Debug.Log("Basic Attack North");
+                _isAbility = true;
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("Nattack");
+            }
+            else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
+            {
+                Debug.Log("Basic Attack South");
+                _isAbility = true;
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("Sattack");
+            }
+            else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
+            {
+                Debug.Log("Basic Attack West");
+                _isAbility = true;
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("Wattack");
+            }
+            else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
+            {
+                Debug.Log("Basic Attack East");
+                _isAbility = true;
+                rb2d.bodyType = RigidbodyType2D.Static;
+                pAnim.SetTrigger("Eattack");
+            }
         }
     }
 
-    /// <summary>
-    /// Called on north button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackNorth(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Nattack");
-        }
-    }
-
-    /// <summary>
-    /// Called on south button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackSouth(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Sattack");
-        }
-    }
-
-    /// <summary>
-    /// Called on west button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackWest(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Wattack");
-        }
-    }
-
-    /// <summary>
-    /// Called on east button press and uses an attack.
-    /// </summary>
-    /// <param name="obj">obj Callback context when action is triggered</param>
-    private void AttackEast(InputAction.CallbackContext obj)
-    {
-        if (!_isAbility)
-        {
-            _isAbility = true;
-            rb2d.bodyType = RigidbodyType2D.Static;
-            pAnim.SetTrigger("Eattack");
-        }
-    }
-
+	private void MoveToTarget()
+	{
+	    gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, targetPos, speed * Time.deltaTime);
+	}
+	
     /// <summary>
     /// Reset the player animation state to idle.
     /// </summary>

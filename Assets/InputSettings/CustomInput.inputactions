@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Ability1",
+                    "name": "PowerUp",
                     "type": "Button",
                     "id": "44ce5e75-240d-40f2-afe0-9b27e7b70cb8",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ability2",
+                    "name": "BasicAttack",
                     "type": "Button",
                     "id": "14e6e626-1e38-4965-9501-a0cdf2083c6d",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PowerUp1",
+                    "name": "Ability1",
                     "type": "Button",
                     "id": "9388eacb-1d50-4618-b0e5-87ee701e8c97",
                     "expectedControlType": "Button",
@@ -60,13 +60,22 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PowerUp2",
+                    "name": "Ability2",
                     "type": "Button",
                     "id": "3cd67d49-b294-4fc1-84bf-63bda155c0d0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "2e4010b6-8826-4464-9103-5d721f0be97d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "AttackNorth",
@@ -113,7 +122,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability2",
+                    "action": "BasicAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -124,7 +133,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability2",
+                    "action": "BasicAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -135,7 +144,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUp1",
+                    "action": "Ability1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -146,7 +155,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUp1",
+                    "action": "Ability1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -157,7 +166,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUp2",
+                    "action": "Ability2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -168,7 +177,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUp2",
+                    "action": "Ability2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -179,7 +188,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability1",
+                    "action": "PowerUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -190,7 +199,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability1",
+                    "action": "PowerUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -433,6 +442,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AttackEast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6aa98997-7943-4b9a-87a3-60d66ea9a6f5",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
