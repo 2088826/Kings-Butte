@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour
     GameObject right;
     GameObject left;
 
-    // Input System
-    private InputActionAsset inputAsset;
-    private InputActionMap player;
-    private InputAction move;
+    private InputManager input;
     
     void Start()
     {
+
+        input = gameObject.GetComponent<InputManager>();
+
         up = new GameObject();
         down = new GameObject();
         right = new GameObject();
@@ -86,29 +86,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Awake()
-    {
-        inputAsset = this.GetComponent<PlayerInput>().actions;
-        player = inputAsset.FindActionMap("Player");
-    }
-
-    /// <summary>
-    /// I believe this is called on value change for inputs when pressed.
-    /// </summary>
-    private void OnEnable()
-    {
-        move = player.FindAction("Movement");
-        player.Enable();
-    }
-
-    /// <summary>
-    /// I believe this is called on value change when released (back to neutral positions).
-    /// </summary>
-    private void OnDisable()
-    {
-        player.Disable();
-    }
-
     void Update()
     {
 
@@ -134,7 +111,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (move != null && Time.time > nextMoveTime)
+        Debug.Log(input.Move);
+        if (input.Move != null && Time.time > nextMoveTime)
         {
             GetAdjacentTiles();
 
@@ -245,8 +223,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void MovePlayer()
     {
-        float horizontal = move.ReadValue<Vector2>().x;
-        float vertical = move.ReadValue<Vector2>().y;
+        float horizontal = input.Move.ReadValue<Vector2>().x;
+        float vertical = input.Move.ReadValue<Vector2>().y;
 
         if (horizontal != 0)
         {
