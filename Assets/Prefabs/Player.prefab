@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6876170827077684829}
   - component: {fileID: 6876170827077684824}
-  - component: {fileID: 6876170827077684827}
+  - component: {fileID: 3724748982806444019}
   m_Layer: 0
   m_Name: Ability Hitbox
   m_TagString: Untagged
@@ -169,8 +169,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6876170827077684827
-BoxCollider2D:
+--- !u!60 &3724748982806444019
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,9 +192,37 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.02
+  m_Points:
+    m_Paths:
+    - - {x: 0.333445, y: 0.5131471}
+      - {x: -0.3071039, y: 0.51330084}
+      - {x: -0.49317506, y: 0.59994173}
+      - {x: -0.48030362, y: 0.5389253}
+      - {x: -0.5518442, y: 0.47389427}
+      - {x: -0.62078214, y: 0.49252295}
+      - {x: -0.5101478, y: 0.28718844}
+      - {x: -0.5121383, y: -0.28360397}
+      - {x: -0.64662296, y: -0.49829188}
+      - {x: -0.5404018, y: -0.46475378}
+      - {x: -0.4571386, y: -0.55782825}
+      - {x: -0.48962146, y: -0.63602626}
+      - {x: -0.3320707, y: -0.52898544}
+      - {x: 0.4052274, y: -0.5308995}
+      - {x: 0.49304143, y: -0.6185929}
+      - {x: 0.47593576, y: -0.52835715}
+      - {x: 0.5259393, y: -0.4823942}
+      - {x: 0.5964479, y: -0.49963382}
+      - {x: 0.52747494, y: -0.35959175}
+      - {x: 0.538007, y: 0.39119136}
+      - {x: 0.6125984, y: 0.5233213}
+      - {x: 0.5248505, y: 0.47018412}
+      - {x: 0.46716323, y: 0.5140762}
+      - {x: 0.50792694, y: 0.61481386}
+    - - {x: -0.45555556, y: 0.45555556}
+      - {x: 0.45000002, y: 0.45555556}
+      - {x: 0.45000005, y: -0.45000008}
+      - {x: 0.45000002, y: -0.45000002}
+      - {x: -0.45555556, y: -0.45000002}
 --- !u!1 &6876170827907371461
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +396,7 @@ MonoBehaviour:
   target: {fileID: 0}
   currentTileIndex: 7
   moveCooldown: 1
+  pushedCooldown: 0.15
 --- !u!114 &7175508597106829306
 MonoBehaviour:
   m_ObjectHideFlags: 0
