@@ -346,9 +346,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        
-        // maybe use an oncollisionexit
-
 
         if(other.gameObject.name.Contains("Player") == true && input.IsAbility == false)
         {
