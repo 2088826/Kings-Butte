@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
-    [SerializeField] int currentTileIndex = 7;
 
     [SerializeField] float moveCooldown = 1f;
     [SerializeField] float pushedCooldown = 0.15f;
@@ -72,19 +71,6 @@ public class PlayerController : MonoBehaviour
                 tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
                 tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
             }
-
-            //if (!target)
-            //{
-            //    // Initialize a target according to the tileIndex
-            //    target = tiles[currentTileIndex];
-            //}
-
-
-            //if (target)
-            //{
-            //    // Start at the target position.
-            //    transform.position = target.transform.position;
-            //}
 
             //GetAdjacentTiles();
         }
@@ -336,12 +322,6 @@ public class PlayerController : MonoBehaviour
 
         SetTargetToCurrentTile();
         ActivateTarget();
-
-
-        //Invoke("SetTargetToCurrentTile", pushedCooldown);
-        //Invoke("ActivateTarget", pushedCooldown);
-
-        //target = GetCurrentTile();
         
     }
 
@@ -386,8 +366,8 @@ public class PlayerController : MonoBehaviour
     public GameObject GetCurrentTile()
     {
         
-        // Initialize with the target
-        GameObject currentTile = target;
+        // Initialize as null
+        GameObject currentTile = null;
         
         // Gets colliders
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.0001f);
@@ -402,7 +382,7 @@ public class PlayerController : MonoBehaviour
            if (coll.gameObject.tag == "Tile")
             {
                 currentTile = coll.gameObject;
-                Debug.Log("Target reassigned");
+                Debug.Log("Current tile identified.");
                 break;
             }
         }
