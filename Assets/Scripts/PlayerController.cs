@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
         if (input.Move != null && Time.time > nextMoveTime)
         {
             GetAdjacentTiles();
+            //GetAdjacentTilesX2();
 
             MovePlayer();
 
@@ -143,6 +144,80 @@ public class PlayerController : MonoBehaviour
         // Dimensions of the OverlapBox
         Vector2 xBox = new Vector2(tileWidth, tileHeight * 0.0001f);
         Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight);
+
+        // Gets colliders (HARDCODED ANGLES)
+        Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
+        Collider2D[] yColliders = Physics2D.OverlapBoxAll(transform.position, yBox, 63);
+
+        // Lists to hold Horizontal and Vertical tile GameObjects.
+        List<GameObject> xTiles = new List<GameObject>();
+        List<GameObject> yTiles = new List<GameObject>();
+
+
+        // Adds the GameObjects of the colliders to the list.
+        foreach (Collider2D coll in xColliders)
+        {
+            xTiles.Add(coll.gameObject);
+        }
+
+        foreach (Collider2D coll in yColliders)
+        {
+            yTiles.Add(coll.gameObject);
+        }
+
+        // Initializes the values of the adjacent tiles.
+        up = xTiles[0]; // up
+        down = xTiles[0]; // down
+        right = yTiles[0]; // right
+        left = yTiles[0]; //left
+
+        // Determines the Top and Bottom tiles.
+        foreach (GameObject tile in yTiles)
+        {
+            // Only tile objects count
+            if (tile.tag == "Tile")
+            {
+                if (tile.transform.position.y > up.transform.position.y)
+                {
+                    up = tile;
+                }
+
+                if (tile.transform.position.y < down.transform.position.y)
+                {
+                    down = tile;
+                }
+            }
+        }
+
+        // Determines the Left and Right tiles.
+        foreach (GameObject tile in xTiles)
+        {
+            // Only tile objects count
+            if (tile.tag == "Tile")
+            {
+                if (tile.transform.position.x > right.transform.position.x)
+                {
+                    right = tile;
+                }
+
+                if (tile.transform.position.x < left.transform.position.x)
+                {
+                    left = tile;
+                }
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Identifies the adjacent tiles 2 spaces away.
+    /// </summary>
+    /// <remarks>The angles are hardcoded.</remarks>
+    private void GetAdjacentTilesX2()
+    {
+        // Dimensions of the OverlapBox
+        Vector2 xBox = new Vector2(tileWidth*2, tileHeight * 0.0001f);
+        Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight*4f);
 
         // Gets colliders (HARDCODED ANGLES)
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
@@ -288,30 +363,30 @@ public class PlayerController : MonoBehaviour
         target = GetCurrentTile();
     }
 
-    public void GetPushed(Transform transform)
+    /// <summary>
+    /// Alternate method to call when pushed.
+    /// </summary>
+    /// <remarks>Don't use it. OnPush is simpler... and works.</remarks>
+    /// <param name="transform"></param>
+    public void Jump2Adjacent(string direction)
     {
-        GetAdjacentTiles();
+        GetAdjacentTilesX2();
 
-        Transform up = this.up.transform;
-        Transform down = this.down.transform;
-        Transform left = this.left.transform;
-        Transform right = this.right.transform;
-
-        if (transform.position == up.transform.position)
+        if (direction == "South")
         {
-            target = this.down;
+            target = down;
         }
-        else if(transform.position == down.transform.position)
+        else if(direction == "North")
         {
-            target = this.up;
+            target = up;
         }
-        else if (transform.position == left.transform.position)
+        else if (direction == "East")
         {
-            target = this.right;
+            target = right;
         }
-        else if (transform.position == right.transform.position)
+        else if (direction == "West")
         {
-            target = this.left;
+            target = left;
         }
 
     }
