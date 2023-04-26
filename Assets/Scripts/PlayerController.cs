@@ -281,18 +281,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-        // Used to Identify adjacent tiles from editor. No longer needed.
-        /*MarkTile(up, "up");
-        MarkTile(down, "down");
-        MarkTile(left, "left");
-        MarkTile(right, "right");*/
-
-    }
-
-    private void MarkTile(GameObject tile, string name)
-    {
-        tile.gameObject.name = name;
     }
 
     /// <summary>
@@ -364,11 +352,11 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Alternate method to call when pushed.
+    /// Moves the player 2 spaces in an adjacent direction
     /// </summary>
-    /// <remarks>Don't use it. OnPush is simpler... and works.</remarks>
+    /// <remarks>Repurposed. Formerly GetPushed.</remarks>
     /// <param name="transform"></param>
-    public void Jump2Adjacent(string direction)
+    public void Move2Adjacent(string direction)
     {
         GetAdjacentTilesX2();
 
@@ -425,8 +413,6 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.name.Contains("Player") == true && input.IsAbility == false)
         {
             OnPushed();
-
-            //GetPushed(other.transform);
 
             Debug.Log(gameObject.name + " detects " + other.gameObject.name);
         }
