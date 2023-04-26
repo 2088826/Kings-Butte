@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour
     float tileHeight;
     
     // Holds the adjacent tiles
+    GameObject left;
+    GameObject right;
     GameObject up;
     GameObject down;
-    GameObject right;
-    GameObject left;
 
     private InputManager input;
     
@@ -43,10 +43,10 @@ public class PlayerController : MonoBehaviour
 
         input = gameObject.GetComponent<InputManager>();
 
+        left = new GameObject();
+        right = new GameObject();
         up = new GameObject();
         down = new GameObject();
-        right = new GameObject();
-        left = new GameObject();
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
@@ -166,10 +166,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Initializes the values of the adjacent tiles.
-        up = xTiles[0]; // up
-        down = xTiles[0]; // down
-        right = yTiles[0]; // right
-        left = yTiles[0]; //left
+        left = xTiles[0]; // up
+        right = xTiles[0]; // down
+        up = yTiles[0]; // right
+        down = yTiles[0]; //left
 
         // Determines the Top and Bottom tiles.
         foreach (GameObject tile in yTiles)
@@ -177,14 +177,14 @@ public class PlayerController : MonoBehaviour
             // Only tile objects count
             if (tile.tag == "Tile")
             {
-                if (tile.transform.position.y > up.transform.position.y)
+                if (tile.transform.position.y > left.transform.position.y)
                 {
-                    up = tile;
+                    left = tile;
                 }
 
-                if (tile.transform.position.y < down.transform.position.y)
+                if (tile.transform.position.y < right.transform.position.y)
                 {
-                    down = tile;
+                    right = tile;
                 }
             }
         }
@@ -195,14 +195,14 @@ public class PlayerController : MonoBehaviour
             // Only tile objects count
             if (tile.tag == "Tile")
             {
-                if (tile.transform.position.x > right.transform.position.x)
+                if (tile.transform.position.x > up.transform.position.x)
                 {
-                    right = tile;
+                    up = tile;
                 }
 
-                if (tile.transform.position.x < left.transform.position.x)
+                if (tile.transform.position.x < down.transform.position.x)
                 {
-                    left = tile;
+                    down = tile;
                 }
             }
         }
@@ -240,10 +240,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Initializes the values of the adjacent tiles.
-        up = xTiles[0]; // up
-        down = xTiles[0]; // down
-        right = yTiles[0]; // right
-        left = yTiles[0]; //left
+        left = xTiles[0]; // up
+        right = xTiles[0]; // down
+        up = yTiles[0]; // right
+        down = yTiles[0]; //left
 
         // Determines the Top and Bottom tiles.
         foreach (GameObject tile in yTiles)
@@ -251,14 +251,14 @@ public class PlayerController : MonoBehaviour
             // Only tile objects count
             if (tile.tag == "Tile")
             {
-                if (tile.transform.position.y > up.transform.position.y)
+                if (tile.transform.position.y > left.transform.position.y)
                 {
-                    up = tile;
+                    left = tile;
                 }
 
-                if (tile.transform.position.y < down.transform.position.y)
+                if (tile.transform.position.y < right.transform.position.y)
                 {
-                    down = tile;
+                    right = tile;
                 }
             }
         }
@@ -269,14 +269,14 @@ public class PlayerController : MonoBehaviour
             // Only tile objects count
             if (tile.tag == "Tile")
             {
-                if (tile.transform.position.x > right.transform.position.x)
+                if (tile.transform.position.x > up.transform.position.x)
                 {
-                    right = tile;
+                    up = tile;
                 }
 
-                if (tile.transform.position.x < left.transform.position.x)
+                if (tile.transform.position.x < down.transform.position.x)
                 {
-                    left = tile;
+                    down = tile;
                 }
             }
         }
@@ -296,13 +296,13 @@ public class PlayerController : MonoBehaviour
             if (horizontal > 0)
             {
                 // Move Right
-                target = down;
+                target = right;
                 Debug.Log("Right");
             }
             else
             {
                 // Move Left
-                target = up;
+                target = left;
                 Debug.Log("Left");
             }
         }
@@ -311,13 +311,13 @@ public class PlayerController : MonoBehaviour
             if (vertical > 0)
             {
                 // Move Up
-                target = right;
+                target = up;
                 Debug.Log("Up");
             }
             else
             {
                 // Move Down
-                target = left;
+                target = down;
                 Debug.Log("Down");
             }
         }
