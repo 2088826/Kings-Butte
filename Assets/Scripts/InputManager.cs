@@ -98,7 +98,8 @@ public class InputManager : MonoBehaviour
                 xOffset = 1f;
                 yOffset = 0.5f;
                 targetPos = new Vector2 (currentPos.x + xOffset, currentPos.y + yOffset);
-                MoveToTarget();
+                // Method to change target;
+                controller.Move2Adjacent("North");
 
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("ability2");
@@ -111,7 +112,7 @@ public class InputManager : MonoBehaviour
                 xOffset = -1f;
                 yOffset = -0.5f;
                 targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
-                MoveToTarget();
+                controller.Move2Adjacent("South");
 
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("ability2");
@@ -124,7 +125,7 @@ public class InputManager : MonoBehaviour
                 xOffset = -1f;
                 yOffset = 0.5f;
                 targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
-                MoveToTarget();
+                controller.Move2Adjacent("West");
 
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("ability2");
@@ -134,13 +135,13 @@ public class InputManager : MonoBehaviour
                 Debug.Log("Jump East");
                 _isAbility = true;
 
+                pAnim.SetTrigger("ability2");
                 xOffset = 1f;
                 yOffset = -0.5f;
                 targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
-                MoveToTarget();
+                controller.Move2Adjacent("East");
 
                 rb2d.bodyType = RigidbodyType2D.Static;
-                pAnim.SetTrigger("ability2");
             }
         }
     }
@@ -202,11 +203,6 @@ public class InputManager : MonoBehaviour
             }
         }
     }
-
-	private void MoveToTarget()
-	{
-	    gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, targetPos, speed * Time.deltaTime);
-	}
 	
     /// <summary>
     /// Reset the player animation state to idle.
