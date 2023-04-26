@@ -43,10 +43,14 @@ public class PlayerController : MonoBehaviour
 
         input = gameObject.GetComponent<InputManager>();
 
-        left = new GameObject();
-        right = new GameObject();
-        up = new GameObject();
-        down = new GameObject();
+        up = new GameObject("AdjacentUp");
+        up.gameObject.transform.parent = this.gameObject.transform;
+        down = new GameObject("AdjacentDown");
+        down.gameObject.transform.parent = this.gameObject.transform;
+        right = new GameObject("AdjacentRight");
+        right.gameObject.transform.parent = this.gameObject.transform;
+        left = new GameObject("AdjacentLeft");
+        left.gameObject.transform.parent = this.gameObject.transform;
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
