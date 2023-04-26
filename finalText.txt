@@ -1,6 +1,5 @@
 [Intro Scroll]
-
-A long time ago... 
+Hear ye hear ye
 In the kingdom of BUTTE
 Four kins predistined to fight eachother, in an endless war...
 to decide who would be the 
@@ -24,7 +23,7 @@ REGICIDE!!!
 
 [Tutorial]
 
-Welcome my liege, I see you are getting ready to the claim what is rightfully yours, The BUTTE...
+Welcome my liege, I see you are getting ready to claim what is rightfully yours, The BUTTE...
 
 [press x]
 
