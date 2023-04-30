@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 37860508}
   - component: {fileID: 37860507}
   - component: {fileID: 37860506}
+  - component: {fileID: 37860514}
   - component: {fileID: 37860511}
   - component: {fileID: 37860512}
   - component: {fileID: 37860513}
@@ -222,9 +223,9 @@ MonoBehaviour:
           m_StringArgument: Open
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 37860514}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
-        m_MethodName: OpenMenu
+        m_MethodName: InvokeOpenMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -428,6 +429,27 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &37860514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37860504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823d236df1ab59e4ca557489ec478572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayButton: {fileID: 37860504}
+  TutorialButton: {fileID: 1663457416}
+  CreditButton: {fileID: 871530965}
+  ExitButton: {fileID: 1664134029}
+  StageBackButton: {fileID: 1386167270}
+  CreditBackButton: {fileID: 1386167270}
+  Stage1: {fileID: 1090998403}
+  Stage2: {fileID: 1056955216}
+  Stage3: {fileID: 1741351629}
 --- !u!1 &95221619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1611,7 @@ GameObject:
   - component: {fileID: 871530969}
   - component: {fileID: 871530968}
   - component: {fileID: 871530967}
+  - component: {fileID: 871530974}
   - component: {fileID: 871530973}
   - component: {fileID: 871530972}
   - component: {fileID: 871530971}
@@ -1676,9 +1699,9 @@ MonoBehaviour:
           m_StringArgument: Open
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 871530974}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
-        m_MethodName: OpenMenu
+        m_MethodName: InvokeOpenMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1882,6 +1905,27 @@ MonoBehaviour:
   myFx: {fileID: 871530971}
   hoverFx: {fileID: 8300000, guid: 2b8c207613cd58b4889b0cc6bf739f2c, type: 3}
   clickFx: {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
+--- !u!114 &871530974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871530965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823d236df1ab59e4ca557489ec478572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayButton: {fileID: 37860504}
+  TutorialButton: {fileID: 1663457416}
+  CreditButton: {fileID: 871530965}
+  ExitButton: {fileID: 1664134029}
+  StageBackButton: {fileID: 0}
+  CreditBackButton: {fileID: 0}
+  Stage1: {fileID: 0}
+  Stage2: {fileID: 0}
+  Stage3: {fileID: 0}
 --- !u!1 &926217963
 GameObject:
   m_ObjectHideFlags: 0

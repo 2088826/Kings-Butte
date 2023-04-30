@@ -3,35 +3,59 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
 {
-    [SerializeField] GameObject PlayButton;
-    [SerializeField] GameObject TutorialButton;
-    [SerializeField] GameObject CreditButton;
-    [SerializeField] GameObject ExitButton;
-    [SerializeField] GameObject StageBackButton;
-    [SerializeField] GameObject CreditBackButton;
-    [SerializeField] GameObject Stage1;
-    [SerializeField] GameObject Stage2;
-    [SerializeField] GameObject Stage3;
+    public GameObject PlayButton;
+    public GameObject TutorialButton;
+    public GameObject CreditButton;
+    public GameObject ExitButton;
+    public GameObject StageBackButton;
+    public GameObject CreditBackButton;
+    public GameObject Stage1;
+    public GameObject Stage2;
+    public GameObject Stage3;
 
+
+    public void InvokeOpenMenu()
+    {
+        Invoke(nameof(OpenMenu), 0.5f);
+    }
     public void OpenMenu() 
     {
-        //Disable the buttons
-        PlayButton.SetActive(false);
-        TutorialButton.SetActive(false);
-        CreditButton.SetActive(false);
-        ExitButton.SetActive(false);
+        //Disable the buttons & Sound
+        PlayButton.GetComponent<Button>().interactable = false;
+        PlayButton.GetComponent<AudioSource>().volume = 0;
+
+        TutorialButton.GetComponent<Button>().interactable = false;
+        TutorialButton.GetComponent<AudioSource>().volume = 0;
+
+        CreditButton.GetComponent<Button>().interactable = false;
+        CreditButton.GetComponent<AudioSource>().volume = 0;
+
+        ExitButton.GetComponent<Button>().interactable = false;
+        ExitButton.GetComponent<AudioSource>().volume = 0;
     }
-  
+
+    public void InvokeCloseMenu()
+    {
+        Invoke(nameof(CloseMenu), 0.5f);
+    }
     public void CloseMenu()
     {
         //Reavtivate the Disable the buttons
-        PlayButton.SetActive(true);
-        TutorialButton.SetActive(true);
-        CreditButton.SetActive(true);
-        ExitButton.SetActive(true);
+        PlayButton.GetComponent<Button>().interactable = true;
+        PlayButton.GetComponent<AudioSource>().volume = 1;
+
+        TutorialButton.GetComponent<Button>().interactable = true;
+        TutorialButton.GetComponent<AudioSource>().volume = 1;
+
+        CreditButton.GetComponent<Button>().interactable = true;
+        CreditButton.GetComponent<AudioSource>().volume = 1;
+
+        ExitButton.GetComponent<Button>().interactable = true;
+        ExitButton.GetComponent<AudioSource>().volume = 1;
     }
 
     public void GoToStage1()
@@ -53,8 +77,15 @@ public class MainMenuScript : MonoBehaviour
     {
         //Add transition goto Tutorial scene.
     }
+
+    public void InvokeExit()
+    {
+        Invoke(nameof(ExitButtonClick), 0.5f);
+    }
     public void ExitButtonClick()
     {
+        //Wait for 0.5 seconds before exit.
+        
         //Add transition.
         Application.Quit();
     }
