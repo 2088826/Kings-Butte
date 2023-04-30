@@ -5,14 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    
-    public void Play() 
+    [SerializeField] GameObject StagePanel;
+    [SerializeField] AnimationClip openStagePanel;
+    [SerializeField] AnimationClip closeStagePanel;
+    public void PlayButton() 
     {
-        //Might need to change the name of the level or the function to work with index.
-        SceneManager.LoadScene("TestScene");
+        //if StagePanel is visible then hide it
+        if (StagePanel.activeSelf)
+        {
+            StagePanel.SetActive(false);
+        }
+        else
+        {
+            //Play the openStagePanel animation
+
+            //Set stage panel to visible
+            StagePanel.SetActive(true);
+        }
     }
 
-    public void Quit()
+    public void ExitButton()
     {
         Application.Quit();
     }
