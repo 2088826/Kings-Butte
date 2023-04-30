@@ -1589,7 +1589,6 @@ GameObject:
   - component: {fileID: 871530969}
   - component: {fileID: 871530968}
   - component: {fileID: 871530967}
-  - component: {fileID: 871530970}
   - component: {fileID: 871530973}
   - component: {fileID: 871530972}
   - component: {fileID: 871530971}
@@ -1647,7 +1646,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 4.53
+    m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -1677,7 +1676,7 @@ MonoBehaviour:
           m_StringArgument: Open
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 871530970}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
         m_MethodName: OpenMenu
         m_Mode: 1
@@ -1727,27 +1726,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871530965}
   m_CullTransparentMesh: 1
---- !u!114 &871530970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871530965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823d236df1ab59e4ca557489ec478572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayButton: {fileID: 0}
-  TutorialButton: {fileID: 0}
-  CreditButton: {fileID: 0}
-  ExitButton: {fileID: 0}
-  StageBackButton: {fileID: 0}
-  CreditBackButton: {fileID: 0}
-  Stage1: {fileID: 0}
-  Stage2: {fileID: 0}
-  Stage3: {fileID: 0}
 --- !u!82 &871530971
 AudioSource:
   m_ObjectHideFlags: 0
