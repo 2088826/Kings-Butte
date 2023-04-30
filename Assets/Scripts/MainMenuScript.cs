@@ -5,26 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    [SerializeField] GameObject StagePanel;
-    [SerializeField] AnimationClip openStagePanel;
-    [SerializeField] AnimationClip closeStagePanel;
-    public void PlayButton() 
+    [SerializeField] GameObject PlayButton;
+    [SerializeField] GameObject TutorialButton;
+    [SerializeField] GameObject CreditButton;
+    [SerializeField] GameObject ExitButton;
+    [SerializeField] GameObject StageBackButton;
+    [SerializeField] GameObject CreditBackButton;
+    [SerializeField] GameObject Stage1;
+    [SerializeField] GameObject Stage2;
+    [SerializeField] GameObject Stage3;
+
+    public void OpenMenu() 
     {
-        //if StagePanel is visible then hide it
-        if (StagePanel.activeSelf)
-        {
-            StagePanel.SetActive(false);
-        }
-        else
-        {
-            //Play the openStagePanel animation
-
-            //Set stage panel to visible
-            StagePanel.SetActive(true);
-        }
+        //Disable the buttons
+        PlayButton.SetActive(false);
+        TutorialButton.SetActive(false);
+        CreditButton.SetActive(false);
+        ExitButton.SetActive(false);
     }
-
-    public void ExitButton()
+  
+    public void CloseMenu()
+    {
+        //Reavtivate the Disable the buttons
+        PlayButton.SetActive(true);
+        TutorialButton.SetActive(true);
+        CreditButton.SetActive(true);
+        ExitButton.SetActive(true);
+    }
+    public void ExitButtonClick()
     {
         Application.Quit();
     }
