@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
 
     private bool _isAbility = false;
 	private bool _hasPowerUp = false;
+    private bool _canJump = true;
 
     private Rigidbody2D rb2d;
     private Animator pAnim;
@@ -85,7 +86,7 @@ public class InputManager : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility2(InputAction.CallbackContext obj)
     {
-        if (!_isAbility && aim.inProgress) // Jump (move 2 spaces)
+        if (!_isAbility && aim.inProgress && _canJump) // Jump (move 2 spaces)
         {
 			float valueX = aim.ReadValue<Vector2>().x;
             float valueY = aim.ReadValue<Vector2>().y;
