@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,8 +33,29 @@ public class MainMenuScript : MonoBehaviour
         CreditButton.SetActive(true);
         ExitButton.SetActive(true);
     }
+
+    public void GoToStage1()
+    {
+        //Add transition goto Stage1 scene.
+    }
+
+    public void GoToStage2()
+    {
+        //Add transition goto Stage2 scene.
+    }
+
+    public void GoToStage3()
+    {
+        //Add transition goto Stage3 scene.
+    }
+
+    public void GoToTutorial()
+    {
+        //Add transition goto Tutorial scene.
+    }
     public void ExitButtonClick()
     {
+        //Add transition.
         Application.Quit();
     }
 }
