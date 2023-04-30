@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 21572526}
   - component: {fileID: 21572525}
   - component: {fileID: 21572524}
+  - component: {fileID: 21572527}
   m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
@@ -206,7 +207,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 21572525}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8695998297922651766}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Start
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 21572527}
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
+        m_MethodName: InvokeGotoProtoMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &21572525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +270,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21572522}
   m_CullTransparentMesh: 1
+--- !u!114 &21572527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21572522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &189684135
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +509,7 @@ GameObject:
   - component: {fileID: 604857097}
   - component: {fileID: 604857096}
   - component: {fileID: 604857095}
+  - component: {fileID: 604857101}
   - component: {fileID: 604857100}
   - component: {fileID: 604857099}
   - component: {fileID: 604857098}
@@ -546,7 +584,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 604857096}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8695998297922651766}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Start
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 604857101}
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
+        m_MethodName: InvokeGotoProtoMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &604857096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,6 +803,18 @@ MonoBehaviour:
   myFx: {fileID: 604857098}
   hoverFx: {fileID: 8300000, guid: 2b8c207613cd58b4889b0cc6bf739f2c, type: 3}
   clickFx: {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
+--- !u!114 &604857101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604857093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1280010893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1264,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "> Hear ye hear ye <\r\n\nIn the kingdom of Butte.\nFour kins predistined
-    to fight eachother, \nAn endless war...\r\nTo decide who would be... \n\rThe
+    to fight eachother, \nIn an endless war...\r\nTo decide who would be... \n\rThe
     rightful King of Butte.\n\r\n\r\nCouldst thou be the one?\r\nLook deep inside
     thee...\r\nThou know it to be true...\r\nThe crown must be thine...\r\nOr the
     Kingdom will crumble.\r\n\r\n\r\nArm thyself,\r\nMore will come,\r\nNo mather
