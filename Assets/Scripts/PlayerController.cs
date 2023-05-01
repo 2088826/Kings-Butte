@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
 
         if (target == null)
         {
-            health.Die();
+            health.Fall();
         }
     }
 
