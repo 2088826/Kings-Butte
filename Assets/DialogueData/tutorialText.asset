@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7740154a425024a88c61a2fc6966df, type: 3}
+  m_Name: tutorialText
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Hail, my liege! I doth perceive thou art preparing to lay claim to that which
+    is thy rightful due: The BUTTE...'
+  - But first thou shall need to learn how to move...
+  - "To maneuver around,  employ [A, W, S, D], or the [D-Pad] of thy controller. 
+    \r\n"
+  - Furthermore, thy royal scepter holds the power to propel thee aloft, higher than
+    any other.
+  - To achieve such feat, employ [Arrow Keys] or [Right Joystick] to aim thy jump,
+    and [Space Bar] or [L1] to enact the leap.
+  - Excellent, my liege! Let us now proceed to the offensive!
+  - To pound your enemy press [Q] or [R1].
+  - Marvelous! But thou seek to smite from a greater distance and crush thine enemies.
+  - Take aim with [Arrow Keys] or [Right joystick] and unleash a focused assault
+    with the press of [R2].
+  - 'Good.. Good.. '
+  - To defeat the usurpers thou shall need to push them off The BUTTE. Give it a
+    try. Move to the enemy and banish them from your kingdom.
+  - At times, certain items shall manifest within the realm. To employ their abilities,
+    simply press [Shift] or [L2].
+  - Have at it, then! Go forth and seize an item, and press [Shift] or [L2] to activate
+    its power.
+  - 'Magnificent, my lord! Verily, thou art now prepared to do battle upon The BUTTE. '
+  - However, I would advise thee to remain vigilant, for obstacles shall surely obstruct
+    thy path. Best of luck in thy quest for the crown!
