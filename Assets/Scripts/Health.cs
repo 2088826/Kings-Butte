@@ -24,4 +24,18 @@ public class Health : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void Fall()
+    {
+        if (transform.position.y > 0.25)
+        {
+            SpriteRenderer sp = gameObject.GetComponentInChildren<SpriteRenderer>();
+            Debug.Log(sp.sortingLayerName);
+            sp.sortingLayerName = "Level";
+            sp.sortingOrder = -5;
+            Debug.Log(sp.sortingLayerName);
+        }
+
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+    }
 }
