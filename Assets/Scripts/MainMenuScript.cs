@@ -74,7 +74,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void InokeTutorial()
     {
-        Invoke(nameof(GoToTutorial), 0.5f);
+        Invoke(nameof(GoToTutorial), 1);
 
         Debug.Log("Moved Scene");
     }
