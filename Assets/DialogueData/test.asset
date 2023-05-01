@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7740154a425024a88c61a2fc6966df, type: 3}
   m_Name: test
   m_EditorClassIdentifier: 
+  dialogue:
+  - 'Hail, my liege! I doth perceive thou art preparing to lay claim to that which
+    is thy rightful due: The BUTTE...'
