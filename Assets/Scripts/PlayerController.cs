@@ -398,6 +398,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+    public void ChangeMoveCooldown(float multiplier)
+    {
+        moveCooldown = 1 * multiplier;
+    }
+
+
+
     private void OnCollisionExit2D(Collision2D other)
     {
 
