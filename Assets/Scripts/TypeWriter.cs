@@ -6,15 +6,13 @@ using TMPro;
 public class TypeWriter : MonoBehaviour
 {
     [SerializeField] private float typeSpeed = 25f;
-    public void Run(string textToType, TMP_Text textLabel)
+    public Coroutine Run(string textToType, TMP_Text textLabel)
     {
-        StartCoroutine(TypeText(textToType, textLabel));
+        return StartCoroutine(TypeText(textToType, textLabel));
     }
 
     private IEnumerator TypeText(string textToType, TMP_Text textLabel)
     {
-
-        yield return new WaitForSeconds(2);
 
         float t = 0;
         int charIndex = 0;

@@ -1,13 +1,29 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
 public class DialogueUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text textLabel;
-
+    [SerializeField] private DialogueObject testDialogue;
+    private TypeWriter typeWriter;
 
     private void Start()
     {
-        GetComponent<TypeWriter>().Run("Hail, my liege! I doth perceive thou art preparing to lay claim to that which is thy rightful due: The BUTTE...", textLabel);
+        typeWriter = GetComponent<TypeWriter>();
+        ShowDialogue(testDialogue);
+    }
+
+    public void ShowDialogue(DialogueObject dialogueObject)
+    {
+        StartCoroutine(StepThroughDialogue(dialogueObject));
+    }
+
+    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
+    {
+        foreach(string dialogue in dialogueObject.Dialogue)
+        {
+            yield return typeWriter.Run(dialogue, textLabel);
+        }
     }
 }
