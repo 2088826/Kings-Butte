@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    // Start is called before the first frame update
+    int hp = 1;
+
     void Start()
     {
         
@@ -13,6 +14,14 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(hp == 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

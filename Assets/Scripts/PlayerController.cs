@@ -36,11 +36,13 @@ public class PlayerController : MonoBehaviour
     GameObject down;
 
     private InputManager input;
+    private Health health;
     
     void Start()
     {
 
         input = gameObject.GetComponent<InputManager>();
+        health = gameObject.GetComponent<Health>();
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
@@ -333,6 +335,11 @@ public class PlayerController : MonoBehaviour
     private void SetTargetToCurrentTile()
     {
         target = GetCurrentTile();
+
+        if (target == null)
+        {
+            health.Die();
+        }
     }
 
     /// <summary>
