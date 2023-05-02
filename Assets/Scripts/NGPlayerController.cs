@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
 using static UnityEngine.GraphicsBuffer;
 
 public class NGPlayerController : MonoBehaviour

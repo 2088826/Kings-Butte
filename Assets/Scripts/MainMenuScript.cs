@@ -57,10 +57,14 @@ public class MainMenuScript : MonoBehaviour
         ExitButton.GetComponent<Button>().interactable = true;
         ExitButton.GetComponent<AudioSource>().volume = 1;
     }
-
+    public void InvokeGoToStage1()
+    {
+        Invoke(nameof(GoToStage1), 1);
+    }
     public void GoToStage1()
     {
         //Add transition goto Stage1 scene.
+        SceneManager.LoadScene("ProtoPlayScene");
     }
 
     public void GoToStage2()
@@ -90,9 +94,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void ExitButtonClick()
     {
-        //Wait for 0.5 seconds before exit.
-        
-        //Add transition.
+        //Close the game.
         Application.Quit();
     }
 }
