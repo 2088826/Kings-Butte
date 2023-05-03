@@ -7,7 +7,6 @@ public class StartCountdown : MonoBehaviour
 {
     private TextMeshProUGUI startTimer;
     private int countdown = 3;
-    private string text;
 
     private GameManager gameManager;
 
@@ -17,23 +16,16 @@ public class StartCountdown : MonoBehaviour
         startTimer = GetComponent<TextMeshProUGUI>();
     }
 
-    private void Update()
-    {
-        if(countdown != 0)
-        {
-            startTimer.text = countdown.ToString();
-        }
-        else
-        {
-            startTimer.text = "Start";
-        }
-    }
-
     public void Countdown()
     {
         if (countdown > 0)
         {
+            startTimer.text = countdown.ToString();
             countdown--;
+        }
+        else
+        {
+            startTimer.text = "Start";
         }
     }
 
