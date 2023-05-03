@@ -202,6 +202,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Returns true if the tile is unoccupied.
+    /// </summary>
+    /// <remarks>
+    /// Checks the tile's <see cref="TileVacancy"/> script and returns the value of its Occupied property.
+    /// </remarks>
+    /// <param name="tile"></param>
+    /// <returns></returns>
     private bool CheckForVacancy(GameObject tile)
     {
         try
@@ -311,13 +319,13 @@ public class PlayerController : MonoBehaviour
             if (horizontal > 0)
             {
                 // Move Right
-                target = right;
+                SetTarget(right);
                 Debug.Log("Right");
             }
             else
             {
                 // Move Left
-                target = left;
+                SetTarget(left);
                 Debug.Log("Left");
             }
         }
@@ -326,13 +334,13 @@ public class PlayerController : MonoBehaviour
             if (vertical > 0)
             {
                 // Move Up
-                target = up;
+                SetTarget(up);
                 Debug.Log("Up");
             }
             else
             {
                 // Move Down
-                target = down;
+                SetTarget(down);
                 Debug.Log("Down");
             }
         }
@@ -355,6 +363,10 @@ public class PlayerController : MonoBehaviour
         targetOn = true;
     }
 
+    /// <summary>
+    /// Sets the target to the given tile.
+    /// </summary>
+    /// <param name="tile"></param>
     private void SetTarget(GameObject tile)
     {
         target = tile;
@@ -362,6 +374,10 @@ public class PlayerController : MonoBehaviour
         if (target == null)
         {
             health.Fall();
+        }
+        else if (!CheckForVacancy(tile))
+        {
+            target = (GetCurrentTile());
         }
     }
 
@@ -376,23 +392,27 @@ public class PlayerController : MonoBehaviour
 
         if (direction == "South")
         {
-            target = down;
+            SetTarget(down);
         }
         else if(direction == "North")
         {
-            target = up;
+            SetTarget(up);
         }
         else if (direction == "East")
         {
-            target = right;
+            SetTarget(right);
         }
         else if (direction == "West")
         {
-            target = left;
+            SetTarget(left);
         }
 
     }
 
+    /// <summary>
+    /// Returns the gameObject of the tile the object is currently on.
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetCurrentTile()
     {
         
@@ -422,6 +442,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// The move cooldown changes based on the multiplier.
+    /// </summary>
+    /// <param name="multiplier"></param>
     public void ChangeMoveCooldown(float multiplier)
     {
         moveCooldown = 1 * multiplier;

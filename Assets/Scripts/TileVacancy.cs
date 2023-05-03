@@ -13,19 +13,24 @@ public class TileVacancy : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.transform.parent.tag == "Player")
         {
             occupied = true;
+
+            Debug.Log(gameObject.name + " OCCUPIED");
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.transform.parent.tag == "Player")
         {
             occupied = false;
+
+            Debug.Log(gameObject.name + " UNOCCUPIED");
         }
     }
 }
