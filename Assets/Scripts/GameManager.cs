@@ -6,26 +6,30 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private TextMeshProUGUI timer;
-    [SerializeField] float timeLimit = 90f;
+    [SerializeField] private TextMeshProUGUI gameTimer;
+    [SerializeField] private float timeLimit = 90f;
+    [SerializeField] private TextMeshProUGUI startTimer;
 
     private bool startGame = true;
     private bool endGame = false;
     private bool first = true;
 
+    public bool IsStart { get { return startGame; } set { startGame = value; } }
 
     void Start()
     {
+        gameTimer.text = (timeLimit).ToString("0");
         StartGame();
     }
 
     private void Update()
     {
-        if (!startGame && !endGame && first)
+        Debug.Log(startGame);
+        if (!startGame && !endGame)
         {
-            Countdown();
+            TimerCountdown();
         }
-        else
+        else if(endGame && first)
         {
             first = false;
             EndGame();
@@ -34,13 +38,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Timer countdown
-    private void Countdown()
+    private void TimerCountdown()
     {
         if (timeLimit > 0)
         {
             timeLimit -= Time.deltaTime;
 
-            timer.text = (timeLimit).ToString("0");
+            gameTimer.text = (timeLimit).ToString("0");
 
         }
         else if (timeLimit < 0)
@@ -52,13 +56,18 @@ public class GameManager : MonoBehaviour
     // Start the game.
     private void StartGame()
     {
-
+        Invoke("StartTimer", 1.1f);
     }
 
     // End the game.
     private void EndGame()
     {
 
+    }
+
+    private void StartTimer()
+    {
+        startTimer.gameObject.SetActive(true);
     }
 
     private void HandlePause()
