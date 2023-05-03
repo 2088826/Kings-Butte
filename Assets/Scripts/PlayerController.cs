@@ -140,8 +140,6 @@ public class PlayerController : MonoBehaviour
         // Gets colliders (HARDCODED ANGLES)
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
         Collider2D[] yColliders = Physics2D.OverlapBoxAll(transform.position, yBox, 63);
-        Debug.Log("X: " + xColliders.Length.ToString());
-        Debug.Log("Y: " + yColliders.Length.ToString());
 
         // Lists to hold Horizontal and Vertical tile GameObjects.
         List<GameObject> xTiles = new List<GameObject>();
@@ -181,6 +179,7 @@ public class PlayerController : MonoBehaviour
                     right = tile;
                 }
             }
+
         }
 
         // Determines the Left and Right tiles.
@@ -201,6 +200,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    private bool CheckForVacancy(GameObject tile)
+    {
+        try
+        {
+            TileVacancy vacancyScript = tile.GetComponent<TileVacancy>();
+
+            if (!vacancyScript.Occupied)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        } catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -324,7 +345,7 @@ public class PlayerController : MonoBehaviour
     {
         targetOn = false;
 
-        SetTargetToCurrentTile();
+        SetTarget(GetCurrentTile());
         ActivateTarget();
         
     }
@@ -334,9 +355,9 @@ public class PlayerController : MonoBehaviour
         targetOn = true;
     }
 
-    private void SetTargetToCurrentTile()
+    private void SetTarget(GameObject tile)
     {
-        target = GetCurrentTile();
+        target = tile;
 
         if (target == null)
         {
@@ -415,7 +436,7 @@ public class PlayerController : MonoBehaviour
         {
             OnPushed();
 
-            Debug.Log(gameObject.name + " detects " + other.gameObject.name);
+            Debug.Log(gameObject.name + " is pushed by " + other.gameObject.name);
         }
     }
 }
