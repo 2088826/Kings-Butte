@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Debug.Log(input.Move);
-        if (input.Move != null && Time.time > nextMoveTime)
+        if (input.Move.inProgress && Time.time > nextMoveTime)
         {
             GetAdjacentTiles();
             //GetAdjacentTilesX2();
@@ -140,6 +140,8 @@ public class PlayerController : MonoBehaviour
         // Gets colliders (HARDCODED ANGLES)
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
         Collider2D[] yColliders = Physics2D.OverlapBoxAll(transform.position, yBox, 63);
+        Debug.Log("X: " + xColliders.Length.ToString());
+        Debug.Log("Y: " + yColliders.Length.ToString());
 
         // Lists to hold Horizontal and Vertical tile GameObjects.
         List<GameObject> xTiles = new List<GameObject>();
