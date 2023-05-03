@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 169530950476551793}
   - component: {fileID: 6584160648066623238}
   - component: {fileID: 5533720314682919928}
+  - component: {fileID: -1927484154087269583}
   m_Layer: 0
   m_Name: TileOverlay
   m_TagString: Tile
@@ -114,3 +115,15 @@ PolygonCollider2D:
       - {x: -0.5, y: 0}
       - {x: 0, y: -0.25}
       - {x: 0.5, y: 0}
+--- !u!114 &-1927484154087269583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784786727943879326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9015050e0e8ab41987093970fe2991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
