@@ -103,7 +103,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(input.Move);
         if (input.Move != null && Time.time > nextMoveTime)
         {
             GetAdjacentTiles();
