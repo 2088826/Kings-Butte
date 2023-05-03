@@ -64,8 +64,6 @@ public class PlayerManager : MonoBehaviour
     {
         if(players.Count < sprites.Count)
         {
-            Debug.Log(players.Count);
-            Debug.Log(sprites.Count);
             SpriteRenderer playerSprite = player.transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
             player.name = "Player " + count++;
@@ -73,7 +71,6 @@ public class PlayerManager : MonoBehaviour
             Sprite sprite = Sprite.Create(sprites[players.Count - 1], new Rect(0, 0, sprites[players.Count - 1].width, sprites[players.Count - 1].height), new Vector2(0.5f, 0.5f));
             playerSprite.sprite = sprite;
             player.transform.position = spawnLocation[players.Count - 1];
-            Debug.Log("PlayerAdded");
         }
         else
         {

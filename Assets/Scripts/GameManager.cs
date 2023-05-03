@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private bool startGame = true;
     private bool endGame = false;
     private bool first = true;
+    private int playerCount = 0;
 
     public bool IsStart { get { return startGame; } set { startGame = value; } }
 
@@ -24,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(startGame);
+        playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
+
         if (!startGame && !endGame)
         {
             TimerCountdown();
