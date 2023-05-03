@@ -50,7 +50,6 @@ namespace finished1
                         var tileKey = new Vector2Int(x, y);
                         if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey) && z >= 0)
                         {
-                            Debug.Log("Added");
                             var newTile = Instantiate(tilePlaceholderPrefab, container.transform);
                             newTile.name = "PlayableTile " + count++;
                             var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
