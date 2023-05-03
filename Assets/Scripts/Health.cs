@@ -22,7 +22,9 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        gameObject.SetActive(false);
     }
 
     public void Fall()
@@ -37,5 +39,7 @@ public class Health : MonoBehaviour
         }
 
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+
+        Invoke("Die", 2);
     }
 }
