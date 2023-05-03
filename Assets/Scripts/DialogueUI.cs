@@ -27,7 +27,7 @@ public class DialogueUI : MonoBehaviour
         foreach(string dialogue in dialogueObject.Dialogue)
         {
             yield return typeWriter.Run(dialogue, textLabel);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0));
         }
 
         CloseDialogueBox();
