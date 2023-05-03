@@ -3413,6 +3413,7 @@ GameObject:
   - component: {fileID: 1663457420}
   - component: {fileID: 1663457419}
   - component: {fileID: 1663457418}
+  - component: {fileID: 1663457424}
   - component: {fileID: 1663457423}
   - component: {fileID: 1663457422}
   - component: {fileID: 1663457421}
@@ -3498,6 +3499,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Start
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1663457424}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: InokeTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1663457419
@@ -3694,6 +3707,27 @@ MonoBehaviour:
   myFx: {fileID: 1663457421}
   hoverFx: {fileID: 8300000, guid: 2b8c207613cd58b4889b0cc6bf739f2c, type: 3}
   clickFx: {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
+--- !u!114 &1663457424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663457416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823d236df1ab59e4ca557489ec478572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
+  CreditButton: {fileID: 0}
+  ExitButton: {fileID: 0}
+  StageBackButton: {fileID: 0}
+  CreditBackButton: {fileID: 0}
+  Stage1: {fileID: 0}
+  Stage2: {fileID: 0}
+  Stage3: {fileID: 0}
 --- !u!1 &1664134029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4980,6 +5014,10 @@ PrefabInstance:
     - target: {fileID: 8695998297965691107, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
       propertyPath: m_Name
       value: LevelLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695998297965691107, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}

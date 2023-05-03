@@ -72,10 +72,16 @@ public class MainMenuScript : MonoBehaviour
     {
         //Add transition goto Stage3 scene.
     }
+    public void InokeTutorial()
+    {
+        Invoke(nameof(GoToTutorial), 1);
 
+        Debug.Log("Moved Scene");
+    }
     public void GoToTutorial()
     {
-        //Add transition goto Tutorial scene.
+        //Goto to scene 3.
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void InvokeExit()

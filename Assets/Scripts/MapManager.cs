@@ -48,7 +48,7 @@ namespace finished1
                     {
                         var tileLocation = new Vector3Int(x, y, z);
                         var tileKey = new Vector2Int(x, y);
-                        if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey))
+                        if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey) && z >= 0)
                         {
                             var newTile = Instantiate(tilePlaceholderPrefab, container.transform);
                             newTile.name = "PlayableTile " + count++;
