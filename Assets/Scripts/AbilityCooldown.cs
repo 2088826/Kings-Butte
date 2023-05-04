@@ -40,7 +40,6 @@ public class AbilityCooldown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(health.IsDefeated);
         if (health.IsDefeated)
         {
             bannerAnim.SetTrigger("defeated");

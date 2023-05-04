@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,15 +12,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameTimer;
     [SerializeField] private float timeLimit = 90f;
     [SerializeField] private TextMeshProUGUI startTimer;
+    [SerializeField] private InputSystemUIInputModule uiModule;
 
     private bool isSetup = true;
     private static bool isStart = false;
     private bool isEnd = false;
     private static bool isPaused = false;
     private bool first = true;
-    private int playerCount = 0;
+    private static int playerCount = 0;
 
-    public int PlayerCount {get { return playerCount;} set { playerCount = value; } }
+    public static int PlayerCount {get { return playerCount;} set { playerCount = value; } }
 
     public static bool IsStart { get { return isStart; } set { isStart = value; } }
 
@@ -25,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        playerCount = 0;
         isStart = false;
         isPaused = false;
         gameTimer.text = timeLimit.ToString("0");
@@ -35,8 +40,17 @@ public class GameManager : MonoBehaviour
     {
         if (isSetup)
         {
-            isSetup = false;
             Debug.Log("Setting up game...");
+
+            if (playerCount >= 2)
+            {
+                uiModule.enabled = true;
+            }
+
+            if (InputSystem.FindControl("Enter").IsPressed())
+            {
+                Debug.Log("Yes");
+            }
         }
         else if (isStart)
         {

@@ -22,7 +22,6 @@ public class PlayerManager : MonoBehaviour
 
     private int count = 1;
 
-
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
@@ -61,12 +60,15 @@ public class PlayerManager : MonoBehaviour
     {
         if(players.Count < sprites.Count)
         {
-            banners[count - 1].SetActive(true);
-            SpriteRenderer playerSprite = player.transform.Find("Sprite").GetComponent<SpriteRenderer>();
+            GameManager.PlayerCount++;
 
+            banners[count - 1].SetActive(true);
             player.name = "Player" + count++;
+            Debug.Log(player.name);
             players.Add(player);
+
             Sprite sprite = Sprite.Create(sprites[players.Count - 1], new Rect(0, 0, sprites[players.Count - 1].width, sprites[players.Count - 1].height), new Vector2(0.5f, 0.5f));
+            SpriteRenderer playerSprite = player.transform.Find("Sprite").GetComponent<SpriteRenderer>();
             playerSprite.sprite = sprite;
             player.transform.position = spawnLocation[players.Count - 1];
         }
