@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float pushedCooldown = 0.15f;
 
 
-    bool moving = false; // Not used... yet
-    private bool _isAbility = false;
+    //bool moving = false; // Not used... yet
+    //private bool _isAbility = false;
 	bool targetOn = true;
 
     float nextMoveTime = 0f;
@@ -35,13 +35,13 @@ public class PlayerController : MonoBehaviour
     GameObject up;
     GameObject down;
 
-    private InputManager input;
+    private PlayerActions input;
     private Health health;
     
     void Start()
     {
 
-        input = gameObject.GetComponent<InputManager>();
+        input = gameObject.GetComponent<PlayerActions>();
         health = gameObject.GetComponent<Health>();
 
         up = new GameObject("AdjacentUp");
@@ -105,7 +105,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(input.Move);
         if (input.Move.inProgress && Time.time > nextMoveTime)
         {
             GetAdjacentTiles();
