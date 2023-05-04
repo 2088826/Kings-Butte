@@ -15,11 +15,13 @@ public class GameManager : MonoBehaviour
     private bool first = true;
     private int playerCount = 0;
 
+    public int PlayerCount {get { return playerCount;} set { playerCount = value; } }
+
     public bool IsStart { get { return startGame; } set { startGame = value; } }
 
     void Start()
     {
-        gameTimer.text = (timeLimit).ToString("0");
+        gameTimer.text = timeLimit.ToString("0");
         StartGame();
     }
 
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
         {
             TimerCountdown();
         }
-        else if(endGame && first)
+        else if(endGame && first || playerCount == 1)
         {
             first = false;
             EndGame();
@@ -64,6 +66,14 @@ public class GameManager : MonoBehaviour
     // End the game.
     private void EndGame()
     {
+        Debug.Log("FINISHED!");
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (player != null)
+            {
+                
+            }
+        }
 
     }
 

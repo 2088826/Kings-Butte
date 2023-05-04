@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private List<Transform> startingPoints;
     [SerializeField] private Tilemap map;
     [SerializeField] private List<Texture2D> sprites;
+    [SerializeField] private GameObject[] banners;
 
     private List<Vector3> spawnLocation = new List<Vector3>();
     private List<PlayerInput> players = new List<PlayerInput>();
@@ -32,10 +33,8 @@ public class PlayerManager : MonoBehaviour
             // Get the cell position of the spawn point.
             Vector3Int cellPosition = map.WorldToCell(spawnPoint.position);
 
-            Debug.Log(cellPosition);
             // Get the world position of the cell position.
             Vector3 worldPosition = map.CellToWorld(cellPosition);
-            Debug.Log(worldPosition);
 
             // Spawning alignment
             float offsetX = worldPosition.x;
@@ -50,13 +49,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Enabled");
         playerInputManager.onPlayerJoined += AddPlayer;
     }
 
     private void OnDisable()
     {
-        Debug.Log("Disabled");
         playerInputManager.onPlayerJoined -= AddPlayer;
     }
 
@@ -64,9 +61,10 @@ public class PlayerManager : MonoBehaviour
     {
         if(players.Count < sprites.Count)
         {
+            banners[count - 1].SetActive(true);
             SpriteRenderer playerSprite = player.transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
-            player.name = "Player " + count++;
+            player.name = "Player" + count++;
             players.Add(player);
             Sprite sprite = Sprite.Create(sprites[players.Count - 1], new Rect(0, 0, sprites[players.Count - 1].width, sprites[players.Count - 1].height), new Vector2(0.5f, 0.5f));
             playerSprite.sprite = sprite;

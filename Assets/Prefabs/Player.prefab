@@ -5303,10 +5303,11 @@ GameObject:
   - component: {fileID: 6876170827907371457}
   - component: {fileID: 6876170827907371487}
   - component: {fileID: 2945400014784244979}
-  - component: {fileID: 2720615287074139434}
   - component: {fileID: 6862219962853230827}
   - component: {fileID: 7175508597106829306}
   - component: {fileID: 542367684650515461}
+  - component: {fileID: 8743976056038197102}
+  - component: {fileID: 3936457846478920821}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5436,20 +5437,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2720615287074139434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6876170827907371461}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b7962c72c5b314587dc52d0bd23c5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  playerIndex: 0
 --- !u!114 &6862219962853230827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5490,6 +5477,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8818236e68e751942b6702ba8b39d1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitbox: {fileID: 6876170828523462686}
+--- !u!114 &8743976056038197102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876170827907371461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a4c01853d5d264888e4ca7b05c6301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3936457846478920821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876170827907371461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a15623c1e8e27498099712e582982d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown1: 4
+  cooldown2: 8
+  playerBanner: {fileID: 4622487497969217315, guid: d68101ecea1ec3842b60d2322b44e179, type: 3}
 --- !u!1 &6876170828523462686
 GameObject:
   m_ObjectHideFlags: 0
