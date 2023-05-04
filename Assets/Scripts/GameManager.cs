@@ -10,35 +10,50 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeLimit = 90f;
     [SerializeField] private TextMeshProUGUI startTimer;
 
-    private bool startGame = true;
-    private bool endGame = false;
+    private bool isSetup = true;
+    private static bool isStart = false;
+    private bool isEnd = false;
+    private static bool isPaused = false;
     private bool first = true;
     private int playerCount = 0;
 
     public int PlayerCount {get { return playerCount;} set { playerCount = value; } }
 
-    public bool IsStart { get { return startGame; } set { startGame = value; } }
+    public static bool IsStart { get { return isStart; } set { isStart = value; } }
+
+    public static bool IsPaused { get { return isPaused; } set { isPaused = value; } }
 
     void Start()
     {
+        isStart = false;
+        isPaused = false;
         gameTimer.text = timeLimit.ToString("0");
-        StartGame();
+        GameSetup();
     }
 
     private void Update()
     {
-        playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
-
-        if (!startGame && !endGame)
+        if (isSetup)
         {
-            TimerCountdown();
+            isSetup = false;
+            Debug.Log("Setting up game...");
         }
-        else if(endGame && first || playerCount == 1)
+        else if (isStart)
         {
-            first = false;
+            isStart = false;
+            playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
+            Debug.Log("Game Start!");
+            TimerCountdown();
+
+
+
+        }
+        else if(isEnd || playerCount == 1)
+        {
+            isEnd = false;
+            Debug.Log("Game End!");
             EndGame();
         }
-
     }
 
     // Timer countdown
@@ -53,11 +68,16 @@ public class GameManager : MonoBehaviour
         }
         else if (timeLimit < 0)
         {
-            endGame = true;
+            isEnd = true;
         }
     }
 
     // Start the game.
+    private void GameSetup()
+    {
+        
+    }
+
     private void StartGame()
     {
         Invoke("StartTimer", 1.1f);

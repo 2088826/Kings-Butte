@@ -22,10 +22,11 @@ public class PlayerActions : MonoBehaviour
     // Input System
     private InputActionAsset inputAsset;
     private InputActionMap player;
+    private InputActionMap ui;
     private InputAction move;
     private InputAction aim;
 
- 	public InputAction Move { get { return move; } }
+    public InputAction Move { get { return move; } }
     public InputAction Aim { get { return aim; } }
     public bool IsAbility { get { return _isAbility; } }
 
@@ -38,32 +39,7 @@ public class PlayerActions : MonoBehaviour
 
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
-    }
-
-    /// <summary>
-    /// I believe this is called on value change for inputs when pressed.
-    /// </summary>
-    private void OnEnable()
-    {
-        player.FindAction("Ability1").started += DoAbility1;
-        player.FindAction("Ability2").started += DoAbility2;
-		player.FindAction("PowerUp").started += DoPowerUp;
-        player.FindAction("BasicAttack").started += DoBasicAttack; 
-		aim = player.FindAction("Aim");
-		move = player.FindAction("Movement");
-        player.Enable();
-    }
-
-    /// <summary>
-    /// I believe this is called on value change when released (back to neutral positions).
-    /// </summary>
-    private void OnDisable()
-    {
-        player.FindAction("Ability1").started -= DoAbility1;
-        player.FindAction("Ability2").started -= DoAbility2;
-        player.FindAction("PowerUp").started -= DoPowerUp;
-        player.FindAction("BasicAttack").started -= DoBasicAttack;
-        player.Disable();
+        ui = inputAsset.FindActionMap("UI");
     }
 
     /// <summary>
@@ -172,7 +148,6 @@ public class PlayerActions : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoBasicAttack(InputAction.CallbackContext obj)
     {
-
         if (!_isAbility && aim.inProgress) // Basic Attack
         {
             float valueX = aim.ReadValue<Vector2>().x;
@@ -208,7 +183,7 @@ public class PlayerActions : MonoBehaviour
             }
         }
     }
-	
+
     /// <summary>
     /// Reset the player animation state to idle.
     /// </summary>
@@ -217,5 +192,55 @@ public class PlayerActions : MonoBehaviour
         pAnim.SetTrigger("idle");
         _isAbility = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    /// <summary>
+    /// Toggle on the UI action map.
+    /// </summary>
+    public void ToggleUI()
+    {
+        // Enable UI
+        //ui.Enable();
+
+        // Disable Player
+        player.FindAction("Ability1").started -= DoAbility1;
+        player.FindAction("Ability2").started -= DoAbility2;
+        player.FindAction("PowerUp").started -= DoPowerUp;
+        player.FindAction("BasicAttack").started -= DoBasicAttack;
+        player.Disable();
+    }
+
+    /// <summary>
+    /// Toggle on the Player action map.
+    /// </summary>
+    public void TogglePlayer()
+    {
+        // Enable Player
+        player.FindAction("Ability1").started += DoAbility1;
+        player.FindAction("Ability2").started += DoAbility2;
+        player.FindAction("PowerUp").started += DoPowerUp;
+        player.FindAction("BasicAttack").started += DoBasicAttack;
+        aim = player.FindAction("Aim");
+        move = player.FindAction("Movement");
+        player.Enable();
+
+        // Disable UI
+        //ui.Disable();
+    }
+
+    /// <summary>
+    /// Toggle off all action maps.
+    /// </summary>
+    public void ToggleDisable()
+    {
+        // Disable UI
+        //ui.Disable();
+
+        // Disable Player
+        player.FindAction("Ability1").started -= DoAbility1;
+        player.FindAction("Ability2").started -= DoAbility2;
+        player.FindAction("PowerUp").started -= DoPowerUp;
+        player.FindAction("BasicAttack").started -= DoBasicAttack;
+        player.Disable();
     }
 }

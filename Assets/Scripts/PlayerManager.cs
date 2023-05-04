@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
 
-        // Get
+        // Loop through spawnpoints
         foreach (Transform spawnPoint in startingPoints)
         {
             // Get the cell position of the spawn point.

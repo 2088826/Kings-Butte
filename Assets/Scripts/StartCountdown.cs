@@ -8,11 +8,9 @@ public class StartCountdown : MonoBehaviour
     private TextMeshProUGUI startTimer;
     private int countdown = 3;
 
-    private GameManager gameManager;
-
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         startTimer = GetComponent<TextMeshProUGUI>();
     }
 
@@ -31,7 +29,6 @@ public class StartCountdown : MonoBehaviour
 
     public void TurnOff()
     {
-        gameManager.IsStart = false;
         this.gameObject.SetActive(false);
     }
 }
