@@ -43,6 +43,7 @@ public class Health : MonoBehaviour
             
             Debug.Log(sp.sortingLayerName);
         }
+        GameManager.RemovePlayers(this.gameObject);
         isDefeated = true;
 
         hitbox.GetComponent<BoxCollider2D>().enabled = false;

@@ -321,13 +321,13 @@ public class PlayerController : MonoBehaviour
             {
                 // Move Right
                 SetTarget(right);
-                Debug.Log("Right");
+                //Debug.Log("Right");
             }
             else
             {
                 // Move Left
                 SetTarget(left);
-                Debug.Log("Left");
+                //Debug.Log("Left");
             }
         }
         else if (vertical != 0)
@@ -336,13 +336,13 @@ public class PlayerController : MonoBehaviour
             {
                 // Move Up
                 SetTarget(up);
-                Debug.Log("Up");
+                //Debug.Log("Up");
             }
             else
             {
                 // Move Down
                 SetTarget(down);
-                Debug.Log("Down");
+                //Debug.Log("Down");
             }
         }
     }

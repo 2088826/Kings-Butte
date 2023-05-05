@@ -50,7 +50,6 @@ public class PlayerActions : MonoBehaviour
     {
         if (!_isAbility && !abilities.IsAbility1) // Slam
         {
-            Debug.Log("Ability1");
             abilities.IsAbility1 = true;
             _isAbility = true;
             rb2d.bodyType = RigidbodyType2D.Static;
@@ -74,7 +73,6 @@ public class PlayerActions : MonoBehaviour
             
             if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
-                Debug.Log("Jump North");
                 _isAbility = true;
                 xOffset = 1f;
                 yOffset = 0.5f;
@@ -87,7 +85,6 @@ public class PlayerActions : MonoBehaviour
             }
             else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
-                Debug.Log("Jump South");
                 _isAbility = true;
 
                 xOffset = -1f;
@@ -100,7 +97,6 @@ public class PlayerActions : MonoBehaviour
             }
             else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
-                Debug.Log("Jump West");
                 _isAbility = true;
 
                 xOffset = -1f;
@@ -113,7 +109,6 @@ public class PlayerActions : MonoBehaviour
             }
             else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
-                Debug.Log("Jump East");
                 _isAbility = true;
 
                 pAnim.SetTrigger("ability2");
@@ -155,33 +150,38 @@ public class PlayerActions : MonoBehaviour
 
             if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
-                Debug.Log("Basic Attack North");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Nattack");
             }
             else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
-                Debug.Log("Basic Attack South");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Sattack");
             }
             else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
-                Debug.Log("Basic Attack West");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Wattack");
             }
             else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
-                Debug.Log("Basic Attack East");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Eattack");
             }
         }
+    }
+
+    /// <summary>
+    /// Pause the Game
+    /// </summary>
+    /// <param name="obj">obj Callback context when action is triggered</param>
+    private void DoPause(InputAction.CallbackContext obj)
+    {
+        GameManager.IsPaused = true;
     }
 
     /// <summary>
@@ -203,6 +203,7 @@ public class PlayerActions : MonoBehaviour
         //ui.Enable();
 
         // Disable Player
+        player.FindAction("Pause").started -= DoPause;
         player.FindAction("Ability1").started -= DoAbility1;
         player.FindAction("Ability2").started -= DoAbility2;
         player.FindAction("PowerUp").started -= DoPowerUp;
@@ -216,6 +217,7 @@ public class PlayerActions : MonoBehaviour
     public void TogglePlayer()
     {
         // Enable Player
+        player.FindAction("Pause").started += DoPause;
         player.FindAction("Ability1").started += DoAbility1;
         player.FindAction("Ability2").started += DoAbility2;
         player.FindAction("PowerUp").started += DoPowerUp;
@@ -237,6 +239,7 @@ public class PlayerActions : MonoBehaviour
         //ui.Disable();
 
         // Disable Player
+        player.FindAction("Pause").started -= DoPause;
         player.FindAction("Ability1").started -= DoAbility1;
         player.FindAction("Ability2").started -= DoAbility2;
         player.FindAction("PowerUp").started -= DoPowerUp;

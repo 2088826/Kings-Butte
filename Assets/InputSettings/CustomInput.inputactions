@@ -522,7 +522,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Enter",
+                    "name": "Start",
                     "type": "Button",
                     "id": "d96683a0-2d1a-41bf-9860-65eb643ac8cd",
                     "expectedControlType": "Button",
@@ -957,7 +957,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Enter",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -968,7 +968,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Enter",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

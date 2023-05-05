@@ -23,7 +23,8 @@ public class StartCountdown : MonoBehaviour
         }
         else
         {
-            startTimer.text = "Start";
+            startTimer.text = "BEGIN";
+            GameManager.IsStart = true;
         }
     }
 
