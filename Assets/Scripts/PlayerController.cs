@@ -403,7 +403,7 @@ public class PlayerController : MonoBehaviour
     /// Sets the target to the given tile.
     /// </summary>
     /// <param name="tile"></param>
-    private void SetTarget(GameObject tile)
+    public void SetTarget(GameObject tile)
     {
         target = tile;
 
