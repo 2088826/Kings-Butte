@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI startTimer;
     [SerializeField] private TextMeshProUGUI[] messages;
     [SerializeField] private InputActionAsset inputAction;
+    [SerializeField] private GameObject scroll;
     
     // Private Fields
     private InputActionMap uiActionMap;
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
     private bool isEnd = false;
     private static bool isPaused = false;
     private bool first = true;
+    private bool isFirst = true;
     private static Dictionary<string, GameObject> players;
 
     // Public Properties
@@ -46,11 +50,14 @@ public class GameManager : MonoBehaviour
         }
         else if (isStart)
         {
+            Debug.Log("Game on!");
             StartGame();
         }
-        else if (isEnd || players.Count == 1)
+        else if (isEnd && first)
         {
+            first = false;
             Debug.Log("Ending Game...");
+
             EndGame();
         }
 
@@ -104,7 +111,7 @@ public class GameManager : MonoBehaviour
                 isSetup = false;
                 first = true;
                 messages[0].gameObject.SetActive(false);
-                StartTimer();
+                Invoke("StartTimer", 0.5f);
             }
         }
     }
@@ -121,6 +128,13 @@ public class GameManager : MonoBehaviour
             first = false;
             EnablePlayers();
         }
+
+        if (players.Count == 1)
+        {
+            isStart = false;
+            isEnd = true;
+            first = true;
+        }
     }
 
     /// <summary>
@@ -128,12 +142,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void EndGame()
     {
-        first = false;
-        isStart = false;
         isEnd = false;
         DisablePlayers();
-        messages[0].gameObject.SetActive(true);
-        messages[0].text = "Game Over";
+        if(players.Count > 1) 
+        {
+            // NO WINNER
+        }
+        else
+        {
+            Invoke("SetWinner", 2f);
+        }
     }
 
     /// <summary>
@@ -204,5 +222,18 @@ public class GameManager : MonoBehaviour
     public static void RemovePlayers(GameObject player)
     {
         players.Remove(player.name);
+    }
+
+    public void SetWinner()
+    {
+        scroll.SetActive(true);
+
+        GameObject winner = players.SingleOrDefault().Value;
+
+        scroll.transform.Find("VictoryMessage1").GetComponent<TextMeshProUGUI>().text = winner.name;
+
+        SpriteRenderer spriteRenderer = winner.transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        Sprite sprite = Sprite.Create(spriteRenderer.sprite.texture, new Rect(0, 0, spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height), Vector2.one / 2f, 100f);
+        scroll.transform.Find("PlayerSprite").GetComponent<Image>().sprite = sprite;
     }
 }
