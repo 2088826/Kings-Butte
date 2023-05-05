@@ -107,13 +107,15 @@ public class IceTile : TileVacancy
 
     }
 
-
-    private void OnTriggerEnter2D(Collider2D other)
+    private void SlidePlayer(Collider2D other)
     {
+        GetAdjacentTiles();
+        
         Vector3 otherSpot = other.transform.position;
-        string direction;
         bool higher = false;
-        bool right = false;
+        bool righter = false;
+
+        GameObject target;
 
 
         if (transform.position.y < otherSpot.y)
@@ -123,24 +125,35 @@ public class IceTile : TileVacancy
 
         if (transform.position.x < otherSpot.x)
         {
-            right = true;
+            righter = true;
         }
 
-        if(right && higher)
+        if (righter && higher)
         {
-            direction = "up";
+            target = down;
         }
-        else if(right && !higher)
+        else if (righter && !higher)
         {
-            direction = "right";
+            target = left;
         }
-        else if (!right && higher)
+        else if (!righter && higher)
         {
-            direction = "left";
+            target = right;
         }
         else
         {
-            direction = "down";
+            target = up;
+        }
+
+        other.GetComponent<PlayerController>().SetTarget(target);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.transform.parent.tag == "Player")
+        {
+            SlidePlayer(other);
         }
 
     }
