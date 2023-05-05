@@ -19,7 +19,7 @@ public class TileVacancy : MonoBehaviour
         {
             occupied = true;
 
-            Debug.Log(gameObject.name + " OCCUPIED");
+            //Debug.Log(gameObject.name + " OCCUPIED");
         }
     }
 
@@ -30,7 +30,7 @@ public class TileVacancy : MonoBehaviour
         {
             occupied = false;
 
-            Debug.Log(gameObject.name + " UNOCCUPIED");
+            //Debug.Log(gameObject.name + " UNOCCUPIED");
         }
     }
 }

@@ -1,43 +1,80 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu;
+    // Serialized Fields
     [SerializeField] private TextMeshProUGUI gameTimer;
     [SerializeField] private float timeLimit = 90f;
     [SerializeField] private TextMeshProUGUI startTimer;
-
-    private bool startGame = true;
-    private bool endGame = false;
+    [SerializeField] private TextMeshProUGUI[] messages;
+    [SerializeField] private InputActionAsset inputAction;
+    [SerializeField] private GameObject scroll;
+    
+    // Private Fields
+    private InputActionMap uiActionMap;
+    private bool isSetup = true;
+    private static bool isStart = false;
+    private bool isEnd = false;
+    private static bool isPaused = false;
     private bool first = true;
+    private bool isFirst = true;
+    private static Dictionary<string, GameObject> players;
 
-    public bool IsStart { get { return startGame; } set { startGame = value; } }
+    // Public Properties
+    public static bool IsStart { get { return isStart; } set { isStart = value; } }
+    public static bool IsPaused { get { return isPaused; } set { isPaused = value; } }
 
     void Start()
     {
-        gameTimer.text = (timeLimit).ToString("0");
-        StartGame();
+        players = new Dictionary<string, GameObject>();
+        uiActionMap = inputAction.FindActionMap("UI");
+        isStart = false;
+        isPaused = false;
+        gameTimer.text = timeLimit.ToString("0");
+        GameSetup();
     }
 
     private void Update()
     {
-        Debug.Log(startGame);
-        if (!startGame && !endGame)
+        if (isSetup)
         {
-            TimerCountdown();
+            GameSetup();
         }
-        else if(endGame && first)
+        else if (isStart)
+        {
+            Debug.Log("Game on!");
+            StartGame();
+        }
+        else if (isEnd && first)
         {
             first = false;
+            Debug.Log("Ending Game...");
+
             EndGame();
         }
 
+        if (isPaused)
+        {
+            HandlePause();
+
+            if (uiActionMap["Start"].triggered)
+            {
+                HandleResume();
+            }
+        }
     }
 
-    // Timer countdown
+    /// <summary>
+    /// Game time countdown.
+    /// </summary>
     private void TimerCountdown()
     {
         if (timeLimit > 0)
@@ -49,34 +86,154 @@ public class GameManager : MonoBehaviour
         }
         else if (timeLimit < 0)
         {
-            endGame = true;
+            isEnd = true;
         }
     }
 
-    // Start the game.
+    /// <summary>
+    /// Setup up the game allowing players to join. *Minimum 2 players to start*
+    /// </summary>
+    private void GameSetup()
+    {
+        if (players.Count >= 2)
+        {
+            if (first)
+            {
+                first = false;
+                uiActionMap.Enable();
+                messages[0].text = "PRESS START TO BEGIN";
+                messages[1].gameObject.SetActive(false);
+            }
+
+            if (uiActionMap["Start"].triggered)
+            {
+                uiActionMap.Disable();
+                isSetup = false;
+                first = true;
+                messages[0].gameObject.SetActive(false);
+                Invoke("StartTimer", 0.5f);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Start the Buttening!
+    /// </summary>
     private void StartGame()
     {
-        Invoke("StartTimer", 1.1f);
+        TimerCountdown();
+
+        if (first)
+        {
+            first = false;
+            EnablePlayers();
+        }
+
+        if (players.Count == 1)
+        {
+            isStart = false;
+            isEnd = true;
+            first = true;
+        }
     }
 
-    // End the game.
+    /// <summary>
+    /// End the game.
+    /// </summary>
     private void EndGame()
     {
-
+        isEnd = false;
+        DisablePlayers();
+        if(players.Count > 1) 
+        {
+            // NO WINNER
+        }
+        else
+        {
+            Invoke("SetWinner", 2f);
+        }
     }
 
+    /// <summary>
+    /// Start game timer.
+    /// </summary>
     private void StartTimer()
     {
         startTimer.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Pause the game.
+    /// </summary>
     private void HandlePause()
     {
-        pauseMenu.SetActive(true);
+        DisablePlayers();
+        messages[0].gameObject.SetActive(true);
+        messages[0].text = "Paused";
+        uiActionMap.Enable();
     }
 
+    /// <summary>
+    /// Resume the game.
+    /// </summary>
     private void HandleResume()
     {
-        pauseMenu.SetActive(false);
+        isPaused = false;
+        EnablePlayers();
+        messages[0].gameObject.SetActive(false);
+        uiActionMap.Disable();
+    }
+
+    /// <summary>
+    /// Disable all players inputs.
+    /// </summary>
+    private void DisablePlayers()
+    {
+        foreach (KeyValuePair<string, GameObject> player in players)
+        {
+            player.Value.GetComponent<PlayerActions>().ToggleDisable();
+        }
+    }
+
+    /// <summary>
+    /// Enable all players inputs.
+    /// </summary>
+    private void EnablePlayers()
+    {
+        foreach (KeyValuePair<string, GameObject> player in players)
+        {
+            player.Value.GetComponent<PlayerActions>().TogglePlayer();
+        }
+    }
+
+    /// <summary>
+    /// Add Players to the roster
+    /// </summary>
+    /// <param name="player">Player GameObject to be add to the list.</param>
+    public static void AddPlayers(GameObject player)
+    {
+        players.Add(player.name, player);
+    }
+
+    /// <summary>
+    /// Remove Players from the roster
+    /// </summary>
+    /// <param name="player">Player GameObject to be removed from the list.</param>
+    public static void RemovePlayers(GameObject player)
+    {
+        players.Remove(player.name);
+    }
+
+    public void SetWinner()
+    {
+        scroll.SetActive(true);
+
+        GameObject winner = players.SingleOrDefault().Value;
+
+        scroll.transform.Find("VictoryMessage1").GetComponent<TextMeshProUGUI>().text = winner.name;
+
+        SpriteRenderer spriteRenderer = winner.transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        Sprite sprite = Sprite.Create(spriteRenderer.sprite.texture, new Rect(0, 0, spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height), Vector2.one / 2f, 100f);
+        scroll.transform.Find("PlayerSprite").GetComponent<Image>().sprite = sprite;
     }
 }

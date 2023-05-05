@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float pushedCooldown = 0.15f;
 
 
-    bool moving = false; // Not used... yet
-    private bool _isAbility = false;
+    //bool moving = false; // Not used... yet
+    //private bool _isAbility = false;
 	bool targetOn = true;
 
     float nextMoveTime = 0f;
@@ -36,13 +36,13 @@ public class PlayerController : MonoBehaviour
     GameObject up;
     GameObject down;
 
-    private InputManager input;
+    private PlayerActions input;
     private Health health;
     
     void Start()
     {
 
-        input = gameObject.GetComponent<InputManager>();
+        input = gameObject.GetComponent<PlayerActions>();
         health = gameObject.GetComponent<Health>();
 
         up = new GameObject("AdjacentUp");
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(input.Move);
+        //Debug.Log(input.Move);
         if (input.Move.inProgress && Time.time > nextMoveTime)
         {
             //GetAdjacentTiles();
@@ -323,13 +323,13 @@ public class PlayerController : MonoBehaviour
             {
                 // Move Right
                 SetTarget(right);
-                Debug.Log("Right");
+                //Debug.Log("Right");
             }
             else
             {
                 // Move Left
                 SetTarget(left);
-                Debug.Log("Left");
+                //Debug.Log("Left");
             }
         }
         else if (vertical != 0)
@@ -338,17 +338,17 @@ public class PlayerController : MonoBehaviour
             {
                 // Move Up
                 SetTarget(up);
-                Debug.Log("Up");
+                //Debug.Log("Up");
             }
             else
             {
                 // Move Down
                 SetTarget(down);
-                Debug.Log("Down");
+                //Debug.Log("Down");
             }
         }
     }
-
+        
     /// <summary>
     /// Moves the player 1 space in the given direction.
     /// </summary>
@@ -381,7 +381,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Down");
         }
     }
-
     /// <summary>
     /// To be called when the object is pushed.
     /// </summary>

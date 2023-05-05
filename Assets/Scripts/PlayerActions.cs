@@ -4,28 +4,29 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class InputManager : MonoBehaviour
+public class PlayerActions : MonoBehaviour
 {
-	private float speed = 5f;
+	//private float speed = 5f;
     private Vector2 targetPos = Vector2.zero;
     private float xOffset = 0;
     private float yOffset = 0;
 
     private bool _isAbility = false;
 	private bool _hasPowerUp = false;
-    private bool _canJump = true;
 
     private Rigidbody2D rb2d;
     private Animator pAnim;
     private PlayerController controller;
+    private AbilityCooldown abilities;
 
     // Input System
     private InputActionAsset inputAsset;
     private InputActionMap player;
+    private InputActionMap ui;
     private InputAction move;
     private InputAction aim;
 
- 	public InputAction Move { get { return move; } }
+    public InputAction Move { get { return move; } }
     public InputAction Aim { get { return aim; } }
     public bool IsAbility { get { return _isAbility; } }
 
@@ -34,35 +35,11 @@ public class InputManager : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         pAnim = GetComponent<Animator>();
         controller = GetComponent<PlayerController>();
+        abilities = GetComponent<AbilityCooldown>();
 
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
-    }
-
-    /// <summary>
-    /// I believe this is called on value change for inputs when pressed.
-    /// </summary>
-    private void OnEnable()
-    {
-        player.FindAction("Ability1").started += DoAbility1;
-        player.FindAction("Ability2").started += DoAbility2;
-		player.FindAction("PowerUp").started += DoPowerUp;
-        player.FindAction("BasicAttack").started += DoBasicAttack; 
-		aim = player.FindAction("Aim");
-		move = player.FindAction("Movement");
-        player.Enable();
-    }
-
-    /// <summary>
-    /// I believe this is called on value change when released (back to neutral positions).
-    /// </summary>
-    private void OnDisable()
-    {
-        player.FindAction("Ability1").started -= DoAbility1;
-        player.FindAction("Ability2").started -= DoAbility2;
-        player.FindAction("PowerUp").started -= DoPowerUp;
-        player.FindAction("BasicAttack").started -= DoBasicAttack;
-        player.Disable();
+        ui = inputAsset.FindActionMap("UI");
     }
 
     /// <summary>
@@ -71,9 +48,9 @@ public class InputManager : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility1(InputAction.CallbackContext obj)
     {
-        if (!_isAbility) // Slam
+        if (!_isAbility && !abilities.IsAbility1) // Slam
         {
-            Debug.Log("Ability1");
+            abilities.IsAbility1 = true;
             _isAbility = true;
             rb2d.bodyType = RigidbodyType2D.Static;
             pAnim.SetTrigger("ability1");
@@ -86,15 +63,16 @@ public class InputManager : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility2(InputAction.CallbackContext obj)
     {
-        if (!_isAbility && aim.inProgress && _canJump) // Jump (move 2 spaces)
+        if (!_isAbility && !abilities.IsAbility2 && aim.inProgress) // Jump (move 2 spaces)
         {
-			float valueX = aim.ReadValue<Vector2>().x;
+            abilities.IsAbility2 = true;
+
+            float valueX = aim.ReadValue<Vector2>().x;
             float valueY = aim.ReadValue<Vector2>().y;
             Vector2 currentPos = gameObject.transform.position;
             
             if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
-                Debug.Log("Jump North");
                 _isAbility = true;
                 xOffset = 1f;
                 yOffset = 0.5f;
@@ -107,7 +85,6 @@ public class InputManager : MonoBehaviour
             }
             else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
-                Debug.Log("Jump South");
                 _isAbility = true;
 
                 xOffset = -1f;
@@ -120,7 +97,6 @@ public class InputManager : MonoBehaviour
             }
             else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
-                Debug.Log("Jump West");
                 _isAbility = true;
 
                 xOffset = -1f;
@@ -133,7 +109,6 @@ public class InputManager : MonoBehaviour
             }
             else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
-                Debug.Log("Jump East");
                 _isAbility = true;
 
                 pAnim.SetTrigger("ability2");
@@ -168,7 +143,6 @@ public class InputManager : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoBasicAttack(InputAction.CallbackContext obj)
     {
-
         if (!_isAbility && aim.inProgress) // Basic Attack
         {
             float valueX = aim.ReadValue<Vector2>().x;
@@ -176,35 +150,40 @@ public class InputManager : MonoBehaviour
 
             if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
-                Debug.Log("Basic Attack North");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Nattack");
             }
             else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
-                Debug.Log("Basic Attack South");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Sattack");
             }
             else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
-                Debug.Log("Basic Attack West");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Wattack");
             }
             else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
-                Debug.Log("Basic Attack East");
                 _isAbility = true;
                 rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Eattack");
             }
         }
     }
-	
+
+    /// <summary>
+    /// Pause the Game
+    /// </summary>
+    /// <param name="obj">obj Callback context when action is triggered</param>
+    private void DoPause(InputAction.CallbackContext obj)
+    {
+        GameManager.IsPaused = true;
+    }
+
     /// <summary>
     /// Reset the player animation state to idle.
     /// </summary>
@@ -213,5 +192,58 @@ public class InputManager : MonoBehaviour
         pAnim.SetTrigger("idle");
         _isAbility = false;
         rb2d.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    /// <summary>
+    /// Toggle on the UI action map.
+    /// </summary>
+    public void ToggleUI()
+    {
+        // Enable UI
+        //ui.Enable();
+
+        // Disable Player
+        player.FindAction("Pause").started -= DoPause;
+        player.FindAction("Ability1").started -= DoAbility1;
+        player.FindAction("Ability2").started -= DoAbility2;
+        player.FindAction("PowerUp").started -= DoPowerUp;
+        player.FindAction("BasicAttack").started -= DoBasicAttack;
+        player.Disable();
+    }
+
+    /// <summary>
+    /// Toggle on the Player action map.
+    /// </summary>
+    public void TogglePlayer()
+    {
+        // Enable Player
+        player.FindAction("Pause").started += DoPause;
+        player.FindAction("Ability1").started += DoAbility1;
+        player.FindAction("Ability2").started += DoAbility2;
+        player.FindAction("PowerUp").started += DoPowerUp;
+        player.FindAction("BasicAttack").started += DoBasicAttack;
+        aim = player.FindAction("Aim");
+        move = player.FindAction("Movement");
+        player.Enable();
+
+        // Disable UI
+        //ui.Disable();
+    }
+
+    /// <summary>
+    /// Toggle off all action maps.
+    /// </summary>
+    public void ToggleDisable()
+    {
+        // Disable UI
+        //ui.Disable();
+
+        // Disable Player
+        player.FindAction("Pause").started -= DoPause;
+        player.FindAction("Ability1").started -= DoAbility1;
+        player.FindAction("Ability2").started -= DoAbility2;
+        player.FindAction("PowerUp").started -= DoPowerUp;
+        player.FindAction("BasicAttack").started -= DoBasicAttack;
+        player.Disable();
     }
 }
