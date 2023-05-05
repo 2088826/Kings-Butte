@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 
 public class PlayerController : MonoBehaviour
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(input.Move);
         if (input.Move.inProgress && Time.time > nextMoveTime)
         {
-            GetAdjacentTiles();
+            //GetAdjacentTiles();
             //GetAdjacentTilesX2();
 
             MovePlayer();
@@ -311,6 +312,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void MovePlayer()
     {
+        GetAdjacentTiles();
+
         float horizontal = input.Move.ReadValue<Vector2>().x;
         float vertical = input.Move.ReadValue<Vector2>().y;
 
@@ -345,7 +348,40 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-        
+
+    /// <summary>
+    /// Moves the player 1 space in the given direction.
+    /// </summary>
+    public void MovePlayer(string direction)
+    {
+        GetAdjacentTiles();
+
+        if (direction == "right")
+        {
+            // Move Right
+            SetTarget(right);
+            Debug.Log("Right");
+        }
+        else if (direction == "left")
+        {
+            // Move Left
+            SetTarget(left);
+            Debug.Log("Left");
+        }
+        else if (direction == "up")
+        {
+            // Move Up
+            SetTarget(up);
+            Debug.Log("Up");
+        }
+        else if (direction == "down")
+        {
+            // Move Down
+            SetTarget(down);
+            Debug.Log("Down");
+        }
+    }
+
     /// <summary>
     /// To be called when the object is pushed.
     /// </summary>
