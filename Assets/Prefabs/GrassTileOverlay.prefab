@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5533720314682919928}
   - component: {fileID: -1927484154087269583}
   m_Layer: 0
-  m_Name: TileOverlay
+  m_Name: GrassTileOverlay
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
