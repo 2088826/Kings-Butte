@@ -107,15 +107,18 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Debug.Log(input.Move);
-        if (input.Move.inProgress && Time.time > nextMoveTime)
+        if(input.Move != null)
         {
-            //GetAdjacentTiles();
-            //GetAdjacentTilesX2();
+            if (input.Move.inProgress && Time.time > nextMoveTime)
+            {
+                //GetAdjacentTiles();
+                //GetAdjacentTilesX2();
 
-            MovePlayer();
+                MovePlayer();
 
-            nextMoveTime = Time.time + moveCooldown;
+                nextMoveTime = Time.time + moveCooldown;
 
+            }
         }
     }
 
