@@ -497,7 +497,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
 
-        if(other.gameObject.name.Contains("Player") == true && input.IsAbility == false)
+        if((other.gameObject.name.Contains("Player") == true || other.gameObject.tag == "Obstacle") && input.IsAbility == false)
         {
             OnPushed();
 
