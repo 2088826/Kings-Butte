@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2756962558954447932}
   - component: {fileID: 2756962558954447933}
+  - component: {fileID: 633929617230904156}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Obstacle
@@ -136,6 +137,27 @@ MonoBehaviour:
   target: {fileID: 0}
   moveCooldown: 2
   tileOverlayPrefab: {fileID: 2784786727943879326, guid: ed0141b06a9076c4d994b9373eb14947, type: 3}
+--- !u!50 &633929617230904156
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756962558954447906}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &2756962559828527889
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +168,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2756962559828527890}
   - component: {fileID: 2756962559828527981}
-  - component: {fileID: 2756962559828527980}
   - component: {fileID: 2756962559828527891}
   m_Layer: 0
   m_Name: Hitbox
@@ -196,20 +217,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &2756962559828527980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756962559828527889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401cd66fa1a05334b9d6cb65f4de88eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownParticles: {fileID: 0}
-  hasteParticles: {fileID: 0}
 --- !u!58 &2756962559828527891
 CircleCollider2D:
   m_ObjectHideFlags: 0

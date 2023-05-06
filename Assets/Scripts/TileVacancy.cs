@@ -15,7 +15,7 @@ public class TileVacancy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.transform.parent.tag == "Player")
+        if (other.gameObject.transform.parent.tag == "Player" || other.gameObject.transform.parent.tag == "Obstacle")
         {
             occupied = true;
 
@@ -26,7 +26,7 @@ public class TileVacancy : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.transform.parent.tag == "Player")
+        if (other.gameObject.transform.parent.tag == "Player" || other.gameObject.transform.parent.tag == "Obstacle")
         {
             occupied = false;
 
