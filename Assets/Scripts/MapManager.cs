@@ -57,7 +57,6 @@ namespace finished1
 
                             if (tileName.Contains("GrassTile"))
                             {
-                                Debug.Log(tileMap.GetTile(tileLocation).name);
                                 var newTile = Instantiate(grassOverlayPrefab, container.transform);
                                 newTile.name = "GrassTile " + grassCount++;
                                 var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
@@ -67,7 +66,6 @@ namespace finished1
                             }
                             else if (tileName.Contains("IceTile"))
                             {
-                                Debug.Log(tileMap.GetTile(tileLocation).name);
                                 var newTile = Instantiate(iceOverlayPrefab, container.transform);
                                 newTile.name = "IceTile " + iceCount++;
                                 var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
