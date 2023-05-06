@@ -1,26 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
-
-public class PlayerController : MonoBehaviour
+public class RockMovement : MonoBehaviour
 {
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
 
-    [SerializeField] float moveCooldown = 1f;
-    [SerializeField] float pushedCooldown = 0.15f;
+    [SerializeField] float moveCooldown = 3f;
 
+    [SerializeField] GameObject tileOverlayPrefab;
 
     //bool moving = false; // Not used... yet
     //private bool _isAbility = false;
-	bool targetOn = true;
+    bool targetOn = true;
 
     float nextMoveTime = 0f;
 
@@ -29,23 +22,20 @@ public class PlayerController : MonoBehaviour
 
     float tileWidth;
     float tileHeight;
-    
+
     // Holds the adjacent tiles
     GameObject left;
     GameObject right;
     GameObject up;
     GameObject down;
 
-    private PlayerActions input;
     private Health health;
-    private Animator anim;
-    
+    //private Animator anim;
+
     void Start()
     {
 
-        input = gameObject.GetComponent<PlayerActions>();
-        health = gameObject.GetComponent<Health>();
-        anim = gameObject.GetComponent<Animator>();
+        //anim = gameObject.GetComponent<Animator>();
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
@@ -58,42 +48,20 @@ public class PlayerController : MonoBehaviour
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
-        
-        if (tiles.Count <= 0 && tileSet != null)
-        {
 
-            // Adds all the tiles in the tileSet to the Tiles List.
-            foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
-            {
-                tiles.Add(tile.gameObject);
-            }
+        // Get the tile dimensions 
+        tileWidth = tileOverlayPrefab.GetComponent<SpriteRenderer>().size.x;
+        tileHeight = tileOverlayPrefab.GetComponent<SpriteRenderer>().size.y;
 
-
-            // Gets the Width and Length of the tiles
-            // *potentially replaceable*
-            if (tiles.Count > 0)
-            {
-                tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
-                tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
-            }
-
-            //GetAdjacentTiles();
-        }
+        Debug.Log("TileWidth: " + tileWidth.ToString());
+        Debug.Log("TileHeight: " + tileHeight.ToString());
 
 
     }
 
     void Update()
     {
-
-        // Changes the target to reflect the currentTileIndex
-        /*if (tiles.Count > 0)
-        {
-            target = tiles[currentTileIndex];
-        }*/
-
-
-        // TODO: Make a "moving" bool... maybe
+        
         if (targetOn == true)
         {
             // Move to the target
@@ -101,28 +69,24 @@ public class PlayerController : MonoBehaviour
             {
                 MoveToTile(target);
             }
+
         }
 
-        //GetAdjacentTiles();
     }
 
     private void FixedUpdate()
     {
-        //Debug.Log(input.Move);
-        if(input.Move != null)
+        if (Time.time > nextMoveTime)
         {
-            if (input.Move.inProgress && Time.time > nextMoveTime)
-            {
-                //GetAdjacentTiles();
-                //GetAdjacentTilesX2();
+            //GetAdjacentTiles();
+            //GetAdjacentTilesX2();
 
-                MovePlayer();
+            Move1();
 
-                nextMoveTime = Time.time + moveCooldown;
-                Debug.Log("Move");
-                anim.SetTrigger("move");
+            nextMoveTime = Time.time + moveCooldown;
 
-            }
+            //anim.SetTrigger("move");
+
         }
     }
 
@@ -234,7 +198,8 @@ public class PlayerController : MonoBehaviour
             }
 
 
-        } catch
+        }
+        catch
         {
             return false;
         }
@@ -247,8 +212,8 @@ public class PlayerController : MonoBehaviour
     private void GetAdjacentTilesX2()
     {
         // Dimensions of the OverlapBox
-        Vector2 xBox = new Vector2(tileWidth*2, tileHeight * 0.0001f);
-        Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight*4f);
+        Vector2 xBox = new Vector2(tileWidth * 2, tileHeight * 0.0001f);
+        Vector2 yBox = new Vector2(tileWidth * 0.0001f, tileHeight * 4f);
 
         // Gets colliders (HARDCODED ANGLES)
         Collider2D[] xColliders = Physics2D.OverlapBoxAll(transform.position, xBox, 45);
@@ -317,49 +282,27 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Sets the target to an adjacent tile according to the input.
     /// </summary>
-    private void MovePlayer()
+    private void Move1()
     {
         GetAdjacentTiles();
 
-        float horizontal = input.Move.ReadValue<Vector2>().x;
-        float vertical = input.Move.ReadValue<Vector2>().y;
+        List<GameObject> spaces = new List<GameObject>();
 
-        if (horizontal != 0)
-        {
-            if (horizontal > 0)
-            {
-                // Move Right
-                SetTarget(right);
-                //Debug.Log("Right");
-            }
-            else
-            {
-                // Move Left
-                SetTarget(left);
-                //Debug.Log("Left");
-            }
-        }
-        else if (vertical != 0)
-        {
-            if (vertical > 0)
-            {
-                // Move Up
-                SetTarget(up);
-                //Debug.Log("Up");
-            }
-            else
-            {
-                // Move Down
-                SetTarget(down);
-                //Debug.Log("Down");
-            }
-        }
+        spaces.Add(right);
+        spaces.Add(up);
+        spaces.Add(down);
+        spaces.Add(left);
+
+        int index = Random.Range(0, 4);
+
+        //SetTarget(spaces[index]);
+        SetTarget(spaces[index]);
     }
-        
+
     /// <summary>
     /// Moves the player 1 space in the given direction.
     /// </summary>
-    public void MovePlayer(string direction)
+    public void Move1(string direction)
     {
         GetAdjacentTiles();
 
@@ -388,16 +331,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Down");
         }
     }
-    /// <summary>
-    /// To be called when the object is pushed.
-    /// </summary>
-    private void OnPushed()
-    {
-        targetOn = false;
-        SetTarget(GetCurrentTile());
-        ActivateTarget();
-        
-    }
+
 
     private void ActivateTarget()
     {
@@ -414,16 +348,13 @@ public class PlayerController : MonoBehaviour
 
         if (target == null)
         {
-            health.Fall();
-        }
-        else if (!CheckForVacancy(tile))
-        {
+            //health.Fall();
             target = (GetCurrentTile());
         }
     }
 
     /// <summary>
-    /// Moves the player 2 spaces in an adjacent direction
+    /// Moves 2 spaces in an adjacent direction
     /// </summary>
     /// <remarks>Repurposed. Formerly GetPushed.</remarks>
     /// <param name="transform"></param>
@@ -435,7 +366,7 @@ public class PlayerController : MonoBehaviour
         {
             SetTarget(down);
         }
-        else if(direction == "North")
+        else if (direction == "North")
         {
             SetTarget(up);
         }
@@ -456,10 +387,10 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     public GameObject GetCurrentTile()
     {
-        
+
         // Initialize as null
         GameObject currentTile = null;
-        
+
         // Gets colliders
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.0001f);
 
@@ -470,7 +401,7 @@ public class PlayerController : MonoBehaviour
         // Adds the GameObjects of the colliders to the list.
         foreach (Collider2D coll in colliders)
         {
-           if (coll.gameObject.tag == "Tile")
+            if (coll.gameObject.tag == "Tile")
             {
                 currentTile = coll.gameObject;
                 Debug.Log("Current tile identified.");
@@ -497,11 +428,6 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
 
-        if((other.gameObject.name.Contains("Player") == true || other.gameObject.tag == "Obstacle") && input.IsAbility == false)
-        {
-            OnPushed();
 
-            Debug.Log(gameObject.name + " is pushed by " + other.gameObject.name);
-        }
     }
 }
