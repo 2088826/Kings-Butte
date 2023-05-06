@@ -430,10 +430,4 @@ public class RockMovement : MonoBehaviour
         
 
     }
-
-    public bool MoveOn
-    {
-        get { return moveOn; }
-        set { moveOn = value; }
-    }
 }
