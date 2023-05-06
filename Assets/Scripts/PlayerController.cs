@@ -525,6 +525,16 @@ public class PlayerController : MonoBehaviour
             target = up;
         }
 
+
+        Debug.Log("Where I am: " + this.target.name);
+        Debug.Log("Where I'm going: " + target.name);
+
+        // Sets the target to null for pushing off the edge.
+        if (!target.name.Contains("Tile"))
+        {
+            target = null;
+        }
+
         SetTarget(target);
     }
 
