@@ -6,20 +6,14 @@ public class RockMovement : MonoBehaviour
 {
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
-
     [SerializeField] float moveCooldown = 3f;
 
-    [SerializeField] GameObject tileOverlayPrefab;
-
-    //bool moving = false; // Not used... yet
-    //private bool _isAbility = false;
+    [SerializeField] bool moveOn = false;
     bool targetOn = true;
 
     float nextMoveTime = 0f;
 
-    GameObject tileSet;
-    List<GameObject> tiles;
-
+    
     float tileWidth;
     float tileHeight;
 
@@ -31,6 +25,8 @@ public class RockMovement : MonoBehaviour
 
     private Health health;
     //private Animator anim;
+
+    private bool isStart = true;
 
     void Start()
     {
@@ -46,21 +42,18 @@ public class RockMovement : MonoBehaviour
         left = new GameObject("AdjacentLeft");
         left.gameObject.transform.parent = this.gameObject.transform;
 
-        tileSet = GameObject.Find("TileContainer");
-        tiles = new List<GameObject>();
-
-        // Get the tile dimensions 
-        tileWidth = tileOverlayPrefab.GetComponent<SpriteRenderer>().size.x;
-        tileHeight = tileOverlayPrefab.GetComponent<SpriteRenderer>().size.y;
-
-        Debug.Log("TileWidth: " + tileWidth.ToString());
-        Debug.Log("TileHeight: " + tileHeight.ToString());
-
-
     }
 
     void Update()
     {
+
+        if (isStart)
+        {
+            // Get the tile dimensions
+            tileWidth = GetCurrentTile().GetComponent<SpriteRenderer>().size.x;
+            tileHeight = GetCurrentTile().GetComponent<SpriteRenderer>().size.y;
+        }
+
         
         if (targetOn == true)
         {
@@ -76,7 +69,7 @@ public class RockMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time > nextMoveTime)
+        if (Time.time > nextMoveTime && moveOn)
         {
             //GetAdjacentTiles();
             //GetAdjacentTilesX2();
@@ -429,5 +422,11 @@ public class RockMovement : MonoBehaviour
     {
         
 
+    }
+
+    public bool MoveOn
+    {
+        get { return moveOn; }
+        set { moveOn = value; }
     }
 }
