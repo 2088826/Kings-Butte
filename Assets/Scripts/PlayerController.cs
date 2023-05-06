@@ -38,12 +38,14 @@ public class PlayerController : MonoBehaviour
 
     private PlayerActions input;
     private Health health;
+    private Animator anim;
     
     void Start()
     {
 
         input = gameObject.GetComponent<PlayerActions>();
         health = gameObject.GetComponent<Health>();
+        anim = gameObject.GetComponent<Animator>();
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
@@ -117,6 +119,8 @@ public class PlayerController : MonoBehaviour
                 MovePlayer();
 
                 nextMoveTime = Time.time + moveCooldown;
+                Debug.Log("Move");
+                anim.SetTrigger("move");
 
             }
         }
@@ -390,7 +394,6 @@ public class PlayerController : MonoBehaviour
     private void OnPushed()
     {
         targetOn = false;
-
         SetTarget(GetCurrentTile());
         ActivateTarget();
         

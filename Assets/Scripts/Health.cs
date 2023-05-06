@@ -33,16 +33,20 @@ public class Health : MonoBehaviour
 
     public void Fall()
     {
+        SpriteRenderer sp = gameObject.GetComponentInChildren<SpriteRenderer>();
+
         if (transform.position.y > 0.25)
         {
-
-            SpriteRenderer sp = gameObject.GetComponentInChildren<SpriteRenderer>();
-            Debug.Log(sp.sortingLayerName);
             sp.sortingLayerName = "Level";
             sp.sortingOrder = -1;
             
-            Debug.Log(sp.sortingLayerName);
         }
+        else
+        {
+            sp.sortingLayerName = "Level";
+            sp.sortingOrder = 1;
+        }
+
         GameManager.RemovePlayers(this.gameObject);
         isDefeated = true;
 
