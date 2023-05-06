@@ -67,42 +67,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "AttackNorth",
-                    "type": "Button",
-                    "id": "05f1d19b-d259-4d66-8fde-c3c37b30d067",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "AttackSouth",
-                    "type": "Button",
-                    "id": "05166fe1-3e2c-4b32-a5fb-8a1ad8b2c1fd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "AttackWest",
-                    "type": "Button",
-                    "id": "db234a73-2a0c-42c6-b82d-069b336d67dc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "AttackEast",
-                    "type": "Button",
-                    "id": "35696237-1f80-4d61-9cd1-1059dd4827e4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -120,7 +84,7 @@
                 {
                     "name": "",
                     "id": "d1df4e89-fbea-4cbc-b1ab-946c6d01d75a",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -142,7 +106,7 @@
                 {
                     "name": "",
                     "id": "b67c93c2-56a3-450a-abcb-b1e54f17647f",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -164,7 +128,7 @@
                 {
                     "name": "",
                     "id": "aa5e6403-a842-46ae-bfd9-853dd33e7293",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -186,7 +150,7 @@
                 {
                     "name": "",
                     "id": "9078efac-83c1-4e91-8123-b103a930c668",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -208,7 +172,7 @@
                 {
                     "name": "up",
                     "id": "fb5865cb-4f2b-4efb-a0e3-576a7213a024",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -219,7 +183,7 @@
                 {
                     "name": "down",
                     "id": "0b79fa56-d4fe-49a8-a29d-cf6d324d5b34",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -230,7 +194,7 @@
                 {
                     "name": "left",
                     "id": "3aba2520-cbf0-46d7-94b0-e906109743a0",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -241,7 +205,7 @@
                 {
                     "name": "right",
                     "id": "83b719f6-0dfc-4184-8a9d-1d95ab0e1089",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -328,94 +292,6 @@
                 },
                 {
                     "name": "",
-                    "id": "8de65a6e-b6c8-4be8-91eb-60d14da5cebc",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackNorth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "20e95506-1bc5-49eb-b0a8-ba0a85f64784",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackNorth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b7435044-b6bd-4da3-9d95-166a20dff13d",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackSouth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1f7e7611-9eaf-4ec9-a8c9-e7b905f03c68",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackSouth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1e176484-c887-4da8-b0ae-884c442fcf08",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackWest",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9a733f23-75cc-404c-8154-8d2d42d65412",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackWest",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f99d28e3-3a6d-4788-b47f-73fdeabb2d1e",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackEast",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "600a1ccf-8f76-4005-9168-07cb89c8b0f7",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AttackEast",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6aa98997-7943-4b9a-87a3-60d66ea9a6f5",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -424,6 +300,61 @@
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Arrow keys",
+                    "id": "a3d07872-5ebf-455f-bd89-65551cb1bac7",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c2225bc1-6f1a-4328-9cc8-4f017f127262",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "5d36446e-d45b-40b1-aa4f-31b685392760",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "32519198-8905-45cb-b8f7-d50e8c6e143b",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "9d85a69b-6066-4371-ae1d-1ff9cbd28653",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

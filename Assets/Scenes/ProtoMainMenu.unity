@@ -2351,6 +2351,7 @@ GameObject:
   - component: {fileID: 1090998407}
   - component: {fileID: 1090998406}
   - component: {fileID: 1090998405}
+  - component: {fileID: 1090998411}
   - component: {fileID: 1090998410}
   - component: {fileID: 1090998409}
   - component: {fileID: 1090998408}
@@ -2436,6 +2437,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Start
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1090998411}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: InvokeGoToStage1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1090998406
@@ -2632,6 +2645,27 @@ MonoBehaviour:
   myFx: {fileID: 1090998408}
   hoverFx: {fileID: 8300000, guid: 2b8c207613cd58b4889b0cc6bf739f2c, type: 3}
   clickFx: {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
+--- !u!114 &1090998411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090998403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823d236df1ab59e4ca557489ec478572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
+  CreditButton: {fileID: 0}
+  ExitButton: {fileID: 0}
+  StageBackButton: {fileID: 0}
+  CreditBackButton: {fileID: 0}
+  Stage1: {fileID: 0}
+  Stage2: {fileID: 0}
+  Stage3: {fileID: 0}
 --- !u!1 &1206561604
 GameObject:
   m_ObjectHideFlags: 0
@@ -3740,6 +3774,7 @@ GameObject:
   - component: {fileID: 1664134033}
   - component: {fileID: 1664134032}
   - component: {fileID: 1664134031}
+  - component: {fileID: 1664134037}
   - component: {fileID: 1664134036}
   - component: {fileID: 1664134035}
   - component: {fileID: 1664134034}
@@ -3825,6 +3860,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Start
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1664134037}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: InvokeExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1664134032
@@ -4021,6 +4068,27 @@ MonoBehaviour:
   myFx: {fileID: 1664134034}
   hoverFx: {fileID: 8300000, guid: 2b8c207613cd58b4889b0cc6bf739f2c, type: 3}
   clickFx: {fileID: 0}
+--- !u!114 &1664134037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664134029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823d236df1ab59e4ca557489ec478572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayButton: {fileID: 0}
+  TutorialButton: {fileID: 0}
+  CreditButton: {fileID: 0}
+  ExitButton: {fileID: 0}
+  StageBackButton: {fileID: 0}
+  CreditBackButton: {fileID: 0}
+  Stage1: {fileID: 0}
+  Stage2: {fileID: 0}
+  Stage3: {fileID: 0}
 --- !u!1 &1722419280
 GameObject:
   m_ObjectHideFlags: 0

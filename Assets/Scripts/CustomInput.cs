@@ -89,42 +89,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""AttackNorth"",
-                    ""type"": ""Button"",
-                    ""id"": ""05f1d19b-d259-4d66-8fde-c3c37b30d067"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AttackSouth"",
-                    ""type"": ""Button"",
-                    ""id"": ""05166fe1-3e2c-4b32-a5fb-8a1ad8b2c1fd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AttackWest"",
-                    ""type"": ""Button"",
-                    ""id"": ""db234a73-2a0c-42c6-b82d-069b336d67dc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AttackEast"",
-                    ""type"": ""Button"",
-                    ""id"": ""35696237-1f80-4d61-9cd1-1059dd4827e4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -142,7 +106,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d1df4e89-fbea-4cbc-b1ab-946c6d01d75a"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -164,7 +128,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b67c93c2-56a3-450a-abcb-b1e54f17647f"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -186,7 +150,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""aa5e6403-a842-46ae-bfd9-853dd33e7293"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -208,7 +172,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9078efac-83c1-4e91-8123-b103a930c668"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -230,7 +194,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""fb5865cb-4f2b-4efb-a0e3-576a7213a024"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -241,7 +205,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""0b79fa56-d4fe-49a8-a29d-cf6d324d5b34"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -252,7 +216,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""3aba2520-cbf0-46d7-94b0-e906109743a0"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -263,7 +227,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""83b719f6-0dfc-4184-8a9d-1d95ab0e1089"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -350,94 +314,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8de65a6e-b6c8-4be8-91eb-60d14da5cebc"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackNorth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""20e95506-1bc5-49eb-b0a8-ba0a85f64784"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackNorth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b7435044-b6bd-4da3-9d95-166a20dff13d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackSouth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1f7e7611-9eaf-4ec9-a8c9-e7b905f03c68"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackSouth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1e176484-c887-4da8-b0ae-884c442fcf08"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackWest"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9a733f23-75cc-404c-8154-8d2d42d65412"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackWest"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f99d28e3-3a6d-4788-b47f-73fdeabb2d1e"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackEast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""600a1ccf-8f76-4005-9168-07cb89c8b0f7"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AttackEast"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6aa98997-7943-4b9a-87a3-60d66ea9a6f5"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -446,6 +322,61 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Arrow keys"",
+                    ""id"": ""a3d07872-5ebf-455f-bd89-65551cb1bac7"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c2225bc1-6f1a-4328-9cc8-4f017f127262"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5d36446e-d45b-40b1-aa4f-31b685392760"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""32519198-8905-45cb-b8f7-d50e8c6e143b"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9d85a69b-6066-4371-ae1d-1ff9cbd28653"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1047,10 +978,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
         m_Player_Ability1 = m_Player.FindAction("Ability1", throwIfNotFound: true);
         m_Player_Ability2 = m_Player.FindAction("Ability2", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_AttackNorth = m_Player.FindAction("AttackNorth", throwIfNotFound: true);
-        m_Player_AttackSouth = m_Player.FindAction("AttackSouth", throwIfNotFound: true);
-        m_Player_AttackWest = m_Player.FindAction("AttackWest", throwIfNotFound: true);
-        m_Player_AttackEast = m_Player.FindAction("AttackEast", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
@@ -1133,10 +1060,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Ability1;
     private readonly InputAction m_Player_Ability2;
     private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_AttackNorth;
-    private readonly InputAction m_Player_AttackSouth;
-    private readonly InputAction m_Player_AttackWest;
-    private readonly InputAction m_Player_AttackEast;
     public struct PlayerActions
     {
         private @CustomInput m_Wrapper;
@@ -1148,10 +1071,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
         public InputAction @Ability1 => m_Wrapper.m_Player_Ability1;
         public InputAction @Ability2 => m_Wrapper.m_Player_Ability2;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
-        public InputAction @AttackNorth => m_Wrapper.m_Player_AttackNorth;
-        public InputAction @AttackSouth => m_Wrapper.m_Player_AttackSouth;
-        public InputAction @AttackWest => m_Wrapper.m_Player_AttackWest;
-        public InputAction @AttackEast => m_Wrapper.m_Player_AttackEast;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1182,18 +1101,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                @AttackNorth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackNorth;
-                @AttackNorth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackNorth;
-                @AttackNorth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackNorth;
-                @AttackSouth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackSouth;
-                @AttackSouth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackSouth;
-                @AttackSouth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackSouth;
-                @AttackWest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackWest;
-                @AttackWest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackWest;
-                @AttackWest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackWest;
-                @AttackEast.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackEast;
-                @AttackEast.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackEast;
-                @AttackEast.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackEast;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1219,18 +1126,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
-                @AttackNorth.started += instance.OnAttackNorth;
-                @AttackNorth.performed += instance.OnAttackNorth;
-                @AttackNorth.canceled += instance.OnAttackNorth;
-                @AttackSouth.started += instance.OnAttackSouth;
-                @AttackSouth.performed += instance.OnAttackSouth;
-                @AttackSouth.canceled += instance.OnAttackSouth;
-                @AttackWest.started += instance.OnAttackWest;
-                @AttackWest.performed += instance.OnAttackWest;
-                @AttackWest.canceled += instance.OnAttackWest;
-                @AttackEast.started += instance.OnAttackEast;
-                @AttackEast.performed += instance.OnAttackEast;
-                @AttackEast.canceled += instance.OnAttackEast;
             }
         }
     }
@@ -1390,10 +1285,6 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
         void OnAbility1(InputAction.CallbackContext context);
         void OnAbility2(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-        void OnAttackNorth(InputAction.CallbackContext context);
-        void OnAttackSouth(InputAction.CallbackContext context);
-        void OnAttackWest(InputAction.CallbackContext context);
-        void OnAttackEast(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
