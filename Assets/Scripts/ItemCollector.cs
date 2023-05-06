@@ -21,14 +21,14 @@ public class ItemCollector : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Cooldown"))
         {
-            //other.gameObject.GetComponent<Animator>().SetTrigger("Pickup");
+            other.gameObject.GetComponentInParent<Animator>().SetTrigger("pickup");
             cooldownParticles.Play();
             cooldowns.ResetCooldowns();
         }
 
         if (other.gameObject.CompareTag("Haste"))
         {
-            //other.gameObject.GetComponent<Animator>().SetTrigger("Pickup");
+            other.gameObject.GetComponentInParent<Animator>().SetTrigger("pickup");
             hasteParticles.Play();
 
             //TODO HASTE FOR X AMOUNT OF TIME

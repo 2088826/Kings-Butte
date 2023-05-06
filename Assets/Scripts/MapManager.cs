@@ -18,6 +18,7 @@ namespace finished1
         public float littleBump;
 
         public Dictionary<Vector2Int, GameObject> map;
+        private GameObject container;
 
         private void Awake()
         {
@@ -28,6 +29,9 @@ namespace finished1
             {
                 _instance = this;
             }
+
+            container = Instantiate(tileContainerPrefab);
+            container.name = "TileContainer";
         }
 
         // Start is called before the first frame update
@@ -36,8 +40,6 @@ namespace finished1
             littleBump = 0.0003f;
             var tileMap = gameObject.GetComponentInChildren<Tilemap>();
             map = new Dictionary<Vector2Int, GameObject>();
-            GameObject container = Instantiate(tileContainerPrefab);
-            container.name = "TileContainer";
             int grassCount = 0;
             int iceCount = 0;
 

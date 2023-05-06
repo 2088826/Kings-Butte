@@ -4540,6 +4540,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937975060096490820}
     m_Modifications:
+    - target: {fileID: 5169083905009846628, guid: c04ce737eccc12e499dc18120c958845, type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2400d2af62b90564ba6c5a0f8d348195, type: 3}
     - target: {fileID: 5169083905009846630, guid: c04ce737eccc12e499dc18120c958845, type: 3}
       propertyPath: m_text
       value: 
