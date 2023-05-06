@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private PlayerActions input;
     private Health health;
     private Animator anim;
+    private float defaultCooldown;
     
     void Start()
     {
@@ -58,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
+
+        defaultCooldown = moveCooldown;
         
         if (tiles.Count <= 0 && tileSet != null)
         {
@@ -545,7 +548,15 @@ public class PlayerController : MonoBehaviour
     /// <param name="multiplier"></param>
     public void ChangeMoveCooldown(float multiplier)
     {
-        moveCooldown = 1 * multiplier;
+        if(multiplier > 0)
+        {
+            moveCooldown = defaultCooldown - (1 * multiplier);
+
+        }
+        else
+        {
+            moveCooldown = defaultCooldown;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
