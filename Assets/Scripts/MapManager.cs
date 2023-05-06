@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,12 +11,14 @@ namespace finished1
         private static MapManager _instance;
         public static MapManager Instance { get { return _instance; } }
 
-        public GameObject tilePlaceholderPrefab;
-        public GameObject tileContainerPrefab;
+        [SerializeField] private GameObject grassOverlayPrefab;
+        [SerializeField] private GameObject iceOverlayPrefab;
+        [SerializeField] private GameObject tileContainerPrefab;
 
         public float littleBump;
 
         public Dictionary<Vector2Int, GameObject> map;
+        private GameObject container;
 
         private void Awake()
         {
@@ -26,6 +29,9 @@ namespace finished1
             {
                 _instance = this;
             }
+
+            container = Instantiate(tileContainerPrefab);
+            container.name = "TileContainer";
         }
 
         // Start is called before the first frame update
@@ -34,9 +40,8 @@ namespace finished1
             littleBump = 0.0003f;
             var tileMap = gameObject.GetComponentInChildren<Tilemap>();
             map = new Dictionary<Vector2Int, GameObject>();
-            GameObject container = Instantiate(tileContainerPrefab);
-            container.name = "TileContainer";
-            int count = 0;
+            int grassCount = 0;
+            int iceCount = 0;
 
             BoundsInt bounds = tileMap.cellBounds;
 
@@ -50,12 +55,26 @@ namespace finished1
                         var tileKey = new Vector2Int(x, y);
                         if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey) && z >= 0)
                         {
-                            var newTile = Instantiate(tilePlaceholderPrefab, container.transform);
-                            newTile.name = "PlayableTile " + count++;
-                            var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
-                            newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z+1);
-                            newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
-                            map.Add(tileKey, newTile);
+                            string tileName = tileMap.GetTile(tileLocation).name;
+
+                            if (tileName.Contains("GrassTile"))
+                            {
+                                var newTile = Instantiate(grassOverlayPrefab, container.transform);
+                                newTile.name = "GrassTile " + grassCount++;
+                                var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
+                                newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z+1);
+                                newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
+                                map.Add(tileKey, newTile);
+                            }
+                            else if (tileName.Contains("IceTile"))
+                            {
+                                var newTile = Instantiate(iceOverlayPrefab, container.transform);
+                                newTile.name = "IceTile " + iceCount++;
+                                var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
+                                newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
+                                newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
+                                map.Add(tileKey, newTile);
+                            }
                         }
                     }
                 }

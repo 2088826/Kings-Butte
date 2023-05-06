@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float pushedCooldown = 0.15f;
 
 
-    bool moving = false; // Not used... yet
-    private bool _isAbility = false;
+    //bool moving = false; // Not used... yet
+    //private bool _isAbility = false;
 	bool targetOn = true;
 
     float nextMoveTime = 0f;
@@ -36,14 +36,17 @@ public class PlayerController : MonoBehaviour
     GameObject up;
     GameObject down;
 
-    private InputManager input;
+    private PlayerActions input;
     private Health health;
+    private Animator anim;
+    private float defaultCooldown;
     
     void Start()
     {
 
-        input = gameObject.GetComponent<InputManager>();
+        input = gameObject.GetComponent<PlayerActions>();
         health = gameObject.GetComponent<Health>();
+        anim = gameObject.GetComponent<Animator>();
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
@@ -56,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
+
+        defaultCooldown = moveCooldown;
         
         if (tiles.Count <= 0 && tileSet != null)
         {
@@ -106,16 +111,21 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(input.Move);
-        if (input.Move.inProgress && Time.time > nextMoveTime)
+        //Debug.Log(input.Move);
+        if(input.Move != null)
         {
-            //GetAdjacentTiles();
-            //GetAdjacentTilesX2();
+            if (input.Move.inProgress && Time.time > nextMoveTime)
+            {
+                //GetAdjacentTiles();
+                //GetAdjacentTilesX2();
 
-            MovePlayer();
+                MovePlayer();
 
-            nextMoveTime = Time.time + moveCooldown;
+                nextMoveTime = Time.time + moveCooldown;
+                Debug.Log("Move");
+                anim.SetTrigger("move");
 
+            }
         }
     }
 
@@ -323,13 +333,13 @@ public class PlayerController : MonoBehaviour
             {
                 // Move Right
                 SetTarget(right);
-                Debug.Log("Right");
+                //Debug.Log("Right");
             }
             else
             {
                 // Move Left
                 SetTarget(left);
-                Debug.Log("Left");
+                //Debug.Log("Left");
             }
         }
         else if (vertical != 0)
@@ -338,17 +348,17 @@ public class PlayerController : MonoBehaviour
             {
                 // Move Up
                 SetTarget(up);
-                Debug.Log("Up");
+                //Debug.Log("Up");
             }
             else
             {
                 // Move Down
                 SetTarget(down);
-                Debug.Log("Down");
+                //Debug.Log("Down");
             }
         }
     }
-
+        
     /// <summary>
     /// Moves the player 1 space in the given direction.
     /// </summary>
@@ -381,14 +391,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Down");
         }
     }
-
     /// <summary>
     /// To be called when the object is pushed.
     /// </summary>
     private void OnPushed()
     {
         targetOn = false;
-
         SetTarget(GetCurrentTile());
         ActivateTarget();
         
@@ -477,6 +485,62 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// The player is shoved away by 1 tile. 
+    /// </summary>
+    /// <remarks>Based on <see cref="IceTile"/>'s SlidePlayer method. </remarks>
+    /// <param name="other"></param>
+    private void OnShoved(Collision2D other)
+    {
+        GetAdjacentTiles();
+
+        Vector3 otherSpot = other.transform.position;
+        bool higher = false;
+        bool righter = false;
+
+        GameObject target;
+
+
+        if (transform.position.y < otherSpot.y)
+        {
+            higher = true;
+        }
+
+        if (transform.position.x < otherSpot.x)
+        {
+            righter = true;
+        }
+
+        if (righter && higher)
+        {
+            target = down;
+        }
+        else if (righter && !higher)
+        {
+            target = left;
+        }
+        else if (!righter && higher)
+        {
+            target = right;
+        }
+        else
+        {
+            target = up;
+        }
+
+
+        //Debug.Log("Where I am: " + this.target.name);
+        //Debug.Log("Where I'm going: " + target.name);
+
+        // Sets the target to null for pushing off the edge.
+        if (!target.name.Contains("Tile"))
+        {
+            target = null;
+        }
+
+        SetTarget(target);
+    }
+
 
     /// <summary>
     /// The move cooldown changes based on the multiplier.
@@ -484,15 +548,29 @@ public class PlayerController : MonoBehaviour
     /// <param name="multiplier"></param>
     public void ChangeMoveCooldown(float multiplier)
     {
-        moveCooldown = 1 * multiplier;
+        if(multiplier > 0)
+        {
+            moveCooldown = defaultCooldown - (1 * multiplier);
+
+        }
+        else
+        {
+            moveCooldown = defaultCooldown;
+        }
     }
 
-
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            OnShoved(other);
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D other)
     {
 
-        if(other.gameObject.name.Contains("Player") == true && input.IsAbility == false)
+        if((other.gameObject.name.Contains("Player") == true) && input.IsAbility == false)
         {
             OnPushed();
 

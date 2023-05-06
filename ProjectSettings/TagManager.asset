@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Player2
   - Tile
+  - Cooldown
+  - Haste
+  - Obstacle
+  - Wave
   layers:
   - Default
   - TransparentFX
@@ -13,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Obstacle
+  - Wave
   - 
   - 
   - 
