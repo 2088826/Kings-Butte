@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI startTimer;
     [SerializeField] private TextMeshProUGUI[] messages;
     [SerializeField] private InputActionAsset inputAction;
-    [SerializeField] private GameObject scroll;
+    [SerializeField] private GameObject winnerScroll;
+    [SerializeField] private GameObject tieScroll;
     
     // Private Fields
     private InputActionMap uiActionMap;
@@ -24,7 +25,6 @@ public class GameManager : MonoBehaviour
     private static bool isStart = false;
     private bool isEnd = false;
     private static bool isPaused = false;
-    private bool first = true;
     private bool isFirst = true;
     private static Dictionary<string, GameObject> players;
 
@@ -53,9 +53,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game on!");
             StartGame();
         }
-        else if (isEnd && first)
+        else if (isEnd)
         {
-            first = false;
             Debug.Log("Ending Game...");
 
             EndGame();
@@ -77,15 +76,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void TimerCountdown()
     {
-        if (timeLimit > 0)
+        if (timeLimit > 0 && !isPaused)
         {
             timeLimit -= Time.deltaTime;
 
-            gameTimer.text = (timeLimit).ToString("0");
+            gameTimer.text = timeLimit.ToString("0");
 
         }
-        else if (timeLimit < 0)
+        else if (timeLimit <= 0)
         {
+            isStart = false;
             isEnd = true;
         }
     }
@@ -97,9 +97,9 @@ public class GameManager : MonoBehaviour
     {
         if (players.Count >= 2)
         {
-            if (first)
+            if (isFirst)
             {
-                first = false;
+                isFirst = false;
                 uiActionMap.Enable();
                 messages[0].text = "PRESS START TO BEGIN";
                 messages[1].gameObject.SetActive(false);
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
             {
                 uiActionMap.Disable();
                 isSetup = false;
-                first = true;
+                isFirst = true;
                 messages[0].gameObject.SetActive(false);
                 Invoke("StartTimer", 0.5f);
             }
@@ -123,9 +123,9 @@ public class GameManager : MonoBehaviour
     {
         TimerCountdown();
 
-        if (first)
+        if (isFirst)
         {
-            first = false;
+            isFirst = false;
             EnablePlayers();
         }
 
@@ -133,7 +133,6 @@ public class GameManager : MonoBehaviour
         {
             isStart = false;
             isEnd = true;
-            first = true;
         }
     }
 
@@ -146,7 +145,7 @@ public class GameManager : MonoBehaviour
         DisablePlayers();
         if(players.Count > 1) 
         {
-            // NO WINNER
+            Invoke("SetTie", 2f);
         }
         else
         {
@@ -224,16 +223,24 @@ public class GameManager : MonoBehaviour
         players.Remove(player.name);
     }
 
-    public void SetWinner()
+    private void SetWinner()
     {
-        scroll.SetActive(true);
+        winnerScroll.SetActive(true);
+        uiActionMap.Enable();
 
         GameObject winner = players.SingleOrDefault().Value;
 
-        scroll.transform.Find("VictoryMessage1").GetComponent<TextMeshProUGUI>().text = winner.name;
+        winnerScroll.transform.Find("VictoryMessage1").GetComponent<TextMeshProUGUI>().text = winner.name;
 
         SpriteRenderer spriteRenderer = winner.transform.Find("Sprite").GetComponent<SpriteRenderer>();
         Sprite sprite = Sprite.Create(spriteRenderer.sprite.texture, new Rect(0, 0, spriteRenderer.sprite.texture.width, spriteRenderer.sprite.texture.height), Vector2.one / 2f, 100f);
-        scroll.transform.Find("PlayerSprite").GetComponent<Image>().sprite = sprite;
+        winnerScroll.transform.Find("PlayerSprite").GetComponent<Image>().sprite = sprite;
+    }
+
+    private void SetTie()
+    {
+        tieScroll.SetActive(true);
+        uiActionMap.Enable();
+
     }
 }
