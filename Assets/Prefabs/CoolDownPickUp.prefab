@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2569089101611119563}
   - component: {fileID: 2569089101611119558}
-  - component: {fileID: 2569089101611119557}
+  - component: {fileID: 813958388609037326}
   m_Layer: 0
   m_Name: CoolDownPickUp
   m_TagString: Cooldown
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2569089101611119557
+--- !u!95 &813958388609037326
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 2569089101611119562}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 64a73de3d020f0b4ea0c2cbd94f13386, type: 2}
+  m_Controller: {fileID: 9100000, guid: d44ebc75e73e90245bc8dc81cc2df03a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4538770465974898240}
   - component: {fileID: 4538770465974898242}
-  - component: {fileID: 7505579121079120762}
+  - component: {fileID: 7254413477970120729}
   m_Layer: 0
   m_Name: SpeedUpPickUp
   m_TagString: Haste
@@ -26,11 +26,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4538770465974898241}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39451033, y: -0.16444029, z: -2.257242}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 5617922602806140565}
+  - {fileID: 1957053662284712529}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7505579121079120762
+--- !u!95 &7254413477970120729
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -106,12 +106,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!1001 &5330695883502819757
+--- !u!1001 &2244033490291838313
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6257153278593605062}
+    m_TransformParent: {fileID: 4538770465974898240}
     m_Modifications:
     - target: {fileID: 291803231505827640, guid: 8c20c2678efdd664a89f62577086ff62, type: 3}
       propertyPath: m_RootOrder
@@ -161,14 +161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupCollider
       objectReference: {fileID: 0}
-    - target: {fileID: 4202691243078254734, guid: 8c20c2678efdd664a89f62577086ff62, type: 3}
-      propertyPath: m_TagString
-      value: Haste
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c20c2678efdd664a89f62577086ff62, type: 3}
---- !u!4 &5617922602806140565 stripped
+--- !u!4 &1957053662284712529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 291803231505827640, guid: 8c20c2678efdd664a89f62577086ff62, type: 3}
-  m_PrefabInstance: {fileID: 5330695883502819757}
+  m_PrefabInstance: {fileID: 2244033490291838313}
   m_PrefabAsset: {fileID: 0}
