@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InputActionAsset inputAction;
     [SerializeField] private GameObject winnerScroll;
     [SerializeField] private GameObject tieScroll;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip[] music;
+    [SerializeField] private AudioClip[] sfx;
     
     // Private Fields
     private InputActionMap uiActionMap;
