@@ -482,6 +482,52 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// The player is shoved away by 1 tile. 
+    /// </summary>
+    /// <remarks>Based on <see cref="IceTile"/>'s SlidePlayer method. </remarks>
+    /// <param name="other"></param>
+    private void OnShoved(Collision2D other)
+    {
+        GetAdjacentTiles();
+
+        Vector3 otherSpot = other.transform.position;
+        bool higher = false;
+        bool righter = false;
+
+        GameObject target;
+
+
+        if (transform.position.y < otherSpot.y)
+        {
+            higher = true;
+        }
+
+        if (transform.position.x < otherSpot.x)
+        {
+            righter = true;
+        }
+
+        if (righter && higher)
+        {
+            target = down;
+        }
+        else if (righter && !higher)
+        {
+            target = left;
+        }
+        else if (!righter && higher)
+        {
+            target = right;
+        }
+        else
+        {
+            target = up;
+        }
+
+        SetTarget(target);
+    }
+
 
     /// <summary>
     /// The move cooldown changes based on the multiplier.
@@ -492,12 +538,18 @@ public class PlayerController : MonoBehaviour
         moveCooldown = 1 * multiplier;
     }
 
-
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            OnShoved(other);
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D other)
     {
 
-        if((other.gameObject.name.Contains("Player") == true || other.gameObject.tag == "Obstacle") && input.IsAbility == false)
+        if((other.gameObject.name.Contains("Player") == true) && input.IsAbility == false)
         {
             OnPushed();
 
