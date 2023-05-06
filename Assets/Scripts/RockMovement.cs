@@ -172,11 +172,6 @@ public class RockMovement : MonoBehaviour
             }
         }
 
-        Debug.Log(down.name);
-        Debug.Log(up.name);
-        Debug.Log(left.name);
-        Debug.Log(right.name);
-
     }
 
     /// <summary>
