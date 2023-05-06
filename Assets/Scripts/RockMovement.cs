@@ -7,8 +7,9 @@ public class RockMovement : MonoBehaviour
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
 
-    [SerializeField] float moveCooldown = 2f;
+    [SerializeField] float moveCooldown = 3f;
 
+    [SerializeField] GameObject tileOverlayPrefab;
 
     //bool moving = false; // Not used... yet
     //private bool _isAbility = false;
@@ -48,31 +49,19 @@ public class RockMovement : MonoBehaviour
         tileSet = GameObject.Find("TileContainer");
         tiles = new List<GameObject>();
 
-        if (tiles.Count <= 0 && tileSet != null)
-        {
+        // Get the tile dimensions 
+        tileWidth = tileOverlayPrefab.GetComponent<SpriteRenderer>().size.x;
+        tileHeight = tileOverlayPrefab.GetComponent<SpriteRenderer>().size.y;
 
-            // Adds all the tiles in the tileSet to the Tiles List.
-            foreach (Transform tile in tileSet.GetComponentInChildren<Transform>())
-            {
-                tiles.Add(tile.gameObject);
-            }
-
-
-            // Gets the Width and Length of the tiles
-            // *potentially replaceable*
-            if (tiles.Count > 0)
-            {
-                tileWidth = tiles[0].GetComponent<SpriteRenderer>().size.x;
-                tileHeight = tiles[0].GetComponent<SpriteRenderer>().size.y;
-            }
-
-        }
+        Debug.Log("TileWidth: " + tileWidth.ToString());
+        Debug.Log("TileHeight: " + tileHeight.ToString());
 
 
     }
 
     void Update()
     {
+        
         if (targetOn == true)
         {
             // Move to the target
@@ -80,6 +69,7 @@ public class RockMovement : MonoBehaviour
             {
                 MoveToTile(target);
             }
+
         }
 
     }
@@ -94,7 +84,7 @@ public class RockMovement : MonoBehaviour
             Move1();
 
             nextMoveTime = Time.time + moveCooldown;
-            Debug.Log("Move");
+
             //anim.SetTrigger("move");
 
         }
@@ -181,6 +171,11 @@ public class RockMovement : MonoBehaviour
                 }
             }
         }
+
+        Debug.Log(down.name);
+        Debug.Log(up.name);
+        Debug.Log(left.name);
+        Debug.Log(right.name);
 
     }
 
@@ -306,7 +301,7 @@ public class RockMovement : MonoBehaviour
         int index = Random.Range(0, 4);
 
         //SetTarget(spaces[index]);
-        target = spaces[index];
+        SetTarget(spaces[index]);
     }
 
     /// <summary>
@@ -358,10 +353,7 @@ public class RockMovement : MonoBehaviour
 
         if (target == null)
         {
-            health.Fall();
-        }
-        else if (!CheckForVacancy(tile))
-        {
+            //health.Fall();
             target = (GetCurrentTile());
         }
     }
