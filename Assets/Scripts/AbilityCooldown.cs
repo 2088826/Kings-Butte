@@ -7,6 +7,7 @@ public class AbilityCooldown : MonoBehaviour
 {
     [SerializeField] private float cooldown1 = 4f;
     [SerializeField] private float cooldown2 = 8f;
+    [SerializeField] private ParticleSystem dust;
 
     private Health health;
     
@@ -103,5 +104,11 @@ public class AbilityCooldown : MonoBehaviour
     {
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
+    }
+
+    // Play dust
+    public void PlayDust()
+    {
+        dust.Play();
     }
 }
