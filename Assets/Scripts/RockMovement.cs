@@ -427,7 +427,7 @@ public class RockMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-
+        
 
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2880686558870012237}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7082446829161519192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 3706666094604647654}
   - component: {fileID: 9129672025486389401}
   - component: {fileID: 4350636881941715351}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5031,7 +5031,7 @@ GameObject:
   - component: {fileID: 7003593222399374159}
   - component: {fileID: 2935193025325261106}
   - component: {fileID: 1907101066657856912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ability Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5186,7 +5186,7 @@ GameObject:
   - component: {fileID: 6876170827077684829}
   - component: {fileID: 6876170827077684824}
   - component: {fileID: 3724748982806444019}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Focus Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10525,7 +10525,7 @@ GameObject:
   - component: {fileID: 5270236522305611466}
   - component: {fileID: 211162253811530861}
   - component: {fileID: 3224046808534472854}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
