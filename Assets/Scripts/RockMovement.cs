@@ -24,14 +24,12 @@ public class RockMovement : MonoBehaviour
     GameObject down;
 
     private Health health;
-    //private Animator anim;
+    
 
     private bool isStart = true;
 
     void Start()
     {
-
-        //anim = gameObject.GetComponent<Animator>();
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
@@ -63,6 +61,15 @@ public class RockMovement : MonoBehaviour
                 MoveToTile(target);
             }
 
+        }
+
+        if (!GameManager.IsStart || GameManager.IsPaused)
+        {
+            moveOn = false;
+        }
+        else
+        {
+            moveOn = true;
         }
 
     }
@@ -422,11 +429,5 @@ public class RockMovement : MonoBehaviour
     {
         
 
-    }
-
-    public bool MoveOn
-    {
-        get { return moveOn; }
-        set { moveOn = value; }
     }
 }
