@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Player2
   - Tile
+  - Cooldown
+  - Haste
   layers:
   - Default
   - TransparentFX

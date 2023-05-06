@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class StartCountdown : MonoBehaviour
 {
+    [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioClip[] clips;
+    
     private TextMeshProUGUI startTimer;
     private int countdown = 3;
 
@@ -18,11 +21,13 @@ public class StartCountdown : MonoBehaviour
     {
         if (countdown > 0)
         {
+            sfxSource.PlayOneShot(clips[0]);
             startTimer.text = countdown.ToString();
             countdown--;
         }
         else
         {
+            sfxSource.PlayOneShot(clips[1]);
             startTimer.text = "BEGIN";
             GameManager.IsStart = true;
         }
