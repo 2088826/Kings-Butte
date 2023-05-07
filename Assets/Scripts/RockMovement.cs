@@ -28,6 +28,7 @@ public class RockMovement : MonoBehaviour
     
 
     private bool isStart = true;
+    private bool isSpawned = false;
 
     void Start()
     {
@@ -53,8 +54,8 @@ public class RockMovement : MonoBehaviour
             tileHeight = GetCurrentTile().GetComponent<SpriteRenderer>().size.y;
         }
 
-        
-        if (targetOn == true)
+
+        if (targetOn == true && isSpawned)
         {
             // Move to the target
             if (target)
@@ -430,6 +431,10 @@ public class RockMovement : MonoBehaviour
         moveCooldown = 1 * multiplier;
     }
 
+    public void Spawned()
+    {
+        isSpawned = true;
+    }
 
 
     private void OnCollisionExit2D(Collision2D other)
