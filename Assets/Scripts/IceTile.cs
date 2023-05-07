@@ -130,19 +130,29 @@ public class IceTile : TileVacancy
 
         if (righter && higher)
         {
+            // From Up
             target = down;
         }
         else if (righter && !higher)
         {
+            // From Right
             target = left;
         }
         else if (!righter && higher)
         {
+            // From left
             target = right;
         }
         else
         {
+            // From Down
             target = up;
+        }
+
+        // Sets the target to null for pushing off the edge.
+        if (!target.name.Contains("Tile"))
+        {
+            target = null;
         }
 
         other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
