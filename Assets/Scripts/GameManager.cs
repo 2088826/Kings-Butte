@@ -14,13 +14,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameTimer;
     [SerializeField] private float timeLimit = 90f;
     [SerializeField] private TextMeshProUGUI startTimer;
-    [SerializeField] private TextMeshProUGUI[] messages;
-    [SerializeField] private InputActionAsset inputAction;
     [SerializeField] private GameObject winnerScroll;
+    [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private InputActionAsset inputAction;
     [SerializeField] private GameObject tieScroll;
+    [SerializeField] private GameObject setupScroll;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] music;
     [SerializeField] private AudioClip[] sfx;
+    [SerializeField] private GameObject fireworks;
     
     // Private Fields
     private InputActionMap uiActionMap;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     private static bool isPaused = false;
     private bool isFirst = true;
     private static Dictionary<string, GameObject> players;
+    private ItemSpawner spawner;
 
     // Public Properties
     public static bool IsStart { get { return isStart; } set { isStart = value; } }
@@ -37,29 +40,34 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        spawner = GetComponent<ItemSpawner>();
         players = new Dictionary<string, GameObject>();
         uiActionMap = inputAction.FindActionMap("UI");
         isStart = false;
         isPaused = false;
         gameTimer.text = timeLimit.ToString("0");
         GameSetup();
+        musicSource.clip = music[0];
+        musicSource.Play();
     }
 
     private void Update()
     {
         if (isSetup)
         {
+            if(!setupScroll.activeSelf)
+            {
+                Invoke("SetSetup", 1f);
+            }
+
             GameSetup();
         }
         else if (isStart)
         {
-            Debug.Log("Game on!");
             StartGame();
         }
         else if (isEnd)
         {
-            Debug.Log("Ending Game...");
-
             EndGame();
         }
 
@@ -104,8 +112,8 @@ public class GameManager : MonoBehaviour
             {
                 isFirst = false;
                 uiActionMap.Enable();
-                messages[0].text = "PRESS START TO BEGIN";
-                messages[1].gameObject.SetActive(false);
+                message.text = "CONTINUE JOINING OR PRESS START WHEN READY";
+                spawner.enabled = true;
             }
 
             if (uiActionMap["Start"].triggered)
@@ -113,8 +121,8 @@ public class GameManager : MonoBehaviour
                 uiActionMap.Disable();
                 isSetup = false;
                 isFirst = true;
-                messages[0].gameObject.SetActive(false);
-                Invoke("StartTimer", 0.5f);
+                setupScroll.GetComponent<Animator>().SetTrigger("close");
+                musicSource.Stop();
             }
         }
     }
@@ -129,6 +137,8 @@ public class GameManager : MonoBehaviour
         if (isFirst)
         {
             isFirst = false;
+            musicSource.clip = music[1];
+            musicSource.Play();
             EnablePlayers();
         }
 
@@ -148,20 +158,20 @@ public class GameManager : MonoBehaviour
         DisablePlayers();
         if(players.Count > 1) 
         {
+            musicSource.Stop();
+            musicSource.clip = music[3];
+            musicSource.Play();
             Invoke("SetTie", 2f);
         }
         else
         {
+            fireworks.SetActive(true);
+            musicSource.Stop();
+            musicSource.clip = music[2];
+            musicSource.loop = false;
+            musicSource.Play();
             Invoke("SetWinner", 2f);
         }
-    }
-
-    /// <summary>
-    /// Start game timer.
-    /// </summary>
-    private void StartTimer()
-    {
-        startTimer.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -170,8 +180,8 @@ public class GameManager : MonoBehaviour
     private void HandlePause()
     {
         DisablePlayers();
-        messages[0].gameObject.SetActive(true);
-        messages[0].text = "Paused";
+        message.gameObject.SetActive(true);
+        message.text = "Paused";
         uiActionMap.Enable();
     }
 
@@ -182,7 +192,7 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         EnablePlayers();
-        messages[0].gameObject.SetActive(false);
+        message.gameObject.SetActive(false);
         uiActionMap.Disable();
     }
 
@@ -245,5 +255,10 @@ public class GameManager : MonoBehaviour
         tieScroll.SetActive(true);
         uiActionMap.Enable();
 
+    }
+
+    private void SetSetup()
+    {
+        setupScroll.SetActive(true);
     }
 }

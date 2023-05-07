@@ -18,8 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float pushedCooldown = 0.15f;
 
 
-    //bool moving = false; // Not used... yet
-    //private bool _isAbility = false;
+    bool isMoving = false;
 	bool targetOn = true;
 
     float nextMoveTime = 0f;
@@ -40,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private Health health;
     private Animator anim;
     private float defaultCooldown;
+
+    public bool IsMoving { get {  return isMoving; } set { isMoving = value; } }
     
     void Start()
     {
@@ -100,12 +101,22 @@ public class PlayerController : MonoBehaviour
         if (targetOn == true)
         {
             // Move to the target
-            if (target)
+            if (target && isMoving)
             {
-                MoveToTile(target);
+                Vector2 targetPos = target.transform.position;
+                Vector2 playerPos = gameObject.transform.position;
+                if (targetPos != playerPos)
+                {
+                    //Debug.Log("Target: " + target.transform.position);
+                    //Debug.Log("Player: " + gameObject.transform.position);
+                    MoveToTile(target);
+                }
+                else
+                {
+                    isMoving = false;
+                }
             }
         }
-
         //GetAdjacentTiles();
     }
 
@@ -114,15 +125,15 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(input.Move);
         if(input.Move != null)
         {
-            if (input.Move.inProgress && Time.time > nextMoveTime)
+            if (input.Move.inProgress && Time.time > nextMoveTime && !input.IsAbility)
             {
+                isMoving = true;
                 //GetAdjacentTiles();
                 //GetAdjacentTilesX2();
 
                 MovePlayer();
 
                 nextMoveTime = Time.time + moveCooldown;
-                Debug.Log("Move");
                 anim.SetTrigger("move");
 
             }
@@ -545,7 +556,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// The move cooldown changes based on the multiplier.
     /// </summary>
-    /// <param name="multiplier"></param>
+    /// <param name="multiplier">Amount of speed buffs currently held</param>
     public void ChangeMoveCooldown(float multiplier)
     {
         if(multiplier > 0)

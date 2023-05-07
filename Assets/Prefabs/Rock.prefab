@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2756962558954447906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.024, y: -0.264, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -136,7 +136,7 @@ MonoBehaviour:
   speed: 2
   target: {fileID: 0}
   moveCooldown: 2
-  tileOverlayPrefab: {fileID: 2784786727943879326, guid: ed0141b06a9076c4d994b9373eb14947, type: 3}
+  moveOn: 0
 --- !u!50 &633929617230904156
 Rigidbody2D:
   serializedVersion: 4
