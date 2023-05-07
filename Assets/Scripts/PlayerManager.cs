@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
             float offsetX = worldPosition.x;
             float offsetY = worldPosition.y + yOffset;
 
-            worldPosition = new Vector3(offsetX, offsetY, 0f);
+            worldPosition = new Vector3(offsetX, offsetY, 1f);
 
 
             spawnLocation.Add(worldPosition);

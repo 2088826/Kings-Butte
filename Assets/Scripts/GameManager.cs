@@ -53,13 +53,10 @@ public class GameManager : MonoBehaviour
         }
         else if (isStart)
         {
-            Debug.Log("Game on!");
             StartGame();
         }
         else if (isEnd)
         {
-            Debug.Log("Ending Game...");
-
             EndGame();
         }
 
