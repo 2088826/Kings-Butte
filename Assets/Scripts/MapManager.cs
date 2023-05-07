@@ -13,6 +13,7 @@ namespace finished1
 
         [SerializeField] private GameObject grassOverlayPrefab;
         [SerializeField] private GameObject iceOverlayPrefab;
+        [SerializeField] private GameObject SnowOverlayPrefab;
         [SerializeField] private GameObject tileContainerPrefab;
 
         public float littleBump;
@@ -42,6 +43,7 @@ namespace finished1
             map = new Dictionary<Vector2Int, GameObject>();
             int grassCount = 0;
             int iceCount = 0;
+            int snowCount = 0;
 
             BoundsInt bounds = tileMap.cellBounds;
 
@@ -70,6 +72,15 @@ namespace finished1
                             {
                                 var newTile = Instantiate(iceOverlayPrefab, container.transform);
                                 newTile.name = "IceTile " + iceCount++;
+                                var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
+                                newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
+                                newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
+                                map.Add(tileKey, newTile);
+                            }
+                            else if (tileName.Contains("SnowTile"))
+                            {
+                                var newTile = Instantiate(SnowOverlayPrefab, container.transform);
+                                newTile.name = "SnowTile " + snowCount++;
                                 var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
                                 newTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
                                 newTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
