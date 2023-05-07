@@ -175,20 +175,20 @@ public class RockMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns true if the tile is unoccupied.
+    /// Returns true if the tile is unblocked.
     /// </summary>
     /// <remarks>
-    /// Checks the tile's <see cref="TileVacancy"/> script and returns the value of its Occupied property.
+    /// Checks the tile's <see cref="TileVacancy"/> script and returns the value of its Blocked property.
     /// </remarks>
     /// <param name="tile"></param>
     /// <returns></returns>
-    private bool CheckForVacancy(GameObject tile)
+    private bool CheckForBlocked(GameObject tile)
     {
         try
         {
             TileVacancy vacancyScript = tile.GetComponent<TileVacancy>();
 
-            if (!vacancyScript.Occupied)
+            if (!vacancyScript.Blocked)
             {
                 return true;
             }
@@ -295,7 +295,6 @@ public class RockMovement : MonoBehaviour
 
         int index = Random.Range(0, 4);
 
-        //SetTarget(spaces[index]);
         SetTarget(spaces[index]);
     }
 
@@ -351,6 +350,11 @@ public class RockMovement : MonoBehaviour
             //health.Fall();
             target = (GetCurrentTile());
         }
+        else if (!CheckForBlocked(tile))
+        {
+            target = (GetCurrentTile());
+        }
+
     }
 
     /// <summary>
