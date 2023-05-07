@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameTimer;
     [SerializeField] private float timeLimit = 90f;
     [SerializeField] private TextMeshProUGUI startTimer;
-    [SerializeField] private TextMeshProUGUI[] messages;
-    [SerializeField] private InputActionAsset inputAction;
     [SerializeField] private GameObject winnerScroll;
+    [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private InputActionAsset inputAction;
     [SerializeField] private GameObject tieScroll;
+    [SerializeField] private GameObject setupScroll;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] music;
     [SerializeField] private AudioClip[] sfx;
@@ -49,6 +50,11 @@ public class GameManager : MonoBehaviour
     {
         if (isSetup)
         {
+            if(!setupScroll.activeSelf)
+            {
+                Invoke("SetSetup", 1f);
+            }
+
             GameSetup();
         }
         else if (isStart)
@@ -101,8 +107,7 @@ public class GameManager : MonoBehaviour
             {
                 isFirst = false;
                 uiActionMap.Enable();
-                messages[0].text = "PRESS START TO BEGIN";
-                messages[1].gameObject.SetActive(false);
+                message.text = "CONTINUE JOINING OR PRESS START WHEN READY";
             }
 
             if (uiActionMap["Start"].triggered)
@@ -110,8 +115,7 @@ public class GameManager : MonoBehaviour
                 uiActionMap.Disable();
                 isSetup = false;
                 isFirst = true;
-                messages[0].gameObject.SetActive(false);
-                Invoke("StartTimer", 0.5f);
+                setupScroll.GetComponent<Animator>().SetTrigger("close");
             }
         }
     }
@@ -154,21 +158,13 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Start game timer.
-    /// </summary>
-    private void StartTimer()
-    {
-        startTimer.gameObject.SetActive(true);
-    }
-
-    /// <summary>
     /// Pause the game.
     /// </summary>
     private void HandlePause()
     {
         DisablePlayers();
-        messages[0].gameObject.SetActive(true);
-        messages[0].text = "Paused";
+        message.gameObject.SetActive(true);
+        message.text = "Paused";
         uiActionMap.Enable();
     }
 
@@ -179,7 +175,7 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         EnablePlayers();
-        messages[0].gameObject.SetActive(false);
+        message.gameObject.SetActive(false);
         uiActionMap.Disable();
     }
 
@@ -242,5 +238,10 @@ public class GameManager : MonoBehaviour
         tieScroll.SetActive(true);
         uiActionMap.Enable();
 
+    }
+
+    private void SetSetup()
+    {
+        setupScroll.SetActive(true);
     }
 }

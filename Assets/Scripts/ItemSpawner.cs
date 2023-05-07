@@ -29,9 +29,8 @@ public class ItemSpawner : MonoBehaviour
     void Start()
     {
         tileContainer = GameObject.Find("TileContainer");
-        Debug.Log(tileContainer);
         map = tileContainer.GetComponentsInChildren<Transform>();
-
+        Debug.Log(map.Length);
         nextSpawn = 0;
     }
 
