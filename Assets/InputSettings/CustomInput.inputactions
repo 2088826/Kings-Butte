@@ -762,17 +762,6 @@
                 },
                 {
                     "name": "",
-                    "id": "930c0789-8c1e-426e-a6d4-881e09c8e485",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8a7222b6-fd37-4666-884f-47e97b40c9e1",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -797,17 +786,6 @@
                     "name": "",
                     "id": "91e19d5c-3f14-4c3d-85ec-7b3bb1cb9a60",
                     "path": "<Touchscreen>/touch*/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Point",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8312072b-d926-4ed3-8e99-e44c25646c45",
-                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
