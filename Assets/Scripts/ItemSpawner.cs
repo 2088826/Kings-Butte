@@ -8,13 +8,16 @@ public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] GameObject powerUpContainer;
     [SerializeField] GameObject[] powerups;
-    [SerializeField] float spawnTimer = 5f;
+    [SerializeField] float powerUpSpawnTimer = 5f;
+    [SerializeField] GameObject rock;
+    [SerializeField] float rockSpawnTimer = 20f;
 
     private GameObject container;
     private GameObject tileContainer;
     private Transform[] map;
     private float rng;
     private float nextSpawn;
+    private float nextRock;
     private GameObject nextPowerUp;
     private Vector3 spawnPosition;
     private bool isFirst = true;
@@ -24,7 +27,8 @@ public class ItemSpawner : MonoBehaviour
     {
         container = Instantiate(powerUpContainer);
         container.name = "PowerUpContainer";
-        nextSpawn = 0;
+        nextSpawn = powerUpSpawnTimer;
+        nextRock = rockSpawnTimer;
     }
 
     private void OnEnable()
@@ -36,20 +40,52 @@ public class ItemSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.IsStart && !GameManager.IsPaused && nextSpawn <= Time.time)
+        if (!GameManager.IsPaused && GameManager.IsStart)
         {
-            SpawnPowerUp();
-        }
+            // Powerup Spawner
+            if(nextSpawn > 0.01f)
+            {
+                nextSpawn -= Time.deltaTime;
 
-        if (GameManager.IsPaused)
-        {
-            nextSpawn = Time.time + spawnTimer;
+            }
+            else
+            {
+                SpawnPowerUp();
+            }
+
+            if(nextRock > 0.01f)
+            {
+                nextRock -= Time.deltaTime;
+            }
+            else
+            {
+                SpawnRock();
+            }
+
         }
     }
 
+    /// <summary>
+    /// Spawn a rock that falls from the sky.
+    /// </summary>
+    private void SpawnRock()
+    {
+        nextRock = rockSpawnTimer;
+
+        spawnPosition = map[Random.Range(0, map.Length)].transform.position;
+
+        //spawnPosition.y += yOffset;
+
+        GameObject newPowerUp = Instantiate(rock, spawnPosition, Quaternion.identity);
+    }
+
+
+    /// <summary>
+    /// Spawns powerups randomly on the map, placing the first one in the center of the map.
+    /// </summary>
     private void SpawnPowerUp()
     {
-        nextSpawn = Time.time + spawnTimer;
+        nextSpawn = powerUpSpawnTimer;
 
         rng = Random.Range(0, 100);
 
@@ -86,7 +122,7 @@ public class ItemSpawner : MonoBehaviour
         else
         {
 
-            spawnPosition = map[Random.Range(0, map.Length - 1)].transform.position;
+            spawnPosition = map[Random.Range(0, map.Length)].transform.position;
 
             spawnPosition.y += yOffset;
 
@@ -102,6 +138,11 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determine the tag of the spawned powerup
+    /// </summary>
+    /// <param name="powerup">Name of the powerup</param>
+    /// <returns></returns>
     private string DetermineTag(GameObject powerup)
     {
         if (powerup.name.Contains("Speed"))
