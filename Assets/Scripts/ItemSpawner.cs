@@ -66,7 +66,7 @@ public class ItemSpawner : MonoBehaviour
 
         if (isFirst)
         {
-            Debug.Log("isFirst: " + isFirst);
+            isFirst = false;
 
             int middle = (int) Mathf.Round((map.Length) / 2);
 
@@ -84,7 +84,6 @@ public class ItemSpawner : MonoBehaviour
                 childTransform.gameObject.tag = tag;
             }
 
-            isFirst = false;
         }
         else
         {

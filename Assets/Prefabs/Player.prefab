@@ -90,7 +90,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391083745225104338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,7 +105,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391083745225104338}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -170,7 +170,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -180,8 +180,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.3
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -233,7 +233,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -665,14 +665,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 500
+    maxNumParticles: 3000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -931,7 +931,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 750
+      scalar: 2000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1718,7 +1718,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -7
+      scalar: -5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5132,49 +5132,49 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.5431696, y: 0.54772955}
-      - {x: 0.45330814, y: 0.8098383}
+      - {x: 0.4941877, y: 0.94610345}
       - {x: 0.44500598, y: 0.53994596}
       - {x: 0.18229654, y: 0.54201037}
-      - {x: 0.14023145, y: 0.73684853}
+      - {x: 0.26627675, y: 0.9514665}
       - {x: 0.11776098, y: 0.53441966}
       - {x: -0.09975511, y: 0.53074634}
-      - {x: -0.10380461, y: 0.746396}
+      - {x: -0.16853061, y: 0.8792548}
       - {x: -0.16199765, y: 0.53161615}
       - {x: -0.41149473, y: 0.5254818}
-      - {x: -0.42986986, y: 0.77593577}
+      - {x: -0.41965, y: 0.874728}
       - {x: -0.52322984, y: 0.5374577}
-      - {x: -0.7446236, y: 0.45952377}
+      - {x: -0.9081419, y: 0.40501764}
       - {x: -0.51110613, y: 0.44076023}
       - {x: -0.52270323, y: 0.18846}
-      - {x: -0.7203492, y: 0.14119022}
+      - {x: -0.89068085, y: 0.17525668}
       - {x: -0.51563954, y: 0.12671573}
       - {x: -0.5188301, y: -0.09430984}
-      - {x: -0.71888065, y: -0.13166632}
+      - {x: -0.91305876, y: -0.26452488}
       - {x: -0.522128, y: -0.1609859}
       - {x: -0.5232921, y: -0.40341178}
-      - {x: -0.75460845, y: -0.44496045}
+      - {x: -0.8704339, y: -0.47902673}
       - {x: -0.52056146, y: -0.5254138}
-      - {x: -0.4448329, y: -0.7304074}
+      - {x: -0.46527267, y: -0.91436553}
       - {x: -0.42745593, y: -0.5102764}
       - {x: -0.15313895, y: -0.5167688}
-      - {x: -0.123377696, y: -0.7232462}
+      - {x: -0.23238987, y: -0.91401756}
       - {x: -0.08503251, y: -0.5118453}
       - {x: 0.16102709, y: -0.5148471}
-      - {x: 0.15067148, y: -0.7221845}
+      - {x: 0.21880417, y: -0.8584496}
       - {x: 0.20854118, y: -0.52592474}
       - {x: 0.4296832, y: -0.5181246}
-      - {x: 0.46383947, y: -0.73001885}
+      - {x: 0.4536196, y: -0.85606414}
       - {x: 0.527721, y: -0.50688994}
-      - {x: 0.77339214, y: -0.44149476}
+      - {x: 0.87218446, y: -0.4312749}
       - {x: 0.51984596, y: -0.4229688}
       - {x: 0.5256658, y: -0.13724712}
-      - {x: 0.74350214, y: -0.11388743}
+      - {x: 0.8865807, y: -0.16158023}
       - {x: 0.5225334, y: -0.0865885}
       - {x: 0.5244323, y: 0.1510944}
-      - {x: 0.75280523, y: 0.15074387}
+      - {x: 0.8856638, y: 0.20865656}
       - {x: 0.53503025, y: 0.20639303}
       - {x: 0.5266415, y: 0.42762062}
-      - {x: 0.7969634, y: 0.4704153}
+      - {x: 0.8889425, y: 0.46019554}
 --- !u!1 &6876170827077684828
 GameObject:
   m_ObjectHideFlags: 0
@@ -5326,7 +5326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6876170827907371461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5469,6 +5469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adddcdffa8cb4c488fffe8ce4a677f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 1.5
 --- !u!114 &542367684650515461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5686,6 +5687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownParticles: {fileID: 2277097613665773430}
   hasteParticles: {fileID: 8772563069448432589}
+  hasteDuration: 10
+  hasteMultiplier: 0.075
 --- !u!58 &1344246607065617549
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10555,7 +10558,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7614237590231546417}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -10630,8 +10633,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10683,7 +10686,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -11115,14 +11118,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 500
+    maxNumParticles: 3000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11381,7 +11384,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 750
+      scalar: 2000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -12168,7 +12171,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -7
+      scalar: -5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -15477,10 +15480,6 @@ PrefabInstance:
     - target: {fileID: 441464433756178703, guid: e612e29eecbb72e44a70d4e9e0eb4d8e, type: 3}
       propertyPath: looping
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 441464433756178703, guid: e612e29eecbb72e44a70d4e9e0eb4d8e, type: 3}
-      propertyPath: lengthInSec
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 441464433756178703, guid: e612e29eecbb72e44a70d4e9e0eb4d8e, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
