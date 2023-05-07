@@ -87,7 +87,7 @@ public class ItemSpawner : MonoBehaviour
 
         spawnPosition = map[Random.Range(0, map.Length)].transform.position;
 
-        //spawnPosition.y += 5f;
+        //spawnPosition.y += 6f;
 
         GameObject newPowerUp = Instantiate(rock, spawnPosition, Quaternion.identity);
     }
