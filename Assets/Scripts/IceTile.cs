@@ -105,6 +105,14 @@ public class IceTile : TileVacancy
             }
         }
 
+
+        Debug.Log("Up: "+up.name);
+        Debug.Log("Down: " + down.name);
+        Debug.Log("Left: " + left.name);
+        Debug.Log("Right: " + right.name);
+
+
+
     }
 
     private void SlidePlayer(Collider2D other)
@@ -149,17 +157,20 @@ public class IceTile : TileVacancy
             target = up;
         }
 
-        if (target.GetComponent<TileVacancy>().Occupied)
+        if (target)
         {
-            target = gameObject;
-        }
-        else if (!target.name.Contains("Tile") || gameObject)
-        {
-            // Sets the target to null for pushing off the edge.
-            target = null;
-        }
+            if (target.GetComponent<TileVacancy>().Occupied)
+            {
+                target = gameObject;
+            }
+            else if (!target.name.Contains("Tile"))
+            {
+                // Sets the target to null for pushing off the edge.
+                target = null;
+            }
 
-        other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
+            other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
+        }
     }
 
 
