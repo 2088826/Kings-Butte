@@ -181,9 +181,9 @@ GameObject:
   - component: {fileID: 2756962558954447932}
   - component: {fileID: 2756962558954447933}
   - component: {fileID: 633929617230904156}
-  - component: {fileID: 7387614008337908620}
   - component: {fileID: 5705645239099618211}
   - component: {fileID: 4211394662305723077}
+  - component: {fileID: 5798657345240527639}
   m_Layer: 6
   m_Name: Rock
   m_TagString: Obstacle
@@ -249,26 +249,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &7387614008337908620
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756962558954447906}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec2ccc5c25e8db14fa2445d74eb00943, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &5705645239099618211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +364,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &5798657345240527639
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756962558954447906}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec2ccc5c25e8db14fa2445d74eb00943, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2756962559828527889
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,17 +757,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Hitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 1863409611416757223, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3137039671143603199, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3137039671143603199, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3137039671143603199, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3137039671143603199, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -808,6 +812,30 @@ PrefabInstance:
     - target: {fileID: 3137039671143603199, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750335541746325545, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750335541746325545, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750335541746325545, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750335541746325545, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750335541746325545, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823049077738755360, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7062528881354819970, guid: 87e4cd4ec7b51a34ca74c2bb89282dab, type: 3}
       propertyPath: m_Enabled
