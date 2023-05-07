@@ -132,6 +132,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void StartGame()
     {
+        gameTimer.gameObject.SetActive(true);
+
         TimerCountdown();
 
         if (isFirst)
@@ -156,6 +158,7 @@ public class GameManager : MonoBehaviour
     {
         isEnd = false;
         DisablePlayers();
+        EnableUI();
         if(players.Count > 1) 
         {
             musicSource.Stop();
@@ -183,6 +186,7 @@ public class GameManager : MonoBehaviour
         message.gameObject.SetActive(true);
         message.text = "Paused";
         uiActionMap.Enable();
+        musicSource.Pause();
     }
 
     /// <summary>
@@ -194,6 +198,7 @@ public class GameManager : MonoBehaviour
         EnablePlayers();
         message.gameObject.SetActive(false);
         uiActionMap.Disable();
+        musicSource.Play();
     }
 
     /// <summary>
@@ -216,6 +221,13 @@ public class GameManager : MonoBehaviour
         {
             player.Value.GetComponent<PlayerActions>().TogglePlayer();
         }
+    }
+
+    private void EnableUI()
+    {
+        uiActionMap.Enable();
+        Debug.Log(uiActionMap.actions);
+        Debug.Log(uiActionMap.enabled);
     }
 
     /// <summary>
