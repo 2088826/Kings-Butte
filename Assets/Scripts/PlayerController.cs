@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         if (targetOn == true)
         {
             // Move to the target
-            if (target && isMoving)
+            if (target)
             {
                 Vector2 targetPos = target.transform.position;
                 Vector2 playerPos = gameObject.transform.position;
