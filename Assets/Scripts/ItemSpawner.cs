@@ -24,15 +24,13 @@ public class ItemSpawner : MonoBehaviour
     {
         container = Instantiate(powerUpContainer);
         container.name = "PowerUpContainer";
+        nextSpawn = 0;
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
         tileContainer = GameObject.Find("TileContainer");
-        Debug.Log(tileContainer);
         map = tileContainer.GetComponentsInChildren<Transform>();
-
-        nextSpawn = 0;
     }
 
     // Update is called once per frame
