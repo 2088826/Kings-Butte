@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -87,6 +88,11 @@ public class PlayerManager : MonoBehaviour
             currentColor = setupLabels[players.Count - 1].color;
             currentColor.a = 1f;
             setupLabels[players.Count - 1].color = currentColor;
+
+            if(SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                player.GetComponent<PlayerActions>().TogglePlayer();
+            }
         }
         else
         {
