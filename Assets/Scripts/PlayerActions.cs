@@ -6,14 +6,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
 {
-	//private float speed = 5f;
-    private Vector2 targetPos = Vector2.zero;
-    private float xOffset = 0;
-    private float yOffset = 0;
+    // Serialized Fields
+    [SerializeField] private float attackSpeed = 1.5f;
 
+    // Numerics
+    private float nextBasic = 0;
+    private float defaultAttackSpeed;
+
+    // Boolean
     private bool _isAbility = false;
 	private bool _hasPowerUp = false;
 
+    // Components
     private Rigidbody2D rb2d;
     private Animator pAnim;
     private PlayerController controller;
@@ -26,6 +30,7 @@ public class PlayerActions : MonoBehaviour
     private InputAction move;
     private InputAction aim;
 
+    // Public Properties
     public InputAction Move { get { return move; } }
     public InputAction Aim { get { return aim; } }
     public bool IsAbility { get { return _isAbility; } }
@@ -40,6 +45,8 @@ public class PlayerActions : MonoBehaviour
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
         ui = inputAsset.FindActionMap("UI");
+
+        defaultAttackSpeed = attackSpeed;
     }
 
     /// <summary>
@@ -48,7 +55,7 @@ public class PlayerActions : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility1(InputAction.CallbackContext obj)
     {
-        if (!_isAbility && !abilities.IsAbility1) // Slam
+        if (!_isAbility && !abilities.IsAbility1 && !controller.IsMoving) // Slam
         {
             abilities.IsAbility1 = true;
             _isAbility = true;
@@ -63,61 +70,32 @@ public class PlayerActions : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoAbility2(InputAction.CallbackContext obj)
     {
-        if (!_isAbility && !abilities.IsAbility2 && aim.inProgress) // Jump (move 2 spaces)
+        if (!_isAbility && !abilities.IsAbility2 && aim.inProgress && !controller.IsMoving) // Jump (move 2 spaces)
         {
             abilities.IsAbility2 = true;
+            controller.IsMoving = true;
+            _isAbility = true;
+            rb2d.bodyType = RigidbodyType2D.Static;
+            pAnim.SetTrigger("ability2");
 
             float valueX = aim.ReadValue<Vector2>().x;
             float valueY = aim.ReadValue<Vector2>().y;
-            Vector2 currentPos = gameObject.transform.position;
             
             if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
-                _isAbility = true;
-                xOffset = 1f;
-                yOffset = 0.5f;
-                targetPos = new Vector2 (currentPos.x + xOffset, currentPos.y + yOffset);
-                // Method to change target;
                 controller.Move2Adjacent("North");
-
-                rb2d.bodyType = RigidbodyType2D.Static;
-                pAnim.SetTrigger("ability2");
             }
             else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
-                _isAbility = true;
-
-                xOffset = -1f;
-                yOffset = -0.5f;
-                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
                 controller.Move2Adjacent("South");
-
-                rb2d.bodyType = RigidbodyType2D.Static;
-                pAnim.SetTrigger("ability2");
             }
             else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
-                _isAbility = true;
-
-                xOffset = -1f;
-                yOffset = 0.5f;
-                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
                 controller.Move2Adjacent("West");
-
-                rb2d.bodyType = RigidbodyType2D.Static;
-                pAnim.SetTrigger("ability2");
             }
             else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
-                _isAbility = true;
-
-                pAnim.SetTrigger("ability2");
-                xOffset = 1f;
-                yOffset = -0.5f;
-                targetPos = new Vector2(currentPos.x + xOffset, currentPos.y + yOffset);
                 controller.Move2Adjacent("East");
-
-                rb2d.bodyType = RigidbodyType2D.Static;
             }
         }
     }
@@ -143,35 +121,48 @@ public class PlayerActions : MonoBehaviour
     /// <param name="obj">obj Callback context when action is triggered</param>
     private void DoBasicAttack(InputAction.CallbackContext obj)
     {
-        if (!_isAbility && aim.inProgress) // Basic Attack
+        if (!_isAbility && aim.inProgress && !controller.IsMoving && Time.time > nextBasic) // Basic Attack
         {
+            nextBasic = Time.time + attackSpeed;
+            _isAbility = true;
+            rb2d.bodyType = RigidbodyType2D.Static;
+
             float valueX = aim.ReadValue<Vector2>().x;
             float valueY = aim.ReadValue<Vector2>().y;
 
             if (valueY > 0.1 && valueY > valueX && valueY > valueX * -1) // Up(y) = 1
             {
-                _isAbility = true;
-                rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Nattack");
             }
             else if (valueY < -0.1 && valueY < valueX && valueY < valueX * -1) // Down(y) = -1
             {
-                _isAbility = true;
-                rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Sattack");
             }
             else if (valueX < -0.1 && valueX < valueY && valueX < valueY * -1) // Left(x) = -1
             {
-                _isAbility = true;
-                rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Wattack");
             }
             else if (valueX > 0.1 && valueX > valueY && valueX > valueY * -1) // Right(x) = 1
             {
-                _isAbility = true;
-                rb2d.bodyType = RigidbodyType2D.Static;
                 pAnim.SetTrigger("Eattack");
             }
+        }
+    }
+
+    /// <summary>
+    /// The basic attack cooldown changes based on the multiplier.
+    /// </summary>
+    /// <param name="multiplier">Amount of speed buffs currently held</param>
+    public void ChangeMoveCooldown(float multiplier)
+    {
+        if (multiplier > 0)
+        {
+            attackSpeed = defaultAttackSpeed - (1 * multiplier);
+
+        }
+        else
+        {
+            attackSpeed = defaultAttackSpeed;
         }
     }
 
