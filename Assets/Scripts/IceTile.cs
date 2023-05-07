@@ -20,7 +20,7 @@ public class IceTile : TileVacancy
     private void Start()
     {
         tileWidth = GetComponent<SpriteRenderer>().size.x;
-        tileWidth = GetComponent<SpriteRenderer>().size.y;
+        tileHeight = GetComponent<SpriteRenderer>().size.y;
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
