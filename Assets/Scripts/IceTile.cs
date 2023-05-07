@@ -145,7 +145,7 @@ public class IceTile : TileVacancy
             target = up;
         }
 
-        other.GetComponent<PlayerController>().SetTarget(target);
+        other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
     }
 
 
