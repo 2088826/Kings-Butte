@@ -2478,9 +2478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804d1c69c6f5ef240b3b80082dead6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePlaceholderPrefab: {fileID: 2784786727943879326, guid: ed0141b06a9076c4d994b9373eb14947, type: 3}
+  grassOverlayPrefab: {fileID: 2784786727943879326, guid: ed0141b06a9076c4d994b9373eb14947, type: 3}
+  iceOverlayPrefab: {fileID: 2784786727943879326, guid: 47591b7c818f09d4b915634de4b5c271, type: 3}
   tileContainerPrefab: {fileID: 1605690926197460551, guid: 79b002afac2697f4e8ec544bd970cdfe, type: 3}
-  littleBump: 0
+  littleBump: 2
 --- !u!1 &7262824125909116561
 GameObject:
   m_ObjectHideFlags: 0

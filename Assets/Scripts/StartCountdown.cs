@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class StartCountdown : MonoBehaviour
 {
+    [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioClip[] clips;
+    
     private TextMeshProUGUI startTimer;
     private int countdown = 3;
 
-    private GameManager gameManager;
-
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         startTimer = GetComponent<TextMeshProUGUI>();
     }
 
@@ -20,18 +21,20 @@ public class StartCountdown : MonoBehaviour
     {
         if (countdown > 0)
         {
+            sfxSource.PlayOneShot(clips[0]);
             startTimer.text = countdown.ToString();
             countdown--;
         }
         else
         {
-            startTimer.text = "Start";
+            sfxSource.PlayOneShot(clips[1]);
+            startTimer.text = "BEGIN";
+            GameManager.IsStart = true;
         }
     }
 
     public void TurnOff()
     {
-        gameManager.IsStart = false;
         this.gameObject.SetActive(false);
     }
 }

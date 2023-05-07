@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private List<Transform> startingPoints;
     [SerializeField] private Tilemap map;
     [SerializeField] private List<Texture2D> sprites;
+    [SerializeField] private GameObject[] banners;
+    [SerializeField] private Image[] setupSprites;
+    [SerializeField] private TextMeshProUGUI[] setupLabels;
 
     private List<Vector3> spawnLocation = new List<Vector3>();
     private List<PlayerInput> players = new List<PlayerInput>();
@@ -21,27 +26,24 @@ public class PlayerManager : MonoBehaviour
 
     private int count = 1;
 
-
     private void Awake()
     {
         playerInputManager = FindObjectOfType<PlayerInputManager>();
 
-        // Get
+        // Loop through spawnpoints
         foreach (Transform spawnPoint in startingPoints)
         {
             // Get the cell position of the spawn point.
             Vector3Int cellPosition = map.WorldToCell(spawnPoint.position);
 
-            Debug.Log(cellPosition);
             // Get the world position of the cell position.
             Vector3 worldPosition = map.CellToWorld(cellPosition);
-            Debug.Log(worldPosition);
 
             // Spawning alignment
             float offsetX = worldPosition.x;
             float offsetY = worldPosition.y + yOffset;
 
-            worldPosition = new Vector3(offsetX, offsetY, 0f);
+            worldPosition = new Vector3(offsetX, offsetY, 1f);
 
 
             spawnLocation.Add(worldPosition);
@@ -50,13 +52,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Enabled");
         playerInputManager.onPlayerJoined += AddPlayer;
     }
 
     private void OnDisable()
     {
-        Debug.Log("Disabled");
         playerInputManager.onPlayerJoined -= AddPlayer;
     }
 
@@ -64,16 +64,29 @@ public class PlayerManager : MonoBehaviour
     {
         if(players.Count < sprites.Count)
         {
-            Debug.Log(players.Count);
-            Debug.Log(sprites.Count);
-            SpriteRenderer playerSprite = player.transform.Find("Sprite").GetComponent<SpriteRenderer>();
+            // Activate Player banner.
+            banners[count - 1].SetActive(true);
 
-            player.name = "Player " + count++;
+            player.name = "Player" + count++;
             players.Add(player);
+
+            // Change Player sprite.
             Sprite sprite = Sprite.Create(sprites[players.Count - 1], new Rect(0, 0, sprites[players.Count - 1].width, sprites[players.Count - 1].height), new Vector2(0.5f, 0.5f));
+            SpriteRenderer playerSprite = player.transform.Find("Sprite").GetComponent<SpriteRenderer>();
             playerSprite.sprite = sprite;
+
+            // Set Player spawn point.
             player.transform.position = spawnLocation[players.Count - 1];
-            Debug.Log("PlayerAdded");
+            GameManager.AddPlayers(player.gameObject);
+
+            // Adjusting SetupScroll alpha values
+            Color currentColor = setupSprites[players.Count - 1].color;
+            currentColor.a = 1f;
+            setupSprites[players.Count - 1].color = currentColor;
+
+            currentColor = setupLabels[players.Count - 1].color;
+            currentColor.a = 1f;
+            setupLabels[players.Count - 1].color = currentColor;
         }
         else
         {
