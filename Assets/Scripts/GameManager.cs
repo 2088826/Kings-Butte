@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private static bool isPaused = false;
     private bool isFirst = true;
     private static Dictionary<string, GameObject> players;
+    private ItemSpawner spawner;
 
     // Public Properties
     public static bool IsStart { get { return isStart; } set { isStart = value; } }
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        spawner = GetComponent<ItemSpawner>();
         players = new Dictionary<string, GameObject>();
         uiActionMap = inputAction.FindActionMap("UI");
         isStart = false;
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
                 isFirst = false;
                 uiActionMap.Enable();
                 message.text = "CONTINUE JOINING OR PRESS START WHEN READY";
+                spawner.enabled = true;
             }
 
             if (uiActionMap["Start"].triggered)
