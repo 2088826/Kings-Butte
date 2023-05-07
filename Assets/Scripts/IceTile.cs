@@ -179,7 +179,7 @@ public class IceTile : TileVacancy
             {
                 target = gameObject;
             }
-            else if (!target.name.Contains("Tile"))
+            else if (!target.name.Contains("Tile") || target.name == gameObject.name)
             {
                 // Sets the target to null for pushing off the edge.
                 target = null;
