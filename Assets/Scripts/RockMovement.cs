@@ -7,6 +7,7 @@ public class RockMovement : MonoBehaviour
     [SerializeField] float speed = 2;
     [SerializeField] GameObject target;
     [SerializeField] float moveCooldown = 3f;
+    [SerializeField] ParticleSystem dust;
 
     [SerializeField] bool moveOn = false;
     bool targetOn = true;
@@ -58,6 +59,7 @@ public class RockMovement : MonoBehaviour
             // Move to the target
             if (target)
             {
+                dust.Play();
                 MoveToTile(target);
             }
 
@@ -93,6 +95,7 @@ public class RockMovement : MonoBehaviour
     // Moves the player in the direction of the target.
     private void MoveToTile(GameObject target)
     {
+
         float step = speed * Time.deltaTime;
 
         // move sprite towards the target location
