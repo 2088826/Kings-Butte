@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] music;
     [SerializeField] private AudioClip[] sfx;
+    [SerializeField] private GameObject fireworks;
     
     // Private Fields
     private InputActionMap uiActionMap;
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         gameTimer.text = timeLimit.ToString("0");
         GameSetup();
+        musicSource.clip = music[0];
+        musicSource.Play();
     }
 
     private void Update()
@@ -119,6 +122,7 @@ public class GameManager : MonoBehaviour
                 isSetup = false;
                 isFirst = true;
                 setupScroll.GetComponent<Animator>().SetTrigger("close");
+                musicSource.Stop();
             }
         }
     }
@@ -133,6 +137,8 @@ public class GameManager : MonoBehaviour
         if (isFirst)
         {
             isFirst = false;
+            musicSource.clip = music[1];
+            musicSource.Play();
             EnablePlayers();
         }
 
@@ -152,10 +158,18 @@ public class GameManager : MonoBehaviour
         DisablePlayers();
         if(players.Count > 1) 
         {
+            musicSource.Stop();
+            musicSource.clip = music[3];
+            musicSource.Play();
             Invoke("SetTie", 2f);
         }
         else
         {
+            fireworks.SetActive(true);
+            musicSource.Stop();
+            musicSource.clip = music[2];
+            musicSource.loop = false;
+            musicSource.Play();
             Invoke("SetWinner", 2f);
         }
     }
