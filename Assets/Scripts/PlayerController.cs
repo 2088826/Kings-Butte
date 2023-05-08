@@ -6,7 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 
 public class PlayerController : MonoBehaviour
