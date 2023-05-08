@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,7 +17,6 @@ public class MainMenuScript : MonoBehaviour
     public GameObject Stage1;
     public GameObject Stage2;
     public GameObject Stage3;
-
 
     public void InvokeOpenMenu()
     {
@@ -96,5 +96,37 @@ public class MainMenuScript : MonoBehaviour
     {
         //Close the game.
         Application.Quit();
+    }
+
+    public void SetStage1()
+    {
+        if(EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(Stage1);
+        }
+    }
+
+    public void SetPlay()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(PlayButton);
+        }
+    }
+
+    public void SetCreditMenu()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(CreditBackButton);
+        }
+    }
+
+    public void SetCreditClose()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(CreditButton);
+        }
     }
 }
