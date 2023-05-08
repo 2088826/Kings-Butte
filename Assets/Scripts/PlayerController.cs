@@ -413,6 +413,15 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void OnSlipoff(GameObject destination)
+    {
+        target = destination;
+
+        health.Invoke("Fall", 0.5f);
+    }
+
+    
+
     private void ActivateTarget()
     {
         targetOn = true;
