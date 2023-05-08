@@ -19,10 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InputActionAsset inputAction;
     [SerializeField] private GameObject tieScroll;
     [SerializeField] private GameObject setupScroll;
+    [SerializeField] private GameObject fireworks;
+    [SerializeField] private GameObject pauseMessage;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] music;
     [SerializeField] private AudioClip[] sfx;
-    [SerializeField] private GameObject fireworks;
     
     // Private Fields
     private InputActionMap uiActionMap;
@@ -183,8 +184,7 @@ public class GameManager : MonoBehaviour
     private void HandlePause()
     {
         DisablePlayers();
-        message.gameObject.SetActive(true);
-        message.text = "Paused";
+        pauseMessage.SetActive(true);
         uiActionMap.Enable();
         musicSource.Pause();
     }
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         EnablePlayers();
-        message.gameObject.SetActive(false);
+        pauseMessage.SetActive(false);
         uiActionMap.Disable();
         musicSource.Play();
     }

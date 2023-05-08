@@ -66,10 +66,14 @@ public class MainMenuScript : MonoBehaviour
         //Add transition goto Stage1 scene.
         SceneManager.LoadScene("ProtoPlayScene");
     }
-
+    public void InvokeGoToStage2()
+    {
+        Invoke(nameof (GoToStage2), 1);
+    }
     public void GoToStage2()
     {
         //Add transition goto Stage2 scene.
+        SceneManager.LoadScene("Level2");
     }
 
     public void GoToStage3()
