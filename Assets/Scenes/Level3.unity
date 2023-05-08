@@ -3975,7 +3975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grassOverlayPrefab: {fileID: 2784786727943879326, guid: ed0141b06a9076c4d994b9373eb14947, type: 3}
   iceOverlayPrefab: {fileID: 2784786727943879326, guid: 47591b7c818f09d4b915634de4b5c271, type: 3}
-  SnowOverlayPrefab: {fileID: 0}
+  SnowOverlayPrefab: {fileID: 2784786727943879326, guid: 1d5d20956ad0e1c4cb819b362c573eab, type: 3}
   tileContainerPrefab: {fileID: 1605690926197460551, guid: 79b002afac2697f4e8ec544bd970cdfe, type: 3}
   littleBump: 2
 --- !u!1 &4869335477316216959
