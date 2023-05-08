@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8858918104210767016}
   - component: {fileID: 2297729554148089291}
   m_Layer: 5
-  m_Name: Message
+  m_Name: SetupMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -803,6 +803,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputAction: {fileID: 0}
+  skipButton: {fileID: 0}
+  continueButton: {fileID: 0}
 --- !u!1 &937975058385353695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,7 +1789,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190335
-  m_fontColor: {r: 0.8018868, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2898,7 +2901,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190335
-  m_fontColor: {r: 0.8018868, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3761,7 +3764,7 @@ MonoBehaviour:
   startTimer: {fileID: 937975058899389544}
   setupScroll: {fileID: 939841263735709562}
   buttons: {fileID: 6935703257146709111}
-  fade: {fileID: 8478658759734969942}
+  fade: {fileID: 8478658758426928822}
 --- !u!1 &1396915970836980586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,12 +3854,12 @@ GameObject:
   - component: {fileID: 16555513544390812}
   - component: {fileID: 3486905826770547955}
   m_Layer: 5
-  m_Name: Message3
+  m_Name: SetupMessage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3279258656125251522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4510,7 +4513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &171275859830392573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4568,8 +4571,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284374622
-  m_fontColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    rgba: 4278194431
+  m_fontColor: {r: 0.9882353, g: 0.89411765, b: 0.003921569, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4871,7 +4874,7 @@ GameObject:
   - component: {fileID: 3262047974594017916}
   - component: {fileID: 1918847689469306312}
   m_Layer: 5
-  m_Name: Message2
+  m_Name: SetupMessage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5082,7 +5085,7 @@ GameObject:
   - component: {fileID: 1000119200307109232}
   - component: {fileID: 1178130116848047625}
   m_Layer: 5
-  m_Name: Message1
+  m_Name: SetupMessage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5265,6 +5268,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695998297194553349, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695998297194553349, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 0}
@@ -5318,18 +5325,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8695998297965691107, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
 --- !u!1 &8478658758426928822 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8695998297194553347, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
-  m_PrefabInstance: {fileID: 937975058941626037}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8478658759734969942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8695998297965691107, guid: 3b246d9a03bef2049a1554e21cc7a9ca, type: 3}
   m_PrefabInstance: {fileID: 937975058941626037}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8478658759734969943 stripped
@@ -6183,9 +6185,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 937975058306581283}
     m_Modifications:
+    - target: {fileID: 6631669339561204484, guid: 642f0ae7e0c2050459b5dadf5f385a37, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.003921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631669339561204484, guid: 642f0ae7e0c2050459b5dadf5f385a37, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.89411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631669339561204484, guid: 642f0ae7e0c2050459b5dadf5f385a37, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9882353
+      objectReference: {fileID: 0}
     - target: {fileID: 6631669339561204506, guid: 642f0ae7e0c2050459b5dadf5f385a37, type: 3}
       propertyPath: m_Name
       value: Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631669339561204506, guid: 642f0ae7e0c2050459b5dadf5f385a37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6631669339561204507, guid: 642f0ae7e0c2050459b5dadf5f385a37, type: 3}
       propertyPath: m_Pivot.x

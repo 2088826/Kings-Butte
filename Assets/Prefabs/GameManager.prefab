@@ -54,6 +54,8 @@ MonoBehaviour:
   inputAction: {fileID: -944628639613478452, guid: 13326aa67f2c18046af7fc614eb96336, type: 3}
   tieScroll: {fileID: 0}
   setupScroll: {fileID: 0}
+  fireworks: {fileID: 0}
+  pauseMessage: {fileID: 0}
   musicSource: {fileID: 4957539441011758889}
   music:
   - {fileID: 8300000, guid: 18a0b8745e856c441a40f65148f4ece1, type: 3}
@@ -77,7 +79,9 @@ MonoBehaviour:
   powerups:
   - {fileID: 4538770465974898241, guid: 3d75c647106c125409beb12549813920, type: 3}
   - {fileID: 2569089101611119562, guid: acc863ac07151634bb318b07fbba67f9, type: 3}
-  spawnTimer: 5
+  powerUpSpawnTimer: 5
+  rock: {fileID: 2756962558954447906, guid: 334846878d129934e953122d7a50de56, type: 3}
+  rockSpawnTimer: 20
 --- !u!82 &4957539441011758889
 AudioSource:
   m_ObjectHideFlags: 0
