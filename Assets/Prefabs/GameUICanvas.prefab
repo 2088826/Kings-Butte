@@ -1016,6 +1016,7 @@ GameObject:
   - component: {fileID: 937975058581533929}
   - component: {fileID: 937975058581533927}
   - component: {fileID: 937975058581533926}
+  - component: {fileID: 6602565327348165117}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -1184,13 +1185,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 6602565327348165117}
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
+        m_MethodName: InvokeGotoProtoMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1352,6 +1353,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6602565327348165117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937975058581533932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &937975058773380865
 GameObject:
   m_ObjectHideFlags: 0
