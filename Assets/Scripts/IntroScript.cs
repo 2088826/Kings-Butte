@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroScript : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputAction;
+    [SerializeField] private Button skipButton;
+    [SerializeField] private Button continueButton;
+
+    private BtnSound btnSound;
     private InputActionMap uiActionMap;
 
     public void Start()
     {
-        uiActionMap = inputAction.FindActionMap("UI");
-
+        btnSound = GetComponent<BtnSound>();
+        if(inputAction != null)
+        {
+            uiActionMap = inputAction.FindActionMap("UI");
+        }
     }
     private void Update()
     {
@@ -20,6 +28,21 @@ public class IntroScript : MonoBehaviour
         {
             if (uiActionMap["Start"].triggered)
             {
+                btnSound.ClickSound();
+                if (skipButton.gameObject.activeSelf)
+                {
+                    skipButton.onClick.Invoke();
+                }
+                else
+                {
+                    continueButton.onClick.Invoke();
+                }
+            }
+
+            if (continueButton.gameObject.activeSelf)
+            {
+                Debug.Log("HOW");
+                skipButton.gameObject.SetActive(false);
 
             }
         }
