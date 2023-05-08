@@ -175,7 +175,9 @@ public class IceTile : TileVacancy
 
         if (target || target != null)
         {
-            
+
+            bool slippingOff = false;
+
             if (target.GetComponent<TileVacancy>().Occupied)
             {
                 target = gameObject;
@@ -184,10 +186,17 @@ public class IceTile : TileVacancy
             {
                 
                 // Sets the target to null for pushing off the edge.
-                target = null;
+                target = CreateNewTarget(target);
+
+                other.gameObject.transform.parent.GetComponent<PlayerController>().OnSlipoff(target);
+
+                slippingOff = true;
             }
 
-            other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
+            if (!slippingOff)
+            {
+                other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
+            }
         }
     }
 
@@ -199,23 +208,23 @@ public class IceTile : TileVacancy
 
         if (givenTarget == right)
         {
-            xoffset = 0.5f;
-            yoffset = 0.25f;
+            xoffset = 4f;
+            yoffset = 2f;
         }
         else if(givenTarget == left)
         {
-            xoffset = 0.5f;
-            yoffset = -0.25f;
+            xoffset = 4f;
+            yoffset = -2f;
         }
         else if (givenTarget == up)
         {
-            xoffset = -0.5f;
-            yoffset = 0.25f;
+            xoffset = -4f;
+            yoffset = 2f;
         }
         else if (givenTarget == down)
         {
-            xoffset = -0.5f;
-            yoffset = -0.25f;
+            xoffset = -4f;
+            yoffset = -2f;
         }
 
         Vector3 newPosition = transform.position + new Vector3(xoffset, yoffset, 0);
