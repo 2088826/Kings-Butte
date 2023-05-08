@@ -2607,6 +2607,8 @@ MonoBehaviour:
   flashingMessage: {fileID: 538127235}
   startTimer: {fileID: 165010243}
   setupScroll: {fileID: 578170564}
+  buttons: {fileID: 0}
+  fade: {fileID: 0}
 --- !u!95 &578170566
 Animator:
   serializedVersion: 5
@@ -6715,7 +6717,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1650816205}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
-        m_MethodName: InvokeGotoProtoMainMenu
+        m_MethodName: InvokeMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6862,7 +6864,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1651131806}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
-        m_MethodName: InvokeGotoProtoMainMenu
+        m_MethodName: InvokeMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

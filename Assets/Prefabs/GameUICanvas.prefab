@@ -1891,7 +1891,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2561728294270183685}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
-        m_MethodName: InvokeGotoProtoMainMenu
+        m_MethodName: InvokeMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

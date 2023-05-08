@@ -1,14 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class IntroScript : MonoBehaviour
 {
-    //Invoke Goto
-    public void InvokeGotoProtoMainMenu()
+    [SerializeField] private InputActionAsset inputAction;
+    private InputActionMap uiActionMap;
+
+    public void Start()
     {
-        Invoke(nameof(GotoProtoMainMenu), 1.6f);
+        uiActionMap = inputAction.FindActionMap("UI");
+
+    }
+    private void Update()
+    {
+        if(uiActionMap != null)
+        {
+            if (uiActionMap["Start"].triggered)
+            {
+
+            }
+        }
+    }
+    //Invoke Goto
+    public void InvokeMainMenu()
+    {
+        Invoke(nameof(LoadMainMenu), 1.6f);
     }
 
     // Invoke Restart
@@ -18,10 +37,10 @@ public class IntroScript : MonoBehaviour
     }
     
     //Goto ProtoMainMenu
-    public void GotoProtoMainMenu()
+    public void LoadMainMenu()
     {
         //Load the scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("ProtoMainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Restart the scene
