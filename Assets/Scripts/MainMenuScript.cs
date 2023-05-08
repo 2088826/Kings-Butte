@@ -63,7 +63,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void GoToStage1()
     {
-        //Add transition goto Stage1 scene.
+        //Transition goto Stage1 scene.
         SceneManager.LoadScene("ProtoPlayScene");
     }
     public void InvokeGoToStage2()
@@ -72,13 +72,18 @@ public class MainMenuScript : MonoBehaviour
     }
     public void GoToStage2()
     {
-        //Add transition goto Stage2 scene.
+        //Transition goto Stage2 scene.
         SceneManager.LoadScene("Level2");
     }
 
+    public void InvokeGoToStage3()
+    {
+        Invoke(nameof(GoToStage3), 1);
+    }
     public void GoToStage3()
     {
-        //Add transition goto Stage3 scene.
+        //Transition goto Stage3 scene.
+        SceneManager.LoadScene("Level3");
     }
     public void InokeTutorial()
     {
@@ -88,7 +93,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void GoToTutorial()
     {
-        //Goto to scene 3.
+        //Goto to tutorial
         SceneManager.LoadScene("Tutorial");
     }
 
