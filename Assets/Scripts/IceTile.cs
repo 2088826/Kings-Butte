@@ -122,10 +122,10 @@ public class IceTile : TileVacancy
         }
 
 
-        Debug.Log("Up: " + up.name);
-        Debug.Log("Down: " + down.name);
-        Debug.Log("Left: " + left.name);
-        Debug.Log("Right: " + right.name);
+        //Debug.Log("Up: " + up.name);
+        //Debug.Log("Down: " + down.name);
+        //Debug.Log("Left: " + left.name);
+        //Debug.Log("Right: " + right.name);
 
 
 
