@@ -438,8 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a15623c1e8e27498099712e582982d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown1: 4
-  cooldown2: 1
+  cooldown1: 5
+  cooldown2: 8
   dust: {fileID: 6672347136049347334}
 --- !u!114 &2664766941329346275
 MonoBehaviour:
