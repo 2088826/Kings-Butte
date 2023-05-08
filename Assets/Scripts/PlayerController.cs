@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,12 +38,13 @@ public class PlayerController : MonoBehaviour
     private Health health;
     private Animator anim;
     private float defaultCooldown;
+    private string scene;
 
     public bool IsMoving { get {  return isMoving; } set { isMoving = value; } }
     
     void Start()
     {
-
+        scene = SceneManager.GetActiveScene().name;
         input = gameObject.GetComponent<PlayerActions>();
         health = gameObject.GetComponent<Health>();
         anim = gameObject.GetComponent<Animator>();
@@ -121,20 +122,41 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log(input.Move);
-        if(input.Move != null)
+        if (scene != "Tutorial")
         {
-            if (input.Move.inProgress && Time.time > nextMoveTime && !input.IsAbility)
+            //Debug.Log(input.Move);
+            if(input.Move != null)
             {
-                isMoving = true;
-                //GetAdjacentTiles();
-                //GetAdjacentTilesX2();
+                if (input.Move.inProgress && Time.time > nextMoveTime && !input.IsAbility)
+                {
+                    isMoving = true;
+                    //GetAdjacentTiles();
+                    //GetAdjacentTilesX2();
 
-                MovePlayer();
+                    MovePlayer();
 
-                nextMoveTime = Time.time + moveCooldown;
-                anim.SetTrigger("move");
+                    nextMoveTime = Time.time + moveCooldown;
+                    anim.SetTrigger("move");
 
+                }
+            }
+        }
+        else if(gameObject.name == "Player1")
+        {
+            //Debug.Log(input.Move);
+            if (input.Move != null)
+            {
+                if (input.Move.inProgress && Time.time > nextMoveTime && !input.IsAbility)
+                {
+                    isMoving = true;
+                    //GetAdjacentTiles();
+                    //GetAdjacentTilesX2();
+
+                    MovePlayer();
+
+                    nextMoveTime = Time.time + moveCooldown;
+                    anim.SetTrigger("move");
+                }
             }
         }
     }
@@ -588,8 +610,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-
-        if((other.gameObject.name.Contains("Player") == true) && input.IsAbility == false)
+        if ((other.gameObject.name.Contains("Player") == true) && input.IsAbility == false)
         {
             OnPushed();
 

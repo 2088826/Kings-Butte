@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     private List<Vector3> spawnLocation = new List<Vector3>();
     private List<PlayerInput> players = new List<PlayerInput>();
     private PlayerInputManager playerInputManager;
+    private string scene;
 
 
     // Offsets the worldPosition to the center of the Isometric grid.
@@ -29,6 +30,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        scene = SceneManager.GetActiveScene().name;
         playerInputManager = FindObjectOfType<PlayerInputManager>();
 
         // Loop through spawnpoints
@@ -46,7 +48,6 @@ public class PlayerManager : MonoBehaviour
 
             worldPosition = new Vector3(offsetX, offsetY, 1f);
 
-
             spawnLocation.Add(worldPosition);
         }
     }
@@ -63,7 +64,15 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(PlayerInput player)
     {
-        if(players.Count < sprites.Count || GameManager.IsSetup)
+        if(scene == "Tutorial" && players.Count < 1)
+        {
+            player.name = "Player" + count++;
+            players.Add(player);
+
+            // Set Player spawn point.
+            player.transform.position = spawnLocation[players.Count - 1];
+        }
+        else if(players.Count < sprites.Count && scene != "Tutorial")
         {
             // Activate Player banner.
             banners[count - 1].SetActive(true);

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerActions : MonoBehaviour
 {
     // Serialized Fields
     [SerializeField] private float attackSpeed = 1.5f;
+
+    // Strings
+    private string scene;
 
     // Numerics
     private float nextBasic = 0;
@@ -37,18 +40,28 @@ public class PlayerActions : MonoBehaviour
 
     private void Awake()
     {
+        scene = SceneManager.GetActiveScene().name;
         rb2d = GetComponent<Rigidbody2D>();
         pAnim = GetComponent<Animator>();
         controller = GetComponent<PlayerController>();
         abilities = GetComponent<AbilityCooldown>();
 
-        inputAsset = this.GetComponent<PlayerInput>().actions;
-        player = inputAsset.FindActionMap("Player");
-        ui = inputAsset.FindActionMap("UI");
+        if (scene != "Tutorial")
+        {
+            inputAsset = this.GetComponent<PlayerInput>().actions;
+            player = inputAsset.FindActionMap("Player");
+            ui = inputAsset.FindActionMap("UI");
+        }
+        else if ( gameObject.name == "Player1")
+        {
+            inputAsset = this.GetComponent<PlayerInput>().actions;
+            player = inputAsset.FindActionMap("Player");
+            ui = inputAsset.FindActionMap("UI");
+            TogglePlayer();
+
+        }
 
         defaultAttackSpeed = attackSpeed;
-
-        ToggleDisable();
     }
 
     /// <summary>

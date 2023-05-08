@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AbilityCooldown : MonoBehaviour
@@ -19,6 +20,7 @@ public class AbilityCooldown : MonoBehaviour
     private bool isCooldown2 = false;
     private bool isAbility1 = false;
     private bool isAbility2 = false;
+    private string scene;
 
     public bool IsAbility1 { get { return isAbility1; } set { isAbility1 = value; } }
     public bool IsAbility2 { get { return isAbility2; } set { isAbility2 = value; } }
@@ -26,16 +28,23 @@ public class AbilityCooldown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scene = SceneManager.GetActiveScene().name;
+
         health = GetComponent<Health>();
-        playerBanner = GameObject.Find(this.gameObject.name + "Banner").transform;
 
-        bannerAnim = playerBanner.GetComponent<Animator>();
+        if(scene != "Tutorial")
+        {
+            playerBanner = GameObject.Find(this.gameObject.name + "Banner").transform;
+            bannerAnim = playerBanner.GetComponent<Animator>();
 
-        abilityImage1 = playerBanner.Find("Ability1").Find("Cooldown1").GetComponent<Image>();
-        abilityImage1.fillAmount = 0;
+            abilityImage1 = playerBanner.Find("Ability1").Find("Cooldown1").GetComponent<Image>();
+            abilityImage1.fillAmount = 0;
 
-        abilityImage2 = playerBanner.Find("Ability2").Find("Cooldown2").GetComponent<Image>();
-        abilityImage2.fillAmount = 0;
+            abilityImage2 = playerBanner.Find("Ability2").Find("Cooldown2").GetComponent<Image>();
+            abilityImage2.fillAmount = 0;
+        }
+
+
     }
 
     // Update is called once per frame

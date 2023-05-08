@@ -13,9 +13,11 @@ public class IntroScript : MonoBehaviour
 
     private BtnSound btnSound;
     private InputActionMap uiActionMap;
+    private string scene;
 
     public void Start()
     {
+        scene = SceneManager.GetActiveScene().name;
         btnSound = GetComponent<BtnSound>();
         if(inputAction != null)
         {
@@ -26,23 +28,48 @@ public class IntroScript : MonoBehaviour
     {
         if(uiActionMap != null)
         {
-            if (uiActionMap["Start"].triggered)
+        
+            if(scene == "Tutorial")
             {
-                btnSound.ClickSound();
-                if (skipButton.gameObject.activeSelf)
+                if (uiActionMap["Cancel"].triggered)
                 {
-                    skipButton.onClick.Invoke();
-                }
-                else
-                {
-                    continueButton.onClick.Invoke();
+                    if(skipButton != null)
+                    {
+                        btnSound.ClickSound();
+                        skipButton.onClick.Invoke();
+                    }
                 }
             }
-
-            if (continueButton.gameObject.activeSelf)
+            else
             {
-                skipButton.gameObject.SetActive(false);
+                if (uiActionMap["Start"].triggered)
+                {
+                    if (skipButton.gameObject.activeSelf)
+                    {
+                        if (skipButton != null)
+                        {
+                            btnSound.ClickSound();
+                            skipButton.onClick.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        if (continueButton != null)
+                        {
+                            btnSound.ClickSound();
+                            continueButton.onClick.Invoke();
+                        }
+                    }
+                }
+            
 
+                if (continueButton.gameObject.activeSelf)
+                {
+                    if(skipButton != null)
+                    {
+                        skipButton.gameObject.SetActive(false);
+                    }
+                }
             }
         }
     }

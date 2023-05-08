@@ -94,7 +94,7 @@ public class MainMenuScript : MonoBehaviour
     public void GoToTutorial()
     {
         //Goto to tutorial
-        //SceneManager.LoadScene("Tutorial", LoadSceneMode.Single);
+        SceneManager.LoadScene("Tutorial", LoadSceneMode.Single);
     }
 
     public void InvokeExit()

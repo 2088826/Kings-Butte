@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     private bool isFirst = true;
     private static Dictionary<string, GameObject> players;
     private ItemSpawner spawner;
+    private string scene;
 
     // Public Properties
     public static bool IsStart { get { return isStart; } set { isStart = value; } }
@@ -43,45 +45,52 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        scene = SceneManager.GetActiveScene().name;
         spawner = GetComponent<ItemSpawner>();
         players = new Dictionary<string, GameObject>();
         uiActionMap = inputAction.FindActionMap("UI");
         isStart = false;
         isPaused = false;
         isSetup = true;
-        gameTimer.text = timeLimit.ToString("0");
         GameSetup();
         musicSource.clip = music[0];
         musicSource.Play();
+        if(scene != "Tutorial")
+        {
+            gameTimer.text = timeLimit.ToString("0");
+        }
     }
 
     private void Update()
     {
-        if (isSetup)
+        if(scene != "Tutorial")
         {
-            if(!setupScroll.activeSelf)
+            if (isSetup)
             {
-                Invoke("SetSetup", 1f);
+                if(!setupScroll.activeSelf)
+                {
+                    Invoke("SetSetup", 1f);
+                }
+
+                GameSetup();
+            }
+            else if (isStart)
+            {
+                StartGame();
+            }
+            else if (isEnd)
+            {
+                EndGame();
             }
 
-            GameSetup();
-        }
-        else if (isStart)
-        {
-            StartGame();
-        }
-        else if (isEnd)
-        {
-            EndGame();
-        }
-
-        if (isPaused)
-        {
-            HandlePause();
-
-            if (uiActionMap["Start"].triggered)
+            if (isPaused)
             {
-                HandleResume();
+                HandlePause();
+
+                if (uiActionMap["Start"].triggered)
+                {
+                    HandleResume();
+                }
             }
         }
     }
