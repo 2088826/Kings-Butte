@@ -181,7 +181,7 @@ public partial class @CustomInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Arrow keys"",
+                    ""name"": ""WASD"",
                     ""id"": ""d0223f77-7459-45fb-bb07-7f95db6b8ff6"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",

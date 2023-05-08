@@ -20,7 +20,7 @@ public class IceTile : TileVacancy
     private void Start()
     {
         tileWidth = GetComponent<SpriteRenderer>().size.x;
-        tileWidth = GetComponent<SpriteRenderer>().size.y;
+        tileHeight = GetComponent<SpriteRenderer>().size.y;
 
         up = new GameObject("AdjacentUp");
         up.gameObject.transform.parent = this.gameObject.transform;
@@ -110,7 +110,7 @@ public class IceTile : TileVacancy
     private void SlidePlayer(Collider2D other)
     {
         GetAdjacentTiles();
-        
+
         Vector3 otherSpot = other.transform.position;
         bool higher = false;
         bool righter = false;
@@ -149,9 +149,13 @@ public class IceTile : TileVacancy
             target = up;
         }
 
-        // Sets the target to null for pushing off the edge.
-        if (!target.name.Contains("Tile"))
+        if (target.GetComponent<TileVacancy>().Occupied)
         {
+            target = gameObject;
+        }
+        else if (!target.name.Contains("Tile") || gameObject)
+        {
+            // Sets the target to null for pushing off the edge.
             target = null;
         }
 

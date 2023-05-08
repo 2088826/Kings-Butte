@@ -34,7 +34,13 @@ public class ItemSpawner : MonoBehaviour
     private void OnEnable()
     {
         tileContainer = GameObject.Find("TileContainer");
-        map = tileContainer.GetComponentsInChildren<Transform>();
+
+        int childCount = tileContainer.transform.childCount;
+        map = new Transform[childCount];
+        for (int i = 0; i < childCount; i++)
+        {
+            map[i] = tileContainer.transform.GetChild(i);
+        }
     }
 
     // Update is called once per frame
@@ -42,6 +48,12 @@ public class ItemSpawner : MonoBehaviour
     {
         if (!GameManager.IsPaused && GameManager.IsStart)
         {
+            // First Powerup
+            if (isFirst)
+            {
+                FirstPowerUp();
+            }
+
             // Powerup Spawner
             if(nextSpawn > 0.01f)
             {
@@ -53,6 +65,7 @@ public class ItemSpawner : MonoBehaviour
                 SpawnPowerUp();
             }
 
+            // Rock Spawner
             if(nextRock > 0.01f)
             {
                 nextRock -= Time.deltaTime;
@@ -74,14 +87,50 @@ public class ItemSpawner : MonoBehaviour
 
         spawnPosition = map[Random.Range(0, map.Length)].transform.position;
 
-        //spawnPosition.y += yOffset;
+        //spawnPosition.y += 5f;
 
         GameObject newPowerUp = Instantiate(rock, spawnPosition, Quaternion.identity);
     }
 
+    /// <summary>
+    /// Spawns the first powerup in the middle of the arena
+    /// </summary>
+    private void FirstPowerUp()
+    {
+        isFirst = false;
+
+        nextSpawn = powerUpSpawnTimer;
+
+        rng = Random.Range(0, 100);
+
+        if (rng < 50f)
+        {
+            nextPowerUp = powerups[0];
+        }
+        else
+        {
+            nextPowerUp = powerups[1];
+        }
+
+        int middle = (int)Mathf.Round((map.Length) / 2);
+
+        spawnPosition = map[middle].position;
+
+        spawnPosition.y += yOffset;
+
+        GameObject newPowerUp = Instantiate(nextPowerUp, spawnPosition, Quaternion.identity, container.transform);
+
+        string tag = DetermineTag(nextPowerUp);
+
+        Transform childTransform = newPowerUp.transform.Find("PickupCollider");
+        if (childTransform != null)
+        {
+            childTransform.gameObject.tag = tag;
+        }
+    }
 
     /// <summary>
-    /// Spawns powerups randomly on the map, placing the first one in the center of the map.
+    /// Spawns powerups randomly on the arena.
     /// </summary>
     private void SpawnPowerUp()
     {
@@ -98,43 +147,19 @@ public class ItemSpawner : MonoBehaviour
             nextPowerUp = powerups[1];
         }
 
-        if (isFirst)
+        spawnPosition = map[Random.Range(0, map.Length)].transform.position;
+
+        Debug.Log(map.Length);
+        spawnPosition.y += yOffset;
+
+        GameObject newPowerUp = Instantiate(nextPowerUp, spawnPosition, Quaternion.identity, container.transform);
+
+        string tag = DetermineTag(nextPowerUp);
+
+        Transform childTransform = newPowerUp.transform.Find("PickupCollider");
+        if (childTransform != null)
         {
-            isFirst = false;
-
-            int middle = (int) Mathf.Round((map.Length) / 2);
-
-            spawnPosition = map[middle].position;
-
-            spawnPosition.y += yOffset;      
-
-            GameObject newPowerUp = Instantiate(nextPowerUp, spawnPosition, Quaternion.identity, container.transform);
-
-            string tag = DetermineTag(nextPowerUp);
-
-            Transform childTransform = newPowerUp.transform.Find("PickupCollider");
-            if (childTransform != null)
-            {
-                childTransform.gameObject.tag = tag;
-            }
-
-        }
-        else
-        {
-
-            spawnPosition = map[Random.Range(0, map.Length)].transform.position;
-
-            spawnPosition.y += yOffset;
-
-            GameObject newPowerUp = Instantiate(nextPowerUp, spawnPosition, Quaternion.identity, container.transform);
-
-            string tag = DetermineTag(nextPowerUp);
-
-            Transform childTransform = newPowerUp.transform.Find("PickupCollider");
-            if (childTransform != null)
-            {
-                childTransform.gameObject.tag = tag;
-            }
+            childTransform.gameObject.tag = tag;
         }
     }
 
