@@ -63,10 +63,10 @@ public class IceTile : TileVacancy
         }
 
         // Initializes the values of the adjacent tiles.
-        left = xTiles[0]; // up
-        right = xTiles[0]; // down
-        up = yTiles[0]; // right
-        down = yTiles[0]; //left
+        left = yTiles[0]; // up
+        right = yTiles[0]; // down
+        up = xTiles[0];// right
+        down = xTiles[0]; //left
 
         // Determines the Top and Bottom tiles.
         foreach (GameObject tile in yTiles)
@@ -78,8 +78,16 @@ public class IceTile : TileVacancy
                 {
                     left = tile;
                 }
+                else if (left.tag != "Tile")
+                {
+                    left = tile;
+                }
 
                 if (tile.transform.position.y < right.transform.position.y)
+                {
+                    right = tile;
+                }
+                else if (right.tag != "Tile")
                 {
                     right = tile;
                 }
@@ -91,9 +99,13 @@ public class IceTile : TileVacancy
         foreach (GameObject tile in xTiles)
         {
             // Only tile objects count
-            if (tile.tag == "Tile")
+            if (tile.name.Contains("Tile"))
             {
                 if (tile.transform.position.x > up.transform.position.x)
+                {
+                    up = tile;
+                }
+                else if (up.tag != "Tile")
                 {
                     up = tile;
                 }
@@ -102,8 +114,20 @@ public class IceTile : TileVacancy
                 {
                     down = tile;
                 }
+                else if (down.tag != "Tile")
+                {
+                    down = tile;
+                }
             }
         }
+
+
+        Debug.Log("Up: " + up.name);
+        Debug.Log("Down: " + down.name);
+        Debug.Log("Left: " + left.name);
+        Debug.Log("Right: " + right.name);
+
+
 
     }
 
@@ -149,17 +173,20 @@ public class IceTile : TileVacancy
             target = up;
         }
 
-        if (target.GetComponent<TileVacancy>().Occupied)
+        if (target || target != null)
         {
-            target = gameObject;
-        }
-        else if (!target.name.Contains("Tile") || gameObject)
-        {
-            // Sets the target to null for pushing off the edge.
-            target = null;
-        }
+            if (target.GetComponent<TileVacancy>().Occupied)
+            {
+                target = gameObject;
+            }
+            else if (!target.name.Contains("Tile") || target.name == gameObject.name)
+            {
+                // Sets the target to null for pushing off the edge.
+                target = null;
+            }
 
-        other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
+            other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
+        }
     }
 
 
