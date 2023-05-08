@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 21572526}
   - component: {fileID: 21572525}
   - component: {fileID: 21572524}
-  - component: {fileID: 21572527}
   m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
@@ -220,7 +219,7 @@ MonoBehaviour:
           m_StringArgument: Start
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 21572527}
+      - m_Target: {fileID: 498312848}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: InvokeMainMenu
         m_Mode: 1
@@ -270,18 +269,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21572522}
   m_CullTransparentMesh: 1
---- !u!114 &21572527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21572522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &189684135
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +417,7 @@ GameObject:
   - component: {fileID: 498312845}
   - component: {fileID: 498312847}
   - component: {fileID: 498312846}
+  - component: {fileID: 498312848}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -497,6 +485,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498312844}
   m_CullTransparentMesh: 1
+--- !u!114 &498312848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498312844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputAction: {fileID: -944628639613478452, guid: 13326aa67f2c18046af7fc614eb96336, type: 3}
+  skipButton: {fileID: 21572524}
 --- !u!1 &604857093
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +511,6 @@ GameObject:
   - component: {fileID: 604857097}
   - component: {fileID: 604857096}
   - component: {fileID: 604857095}
-  - component: {fileID: 604857101}
   - component: {fileID: 604857100}
   - component: {fileID: 604857099}
   - component: {fileID: 604857098}
@@ -597,7 +598,7 @@ MonoBehaviour:
           m_StringArgument: Start
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 604857101}
+      - m_Target: {fileID: 498312848}
         m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: InvokeMainMenu
         m_Mode: 1
@@ -803,18 +804,6 @@ MonoBehaviour:
   myFx: {fileID: 604857098}
   hoverFx: {fileID: 8300000, guid: 2b8c207613cd58b4889b0cc6bf739f2c, type: 3}
   clickFx: {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
---- !u!114 &604857101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604857093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f8b84dfbcc98849af45155e1125814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1280010893
 GameObject:
   m_ObjectHideFlags: 0
