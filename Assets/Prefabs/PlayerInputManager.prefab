@@ -66,7 +66,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -2282370122626598899, guid: 13326aa67f2c18046af7fc614eb96336, type: 3}
+    m_Reference: {fileID: -7516704332887370804, guid: 13326aa67f2c18046af7fc614eb96336, type: 3}
   m_PlayerPrefab: {fileID: 6876170827907371461, guid: 09847a53f8170fc43bc8b17f713b2cd5, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
@@ -101,6 +101,16 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 644df777813bcc4459d62fc480f91738, type: 3}
   - {fileID: 2800000, guid: f5749e2177417924fa2b8274153a1f99, type: 3}
   banners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  setupSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  setupLabels:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
