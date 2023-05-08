@@ -762,6 +762,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c654fbba-380e-4b59-adfb-e34707f5076c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8a7222b6-fd37-4666-884f-47e97b40c9e1",
                     "path": "<Mouse>/position",
                     "interactions": "",
