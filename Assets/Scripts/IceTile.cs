@@ -122,10 +122,10 @@ public class IceTile : TileVacancy
         }
 
 
-        Debug.Log("Up: " + up.name);
-        Debug.Log("Down: " + down.name);
-        Debug.Log("Left: " + left.name);
-        Debug.Log("Right: " + right.name);
+        //Debug.Log("Up: " + up.name);
+        //Debug.Log("Down: " + down.name);
+        //Debug.Log("Left: " + left.name);
+        //Debug.Log("Right: " + right.name);
 
 
 
@@ -175,18 +175,56 @@ public class IceTile : TileVacancy
 
         if (target || target != null)
         {
+            
             if (target.GetComponent<TileVacancy>().Occupied)
             {
                 target = gameObject;
             }
             else if (!target.name.Contains("Tile") || target.name == gameObject.name)
             {
+                
                 // Sets the target to null for pushing off the edge.
                 target = null;
             }
 
             other.gameObject.transform.parent.GetComponent<PlayerController>().SetTarget(target);
         }
+    }
+
+    private GameObject CreateNewTarget(GameObject givenTarget)
+    {
+        GameObject newTarget = new GameObject();
+        float xoffset = 0f;
+        float yoffset = 0f;
+
+        if (givenTarget == right)
+        {
+            xoffset = 0.5f;
+            yoffset = 0.25f;
+        }
+        else if(givenTarget == left)
+        {
+            xoffset = 0.5f;
+            yoffset = -0.25f;
+        }
+        else if (givenTarget == up)
+        {
+            xoffset = -0.5f;
+            yoffset = 0.25f;
+        }
+        else if (givenTarget == down)
+        {
+            xoffset = -0.5f;
+            yoffset = -0.25f;
+        }
+
+        Vector3 newPosition = transform.position + new Vector3(xoffset, yoffset, 0);
+
+        newTarget.transform.SetPositionAndRotation(newPosition, Quaternion.identity);
+
+        Destroy(newTarget, 2f);
+
+        return newTarget;
     }
 
 

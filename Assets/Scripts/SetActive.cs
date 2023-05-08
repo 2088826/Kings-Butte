@@ -7,6 +7,8 @@ public class SetActive : MonoBehaviour
     [SerializeField] GameObject flashingMessage;
     [SerializeField] GameObject startTimer;
     [SerializeField] GameObject setupScroll;
+    [SerializeField] GameObject  buttons;
+    [SerializeField] GameObject fade;
 
     public void SetActiveTrue()
     {
@@ -26,5 +28,20 @@ public class SetActive : MonoBehaviour
     public void DeactivateScroll()
     {
         setupScroll.SetActive(false);
+    }
+
+    public void ActivateButtons()
+    {
+        buttons.SetActive(true);
+    }
+
+    public void DeactivateButtons()
+    {
+        buttons.SetActive(false);
+    }
+
+    public void FadeOut()
+    {
+        fade.GetComponent<Animator>().SetTrigger("Start");
     }
 }
