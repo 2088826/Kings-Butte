@@ -41,7 +41,6 @@ public class IntroScript : MonoBehaviour
 
             if (continueButton.gameObject.activeSelf)
             {
-                Debug.Log("HOW");
                 skipButton.gameObject.SetActive(false);
 
             }
@@ -63,12 +62,12 @@ public class IntroScript : MonoBehaviour
     public void LoadMainMenu()
     {
         //Load the scene
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     // Restart the scene
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 }

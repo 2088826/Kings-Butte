@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     
     // Private Fields
     private InputActionMap uiActionMap;
-    private bool isSetup = true;
+    private static bool isSetup = true;
     private static bool isStart = false;
     private bool isEnd = false;
     private static bool isPaused = false;
@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public static bool IsStart { get { return isStart; } set { isStart = value; } }
     public static bool IsPaused { get { return isPaused; } set { isPaused = value; } }
 
+    public static bool IsSetup { get { return IsSetup; } }
+
     void Start()
     {
         spawner = GetComponent<ItemSpawner>();
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
         uiActionMap = inputAction.FindActionMap("UI");
         isStart = false;
         isPaused = false;
+        isSetup = true;
         gameTimer.text = timeLimit.ToString("0");
         GameSetup();
         musicSource.clip = music[0];

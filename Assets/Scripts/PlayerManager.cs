@@ -63,7 +63,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(PlayerInput player)
     {
-        if(players.Count < sprites.Count)
+        if(players.Count < sprites.Count || GameManager.IsSetup)
         {
             // Activate Player banner.
             banners[count - 1].SetActive(true);

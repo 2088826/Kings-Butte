@@ -47,6 +47,8 @@ public class PlayerActions : MonoBehaviour
         ui = inputAsset.FindActionMap("UI");
 
         defaultAttackSpeed = attackSpeed;
+
+        ToggleDisable();
     }
 
     /// <summary>
