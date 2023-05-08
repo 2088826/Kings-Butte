@@ -88,11 +88,6 @@ public class PlayerManager : MonoBehaviour
             currentColor = setupLabels[players.Count - 1].color;
             currentColor.a = 1f;
             setupLabels[players.Count - 1].color = currentColor;
-
-            if(SceneManager.GetActiveScene().name == "Tutorial")
-            {
-                player.GetComponent<PlayerActions>().TogglePlayer();
-            }
         }
         else
         {
